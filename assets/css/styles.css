@@ -126,8 +126,18 @@ p {
 }
 
 .section {
-    padding: 6rem 0;
+    padding: 4rem 0;
     position: relative;
+}
+
+/* Keep the original padding for the Violinist section */
+.section-violinist {
+    padding: 6rem 0;
+}
+
+/* Add some spacing after the hero section before Violinist */
+.hero + .section {
+    padding-top: 6rem;
 }
 
 .section-header {
@@ -1323,11 +1333,19 @@ p {
     }
     
     .section {
-        padding: 4rem 0;
+        padding: 3rem 0;
     }
     
     .section-title {
         font-size: 2.2rem;
+    }
+    
+    .section-violinist {
+        padding: 5rem 0;
+    }
+    
+    .hero + .section {
+        padding-top: 5rem;
     }
     
     .nav-list {
@@ -1390,11 +1408,19 @@ p {
     }
     
     .section {
-        padding: 3rem 0;
+        padding: 2.5rem 0;
     }
     
     .section-title {
         font-size: 2rem;
+    }
+    
+    .section-violinist {
+        padding: 4rem 0;
+    }
+    
+    .hero + .section {
+        padding-top: 4rem;
     }
     
     .footer-grid {
