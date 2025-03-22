@@ -28,12 +28,20 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Forum';
+    src: url('../fonts/Forum-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Base Styles & Variables */
 :root {
     --primary-color: #1a1a1a;
     --secondary-color: #333;
     --accent-color: #c87137;
-    --text-color: #333;
+    --text-color: #4a4b49;
     --text-light: #fff;
     --text-muted: #777;
     --text-nav: #a0a0a0;
@@ -47,6 +55,7 @@
     --header-height: 80px;
     --font-mono: 'JetBrains Mono', monospace;
     --font-orator: 'Orator Std', monospace;
+    --font-forum: 'Forum', serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
@@ -126,17 +135,17 @@ p {
 }
 
 .section {
-    padding: 4rem 0;
+    padding: 6rem 0;
     position: relative;
 }
 
-/* Keep the original padding for the Violinist section */
-.section-violinist {
-    padding: 6rem 0;
+/* New rule for sections after the first one */
+.section:not(#violinist) {
+    padding-top: 1rem; /* Reduced top padding for all sections except violinist */
 }
 
-/* Add some spacing after the hero section before Violinist */
-.hero + .section {
+/* Preserve original padding for violinist section */
+#violinist {
     padding-top: 6rem;
 }
 
@@ -146,10 +155,12 @@ p {
 }
 
 .section-title {
-    font-size: 3rem;
+    font-size: 4.5rem;
     margin-bottom: 1rem;
     position: relative;
     display: inline-block;
+    font-family: var(--font-forum);
+    color: var(--text-color);
 }
 
 .section-title::after {
@@ -372,7 +383,7 @@ p {
 
 .hero-image-container {
     width: 100%;
-    max-width: 70%;
+    max-width: 80%;
     margin: 0 auto;
     padding: 0;
     background-color: var(--bg-light);
@@ -383,7 +394,7 @@ p {
     width: 100%;
     height: auto;
     display: block;
-    max-height: 75vh;
+    max-height: 65vh;
     object-fit: contain;
     transition: all 0.5s ease;
 }
@@ -537,11 +548,13 @@ p {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    color: var(--text-color);
 }
 
 .card-title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: var(--text-color);
 }
 
 .card-text {
@@ -1252,8 +1265,9 @@ p {
         font-size: 4rem;
     }
     
+    /* Keep the large section title font size at first breakpoint */
     .section-title {
-        font-size: 2.5rem;
+        font-size: 4.5rem;
     }
     
     .card-wide {
@@ -1333,19 +1347,11 @@ p {
     }
     
     .section {
-        padding: 3rem 0;
+        padding: 4rem 0;
     }
     
     .section-title {
         font-size: 2.2rem;
-    }
-    
-    .section-violinist {
-        padding: 5rem 0;
-    }
-    
-    .hero + .section {
-        padding-top: 5rem;
     }
     
     .nav-list {
@@ -1408,19 +1414,11 @@ p {
     }
     
     .section {
-        padding: 2.5rem 0;
+        padding: 3rem 0;
     }
     
     .section-title {
         font-size: 2rem;
-    }
-    
-    .section-violinist {
-        padding: 4rem 0;
-    }
-    
-    .hero + .section {
-        padding-top: 4rem;
     }
     
     .footer-grid {

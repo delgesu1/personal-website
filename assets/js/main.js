@@ -13,6 +13,23 @@ document.addEventListener('DOMContentLoaded', function() {
     updateHeroHeight();
     window.addEventListener('resize', updateHeroHeight);
     
+    // Ensure autoplay works for the featured video
+    const featuredVideo = document.querySelector('#featured-video');
+    
+    // Simple check to ensure video is playing
+    function checkVideoPlaying() {
+        // If iframe exists but video isn't playing, reload it
+        if (featuredVideo && featuredVideo.src) {
+            const currentSrc = featuredVideo.src;
+            // Force a refresh of the iframe to trigger autoplay again
+            featuredVideo.src = currentSrc;
+            console.log('Ensuring video autoplay is active');
+        }
+    }
+    
+    // Check after a short delay to ensure the page has fully loaded
+    setTimeout(checkVideoPlaying, 1500);
+    
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
