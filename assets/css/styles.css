@@ -12,6 +12,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('../fonts/JetBrains Mono/webfonts/JetBrainsMono-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Base Styles & Variables */
 :root {
     --primary-color: #1a1a1a;
@@ -167,11 +175,12 @@ p {
 
 .logo {
     font-size: 1.1rem;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--text-nav);
     letter-spacing: 1px;
     text-transform: uppercase;
     white-space: nowrap;
+    font-family: var(--font-mono);
 }
 
 .logo-divider {
