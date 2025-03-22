@@ -3,6 +3,15 @@
  * Main Stylesheet - Updated with new hero section and structure
  */
 
+/* Font Face Declarations */
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('../fonts/JetBrains Mono/webfonts/JetBrainsMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Base Styles & Variables */
 :root {
     --primary-color: #1a1a1a;
@@ -20,6 +29,7 @@
     --transition: all 0.3s ease;
     --container-width: 1200px;
     --header-height: 80px;
+    --font-mono: 'JetBrains Mono', monospace;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
@@ -179,12 +189,13 @@ p {
 
 .nav-link {
     color: var(--text-nav);
-    font-weight: 400;
+    font-weight: 700;
     position: relative;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.8rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 1.1rem;
+    font-family: var(--font-mono);
 }
 
 .header.scrolled .nav-link {
@@ -278,6 +289,7 @@ p {
 .mobile-nav-link {
     font-size: 1.5rem;
     font-weight: 600;
+    font-family: var(--font-mono);
 }
 
 .mobile-menu-footer {
