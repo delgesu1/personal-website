@@ -184,12 +184,12 @@ p {
 
 .logo {
     font-size: 1.1rem;
-    font-weight: normal;
+    font-weight: 400;
     color: var(--text-nav);
     letter-spacing: 1px;
     text-transform: uppercase;
     white-space: nowrap;
-    font-family: var(--font-orator);
+    font-family: var(--font-mono);
 }
 
 .logo-divider {
