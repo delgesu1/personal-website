@@ -190,6 +190,10 @@ p {
     text-transform: uppercase;
     white-space: nowrap;
     font-family: var(--font-mono);
+    padding: 0.5rem 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
 }
 
 .logo-divider {
@@ -200,20 +204,29 @@ p {
     margin: 0 1.5rem;
 }
 
+.nav {
+    display: flex;
+    align-items: center;
+}
+
 .nav-list {
     display: flex;
     gap: 2rem;
+    align-items: center;
 }
 
 .nav-link {
     color: var(--text-nav);
     font-weight: normal;
     position: relative;
-    padding: 0.5rem 0.8rem;
+    padding: 0.5rem 0.8rem 0.6rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 1.1rem;
     font-family: var(--font-orator);
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .header.scrolled .nav-link {
