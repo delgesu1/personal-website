@@ -194,6 +194,7 @@ p {
     line-height: 1;
     display: flex;
     align-items: center;
+    transition: font-size 0.3s ease;
 }
 
 .logo-divider {
@@ -202,6 +203,7 @@ p {
     height: 20px;
     background-color: var(--accent-color);
     margin: 0 1.5rem;
+    transition: margin 0.3s ease;
 }
 
 .nav {
@@ -213,6 +215,7 @@ p {
     display: flex;
     gap: 2rem;
     align-items: center;
+    transition: gap 0.3s ease;
 }
 
 .nav-link {
@@ -227,6 +230,7 @@ p {
     line-height: 1;
     display: inline-block;
     vertical-align: middle;
+    transition: all 0.3s ease;
 }
 
 .header.scrolled .nav-link {
@@ -241,6 +245,7 @@ p {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    transition: gap 0.3s ease;
 }
 
 .cta-button {
@@ -251,7 +256,7 @@ p {
     border: 1px solid var(--text-nav);
     border-radius: 15px;
     font-weight: normal;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     font-family: var(--font-orator);
 }
 
@@ -1200,12 +1205,39 @@ p {
     }
 }
 
-/* Simplified Responsive Breakpoints */
+/* SIMPLIFIED RESPONSIVE BREAKPOINTS */
 @media (max-width: 1200px) {
     .container {
         max-width: 960px;
     }
     
+    /* Simplified navigation adjustments */
+    .logo {
+        font-size: 1.1rem;
+    }
+    
+    .logo-divider {
+        margin: 0 1.2rem;
+    }
+    
+    .nav-list {
+        gap: 1.2rem;
+    }
+    
+    .nav-link {
+        font-size: 1.1rem;
+        padding: 1rem 0.5rem 0.6rem;
+    }
+    
+    .header-right {
+        gap: 1rem;
+    }
+    
+    .cta-button {
+        padding: 0.5rem 1.2rem;
+    }
+    
+    /* Restore these styles for other elements */
     .hero-title {
         font-size: 4rem;
     }
@@ -1233,39 +1265,39 @@ p {
     .albums-row {
         grid-template-columns: repeat(3, 1fr);
     }
-    
-    /* Navigation adjustments */
+}
+
+/* Single intermediate breakpoint for smaller desktops */
+@media (max-width: 1000px) and (min-width: 980px) {    
     .logo {
         font-size: 1rem;
     }
     
     .logo-divider {
-        margin: 0 1.2rem;
+        margin: 0 0.8rem;
     }
     
     .nav-list {
-        gap: 1.5rem;
+        gap: 0.8rem;
     }
     
     .nav-link {
         font-size: 1rem;
-        padding: 0.5rem 0.5rem;
+        padding: 1rem 0.4rem 0.6rem;
     }
-}
-
-/* Additional media query for the specific range near 985px */
-@media (min-width: 985px) and (max-width: 1050px) {
-    .hero-image-container {
-        max-width: 67%;
+    
+    .cta-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
-}
-
-@media (min-width: 950px) and (max-width: 984px) {
+    
+    /* Hero image sizing for this range */
     .hero-image-container {
         max-width: 68%;
     }
 }
 
+/* Mobile breakpoint - clean cutoff */
 @media (max-width: 979px) {
     .container {
         max-width: 720px;
@@ -1450,79 +1482,4 @@ p {
 .card-overlay .card-text {
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 0;
-}
-
-/* Add more granular breakpoints before mobile menu appears */
-@media (max-width: 1100px) {
-    .header-right {
-        gap: 1rem;
-    }
-    
-    .nav-list {
-        gap: 1.2rem;
-    }
-    
-    .nav-link {
-        padding: 1rem 0.4rem 0.6rem;
-        font-size: 1.1rem;
-    }
-    
-    .cta-button {
-        padding: 0.5rem 1.2rem;
-    }
-    
-    .logo-divider {
-        margin: 0 1rem;
-    }
-}
-
-@media (max-width: 1020px) {
-    .header-right {
-        gap: 0.7rem;
-    }
-    
-    .nav-list {
-        gap: 0.8rem;
-    }
-    
-    .nav-link {
-        padding: 1rem 0.3rem 0.6rem;
-        font-size: 1rem;
-    }
-    
-    .cta-button {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
-}
-
-/* Further reduce spacing before mobile menu */
-@media (max-width: 992px) and (min-width: 980px) {
-    .header-container {
-        padding: 0 0.5rem;
-    }
-    
-    .logo {
-        font-size: 1rem;
-    }
-    
-    .logo-divider {
-        margin: 0 0.7rem;
-    }
-    
-    .header-right {
-        gap: 0.5rem;
-    }
-    
-    .nav-list {
-        gap: 0.6rem;
-    }
-    
-    .nav-link {
-        padding: 1rem 0.25rem 0.6rem;
-    }
-    
-    .cta-button {
-        padding: 0.4rem 0.8rem;
-    }
 }
