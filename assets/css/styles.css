@@ -997,12 +997,56 @@ p {
 /* About Section */
 .about-intro {
     margin-bottom: 3rem;
+    max-width: 900px;
 }
 
 .about-intro p {
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
+}
+
+.discography {
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    background-color: rgba(200, 113, 55, 0.05);
+    border-left: 3px solid var(--accent-color);
+    border-radius: 5px;
+}
+
+.discography h4 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    font-size: 1.3rem;
+}
+
+.discography ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.discography li {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.critic-quote {
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    border-left: 3px solid var(--accent-color);
+    background-color: rgba(0, 0, 0, 0.03);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.critic-quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    text-align: right;
 }
 
 /* Media Gallery Card */
