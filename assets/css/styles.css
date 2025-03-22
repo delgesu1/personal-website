@@ -183,8 +183,8 @@ p {
 }
 
 .logo {
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-size: 1.2rem;
+    font-weight: 800;
     color: var(--text-nav);
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -219,10 +219,10 @@ p {
     color: var(--text-nav);
     font-weight: normal;
     position: relative;
-    padding: 0.5rem 0.8rem 0.6rem;
+    padding: 1rem 0.6rem 0.6rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-family: var(--font-orator);
     line-height: 1;
     display: inline-block;
@@ -245,7 +245,7 @@ p {
 
 .cta-button {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     background-color: transparent;
     color: var(--text-nav);
     border: 1px solid var(--text-nav);
@@ -1266,7 +1266,7 @@ p {
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 979px) {
     .container {
         max-width: 720px;
     }
@@ -1450,4 +1450,79 @@ p {
 .card-overlay .card-text {
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 0;
+}
+
+/* Add more granular breakpoints before mobile menu appears */
+@media (max-width: 1100px) {
+    .header-right {
+        gap: 1rem;
+    }
+    
+    .nav-list {
+        gap: 1.2rem;
+    }
+    
+    .nav-link {
+        padding: 1rem 0.4rem 0.6rem;
+        font-size: 1.1rem;
+    }
+    
+    .cta-button {
+        padding: 0.5rem 1.2rem;
+    }
+    
+    .logo-divider {
+        margin: 0 1rem;
+    }
+}
+
+@media (max-width: 1020px) {
+    .header-right {
+        gap: 0.7rem;
+    }
+    
+    .nav-list {
+        gap: 0.8rem;
+    }
+    
+    .nav-link {
+        padding: 1rem 0.3rem 0.6rem;
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Further reduce spacing before mobile menu */
+@media (max-width: 992px) and (min-width: 980px) {
+    .header-container {
+        padding: 0 0.5rem;
+    }
+    
+    .logo {
+        font-size: 1rem;
+    }
+    
+    .logo-divider {
+        margin: 0 0.7rem;
+    }
+    
+    .header-right {
+        gap: 0.5rem;
+    }
+    
+    .nav-list {
+        gap: 0.6rem;
+    }
+    
+    .nav-link {
+        padding: 1rem 0.25rem 0.6rem;
+    }
+    
+    .cta-button {
+        padding: 0.4rem 0.8rem;
+    }
 }
