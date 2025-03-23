@@ -1017,9 +1017,11 @@ p {
 
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
-    margin-top: 1rem;
+    padding: 0 1.5rem 1.5rem;
+    flex-grow: 1;
+    margin-top: auto;
 }
 
 .social-grid.instagram-grid {
@@ -1368,6 +1370,23 @@ p {
         margin: 0 1.2rem;
     }
     
+    /* YouTube card grid adjustments */
+    .card .social-card .social-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    /* Hide the third and fourth YouTube thumbnails */
+    .card .social-card .social-grid .social-post:nth-child(3),
+    .card .social-card .social-grid .social-post:nth-child(4) {
+        display: none;
+    }
+    
+    /* Increase the size of the remaining thumbnails */
+    .card .social-card .social-grid .social-post {
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    }
+    
     .nav-list {
         gap: 1.2rem;
     }
@@ -1417,11 +1436,23 @@ p {
     
     .social-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
     }
     
-    /* Hide the 3rd and 4th items on smaller screens */
-    .social-grid .social-post:nth-child(n+3) {
+    /* Hide the third and fourth items in the grid */
+    .social-grid .social-post:nth-child(3),
+    .social-grid .social-post:nth-child(4) {
         display: none;
+    }
+    
+    /* Increase the size of the remaining thumbnails */
+    .social-grid .social-post {
+        aspect-ratio: 16/9;
+    }
+    
+    /* Adjust card height for better proportions */
+    .card .social-card {
+        max-height: fit-content;
     }
 }
 
