@@ -169,4 +169,119 @@ document.addEventListener('DOMContentLoaded', function() {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
+
+    // NEW ANIMATION FUNCTIONS
+    
+    // 1. Parallax scrolling for sections
+    function initParallaxScrolling() {
+        const sections = document.querySelectorAll('.section');
+        
+        window.addEventListener('scroll', () => {
+            sections.forEach(section => {
+                const scrollPosition = window.scrollY;
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                // Only apply effect when section is in view
+                if (scrollPosition > sectionTop - window.innerHeight && 
+                    scrollPosition < sectionTop + sectionHeight) {
+                    
+                    // Calculate how far into the section we've scrolled
+                    const scrollPercentage = (scrollPosition - (sectionTop - window.innerHeight)) / 
+                                          (sectionHeight + window.innerHeight);
+                    
+                    // Apply subtle movement to section title
+                    const title = section.querySelector('.section-title');
+                    if (title) {
+                        title.style.transform = `translateY(${scrollPercentage * -30}px)`;
+                        title.style.opacity = 1 - (scrollPercentage * 0.3);
+                    }
+                }
+            });
+        });
+    }
+    
+    // 2. Parallax effect for hero section
+    function heroParallax() {
+        const hero = document.querySelector('.hero');
+        if (!hero) return;
+        
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition < window.innerHeight) {
+                const parallaxAmount = scrollPosition * 0.4;
+                hero.style.setProperty('--parallax-offset', `${parallaxAmount}px`);
+                
+                if (hero.querySelector('.hero-image')) {
+                    hero.querySelector('.hero-image').style.transform = 
+                        `scale(${1 + scrollPosition * 0.0005}) translateY(${scrollPosition * 0.05}px)`;
+                }
+                
+                // Move the pseudo-element for a subtle depth effect
+                hero.style.setProperty('--gradient-offset', `${scrollPosition * -0.2}px`);
+            }
+        });
+    }
+    
+    // 3. Smooth reveal animations on scroll
+    function initScrollReveal() {
+        // Options for the Intersection Observer
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+        
+        // Create an observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target); // Stop observing once revealed
+                }
+            });
+        }, options);
+        
+        // Select elements to observe
+        const elements = document.querySelectorAll('.card, .album-card, .social-card, .section-title');
+        
+        // Add base class and observe each element
+        elements.forEach((element, index) => {
+            // Add staggered delay based on element index within its container
+            element.style.transitionDelay = `${index * 0.05}s`;
+            element.classList.add('reveal-element');
+            observer.observe(element);
+        });
+    }
+    
+    // 4. Magnetic button effect for CTAs
+    function initMagneticButtons() {
+        const buttons = document.querySelectorAll('.cta-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const moveX = (x - centerX) / 10;
+                const moveY = (y - centerY) / 10;
+                
+                button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translate(0, 0)';
+            });
+        });
+    }
+    
+    // Initialize all new animation functions
+    initParallaxScrolling();
+    heroParallax();
+    initScrollReveal();
+    initMagneticButtons();
 });

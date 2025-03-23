@@ -36,6 +36,39 @@
     font-display: swap;
 }
 
+/* Animation Styles */
+@keyframes borderPulse {
+  0% {
+    width: 60px;
+    opacity: 0.7;
+  }
+  100% {
+    width: 100px;
+    opacity: 1;
+  }
+}
+
+@keyframes scrollPulse {
+  0%, 100% {
+    height: 15px;
+    opacity: 0.5;
+  }
+  50% {
+    height: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes heroFadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroImageReveal {
+  0% { transform: scale(1.05); filter: brightness(0.8) blur(5px); }
+  100% { transform: scale(1); filter: brightness(1) blur(0); }
+}
+
 /* Base Styles & Variables */
 :root {
     --primary-color: #1a1a1a;
@@ -58,6 +91,8 @@
     --font-forum: 'Forum', serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --parallax-offset: 0px;
+    --gradient-offset: 0px;
 }
 
 * {
@@ -161,6 +196,7 @@ p {
     display: inline-block;
     font-family: var(--font-forum);
     color: var(--text-color);
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .section-title::after {
@@ -170,7 +206,8 @@ p {
     left: 0;
     width: 60px;
     height: 3px;
-    background-color: var(--accent-color);
+    background: linear-gradient(90deg, var(--accent-color), transparent);
+    animation: borderPulse 3s infinite alternate;
 }
 
 /* New Header & Navigation */
@@ -368,6 +405,19 @@ p {
     background-color: var(--bg-light);
 }
 
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(200, 113, 55, 0.05), transparent 70%);
+    transform: translateY(var(--gradient-offset, 0));
+    transition: transform 0.5s ease-out;
+    z-index: 0;
+}
+
 .hero-content {
     display: flex;
     flex-direction: column;
@@ -379,6 +429,7 @@ p {
     max-width: 1000px;
     margin-bottom: 50px;
     transition: all 0.5s ease;
+    animation: heroFadeIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .hero-image-container {
@@ -388,6 +439,9 @@ p {
     padding: 0;
     background-color: var(--bg-light);
     transition: all 0.5s ease;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
 }
 
 .hero-image {
@@ -397,49 +451,34 @@ p {
     max-height: 65vh;
     object-fit: contain;
     transition: all 0.5s ease;
+    animation: heroImageReveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .scroll-indicator {
     position: absolute;
-    bottom: 2rem;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
     letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    color: var(--text-muted);
+    padding-bottom: 25px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
 .scroll-indicator::after {
     content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 1px;
-    height: 40px;
+    height: 20px;
     background-color: var(--text-muted);
-    animation: scrollIndicator 2s ease-in-out infinite;
-}
-
-@keyframes scrollIndicator {
-    0% {
-        transform: scaleY(0);
-        transform-origin: top;
-    }
-    50% {
-        transform: scaleY(1);
-        transform-origin: top;
-    }
-    50.1% {
-        transform-origin: bottom;
-    }
-    100% {
-        transform: scaleY(0);
-        transform-origin: bottom;
-    }
+    animation: scrollPulse 2s infinite;
 }
 
 /* Buttons */
@@ -530,11 +569,13 @@ p {
     height: 100%;
     display: flex;
     flex-direction: column;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                box-shadow 0.5s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .card-image {
@@ -963,7 +1004,7 @@ p {
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
-    transition: var(--transition);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -971,8 +1012,7 @@ p {
 }
 
 .album-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-10px);
 }
 
 .album-image-container {
@@ -989,11 +1029,12 @@ p {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: var(--transition);
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.7s ease;
 }
 
 .album-card:hover .album-image {
     transform: scale(1.05);
+    filter: brightness(1.05);
 }
 
 .album-content {
@@ -1506,4 +1547,36 @@ p {
 .card-overlay .card-text {
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 0;
+}
+
+.instagram-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+/* Fix for YouTube thumbnails */
+.social-post img[src*="youtube.com"] {
+    object-position: center;
+    transform: scale(1.4); /* Apply a stronger zoom to crop out black bars */
+}
+
+/* Override hover effect for YouTube thumbnails */
+.social-post:hover img[src*="youtube.com"] {
+    transform: scale(1.45); /* Slightly larger scale on hover while maintaining cropping */
+}
+
+/* Reveal animation elements */
+.reveal-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.revealed {
+    opacity: 1;
+    transform: translateY(0);
 }
