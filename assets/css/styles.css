@@ -724,6 +724,21 @@ p {
     margin-bottom: 0.5rem;
 }
 
+.event-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: var(--accent-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.event-link:hover {
+    color: var(--primary-color);
+    transform: translateX(3px);
+}
+
 /* Contact */
 .contact-grid {
     display: grid;
