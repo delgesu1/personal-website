@@ -561,7 +561,6 @@ p {
     margin-bottom: 4rem;
 }
 
-/* Grid items will auto-fill their grid area based on available space */
 .card {
     background-color: var(--bg-color);
     border-radius: var(--border-radius);
@@ -1688,170 +1687,34 @@ p {
     transform: translateY(0);
 }
 
-/* Enhanced responsive behavior */
-@media (min-width: 1200px) {
-    .card-wide {
-        grid-column: span 8;
-    }
-    
-    .card-medium {
-        grid-column: span 6;
-    }
-    
-    .card-small {
-        grid-column: span 4;
-    }
-    
-    .card-tiny {
-        grid-column: span 3;
-    }
-    
-    .albums-row {
-        grid-template-columns: repeat(3, 1fr);
-        grid-column: span 12;
-    }
+/* Production links styling */
+.production-link {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.3s ease;
 }
 
-@media (max-width: 1199px) and (min-width: 992px) {
-    .organic-grid {
-        gap: 1.5rem;
-    }
-    
-    .card-wide {
-        grid-column: span 8;
-    }
-    
-    .card-medium {
-        grid-column: span 6;
-    }
-    
-    .card-small {
-        grid-column: span 4;
-    }
-    
-    .card-tiny {
-        grid-column: span 4;
-    }
-    
-    .social-card .card-medium {
-        grid-column: span 6;
-    }
-    
-    .albums-row {
-        grid-template-columns: repeat(3, 1fr);
-        grid-column: span 12;
-    }
+.production-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
 }
 
-@media (max-width: 991px) and (min-width: 768px) {
-    .organic-grid {
-        grid-template-columns: repeat(8, 1fr);
-        gap: 1.5rem;
-    }
-    
-    .card-wide, .card[style*="grid-column: span 12"] {
-        grid-column: span 8 !important;
-    }
-    
-    .card-medium {
-        grid-column: span 4;
-    }
-    
-    .card-small, .card[style*="grid-column: span 4"] {
-        grid-column: span 4 !important;
-    }
-    
-    .albums-row {
-        grid-template-columns: repeat(2, 1fr);
-        grid-column: span 8;
-        gap: 1.5rem;
-    }
-    
-    /* Force 3rd album to new row but maintain alignment */
-    .albums-row > div:nth-child(3) {
-        grid-column: 1 / span 1;
-    }
+.production-link:hover {
+    color: var(--primary-color);
 }
 
-@media (max-width: 767px) {
-    .organic-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-    }
-    
-    .card-wide, 
-    .card-medium,
-    .card-small,
-    .card-tiny,
-    .card[style*="grid-column"] {
-        grid-column: span 4 !important; /* Force all cards to full width */
-    }
-    
-    .albums-row {
-        grid-template-columns: 1fr;
-        grid-column: span 4;
-        gap: 1rem;
-    }
-    
-    /* Specific adjustments for events layout */
-    .event {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-        padding: 1rem;
-    }
-    
-    .event-date {
-        text-align: left;
-        padding-right: 0;
-        border-right: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        padding-bottom: 0.5rem;
-        margin-bottom: 0.5rem;
-        display: flex;
-        align-items: center;
-    }
-    
-    .date-day {
-        margin: 0 0.5rem;
-    }
-}
-
-/* Improved adaptive layout for 500-650px range */
-@media (min-width: 500px) and (max-width: 650px) {
-    .organic-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-    
-    .card-wide, 
-    .card[style*="grid-column: span 12"],
-    .card[style*="grid-column: span 8"] {
-        grid-column: span 2 !important;
-    }
-    
-    .card-medium, 
-    .card-small, 
-    .card-tiny,
-    .card[style*="grid-column: span 6"],
-    .card[style*="grid-column: span 4"],
-    .card[style*="grid-column: span 3"] {
-        grid-column: span 1 !important;
-    }
-}
-
-/* Additional optimization for very small screens */
-@media (max-width: 499px) {
-    .organic-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .card-wide, 
-    .card-medium, 
-    .card-small, 
-    .card-tiny,
-    .card[style*="grid-column"] {
-        grid-column: 1 / -1 !important; /* All cards full width */
-    }
+.production-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
