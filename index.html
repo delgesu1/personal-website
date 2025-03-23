@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Kurganov | Violinist, Educator, Innovator</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/images/kurganov-headshot.jpg" as="image">
+    <link rel="preload" href="assets/css/styles.css" as="style">
+    <link rel="preload" href="assets/js/main.js" as="script">
+    
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -72,16 +78,18 @@
             </div>
             
             <div class="organic-grid">
-                <!-- Featured Performance - Autoplay Video Cards (side by side) -->
+                <!-- Featured Performance - Autoplay Video Cards (side by side) - Optimized to load after page ready -->
                 <div class="card card-medium">
                     <div class="autoplay-video-card">
-                        <iframe class="autoplay-video" id="featured-video" src="https://www.youtube.com/embed/c43thu5bBZY?autoplay=1&mute=1&loop=1&playlist=c43thu5bBZY&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!-- Using loading="lazy" and a data-src attribute to defer loading -->
+                        <iframe class="autoplay-video" id="featured-video" data-src="https://www.youtube.com/embed/c43thu5bBZY?autoplay=1&mute=1&loop=1&playlist=c43thu5bBZY&rel=0" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
                 
                 <div class="card card-medium">
                     <div class="autoplay-video-card">
-                        <iframe class="autoplay-video" src="https://www.youtube.com/embed/k6kk-4mVKrE?autoplay=1&mute=1&loop=1&playlist=k6kk-4mVKrE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!-- Using loading="lazy" and a data-src attribute to defer loading -->
+                        <iframe class="autoplay-video" data-src="https://www.youtube.com/embed/k6kk-4mVKrE?autoplay=1&mute=1&loop=1&playlist=k6kk-4mVKrE" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
                 
@@ -90,7 +98,7 @@
                     <!-- Album 1 - 2023 -->
                     <div class="album-card">
                         <div class="album-image-container">
-                            <img src="assets/images/Card Photos/The-Brahms-Age-2023-Album-Cover.jpg" alt="Brahms Violin Sonatas Album" class="album-image">
+                            <img src="assets/images/Card Photos/The-Brahms-Age-2023-Album-Cover.jpg" alt="Brahms Violin Sonatas Album" class="album-image" loading="lazy">
                         </div>
                         <div class="album-content">
                             <h3 class="album-title">Complete Brahms Violin Sonatas</h3>
@@ -102,7 +110,7 @@
                     <!-- Album 2 - 2021 -->
                     <div class="album-card">
                         <div class="album-image-container">
-                            <img src="assets/images/Card Photos/Rhythm-Borrowed-Past-2021-Album-cover.jpg" alt="World Premieres Album" class="album-image">
+                            <img src="assets/images/Card Photos/Rhythm-Borrowed-Past-2021-Album-cover.jpg" alt="World Premieres Album" class="album-image" loading="lazy">
                         </div>
                         <div class="album-content">
                             <h3 class="album-title">World-premiere Recordings</h3>
@@ -114,7 +122,7 @@
                     <!-- Album 3 - 2018 -->
                     <div class="album-card">
                         <div class="album-image-container">
-                            <img src="assets/images/Card Photos/Between-The-Notes-2018-Album-Cover.jpg" alt="Debut Album" class="album-image">
+                            <img src="assets/images/Card Photos/Between-The-Notes-2018-Album-Cover.jpg" alt="Debut Album" class="album-image" loading="lazy">
                         </div>
                         <div class="album-content">
                             <h3 class="album-title">Debut Album</h3>
@@ -126,7 +134,7 @@
                 
                 <!-- Aegis Piano Trio -->
                 <div class="card card-medium">
-                    <img src="assets/images/Card Photos/aegis-piano-trio.jpg" alt="Aegis Piano Trio" class="card-image">
+                    <img src="assets/images/Card Photos/aegis-piano-trio.jpg" alt="Aegis Piano Trio" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Aegis Piano Trio</h3>
                         <p class="card-text">Performing with Constantine Finehouse and Daniel Lelchuk, the Aegis Piano Trio explores the rich repertoire of piano trios with a focus on both classic masterpieces and contemporary works.</p>
@@ -135,7 +143,7 @@
                 
                 <!-- Duo with Constantine Finehouse -->
                 <div class="card card-medium">
-                    <img src="assets/images/Card Photos/Kurganov-Finehouse-Duo.jpg" alt="Kurganov-Finehouse Duo" class="card-image">
+                    <img src="assets/images/Card Photos/Kurganov-Finehouse-Duo.jpg" alt="Kurganov-Finehouse Duo" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Kurganov-Finehouse Duo</h3>
                         <p class="card-text">A longstanding musical partnership exploring the violin and piano repertoire with a focus on artistic nuance and historical context.</p>
@@ -179,16 +187,16 @@
                         </div>
                         <div class="social-grid">
                             <div class="social-post">
-                                <img src="https://img.youtube.com/vi/Csd9zkjmO4w/hqdefault.jpg" alt="9 Exercises to Transform your Violin Technique">
+                                <img src="https://img.youtube.com/vi/Csd9zkjmO4w/hqdefault.jpg" alt="9 Exercises to Transform your Violin Technique" loading="lazy">
                             </div>
                             <div class="social-post">
-                                <img src="https://img.youtube.com/vi/osRXzpYiASA/hqdefault.jpg" alt="Forgotten romantic gems - Lera Auerbach">
+                                <img src="https://img.youtube.com/vi/osRXzpYiASA/hqdefault.jpg" alt="Forgotten romantic gems - Lera Auerbach" loading="lazy">
                             </div>
                             <div class="social-post">
-                                <img src="https://img.youtube.com/vi/6yi08rFZYc4/hqdefault.jpg" alt="Bartók Sonata for Solo Violin">
+                                <img src="https://img.youtube.com/vi/6yi08rFZYc4/hqdefault.jpg" alt="Bartók Sonata for Solo Violin" loading="lazy">
                             </div>
                             <div class="social-post">
-                                <img src="https://img.youtube.com/vi/aCCKSmHMnEk/hqdefault.jpg" alt="Bach Chaconne, Partita No. 2">
+                                <img src="https://img.youtube.com/vi/aCCKSmHMnEk/hqdefault.jpg" alt="Bach Chaconne, Partita No. 2" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -212,7 +220,7 @@
                         </div>
                         <div class="instagram-grid">
                             <div class="social-post">
-                                <img src="assets/images/Card Photos/Instagram-Card-Image.jpg" alt="Instagram Image">
+                                <img src="assets/images/Card Photos/Instagram-Card-Image.jpg" alt="Instagram Image" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -220,7 +228,7 @@
                 
                 <!-- Media Gallery -->
                 <div class="card card-small media-gallery-full">
-                    <img src="assets/images/Card Photos/Media-Gallery.jpeg" alt="Media Gallery" class="card-image-full">
+                    <img src="assets/images/Card Photos/Media-Gallery.jpeg" alt="Media Gallery" class="card-image-full" loading="lazy">
                     <div class="card-overlay">
                         <h3 class="card-title">Media Gallery</h3>
                     </div>
@@ -228,7 +236,7 @@
                 
                 <!-- Kurofune Project (moved to end of Violinist section) -->
                 <div class="card card-small">
-                    <img src="assets/images/Card Photos/Kurofune-Ensemble.jpg" alt="Kurofune Project" class="card-image">
+                    <img src="assets/images/Card Photos/Kurofune-Ensemble.jpg" alt="Kurofune Project" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Kurofune Project (2018)</h3>
                         <p class="card-text">A collaborative project blending traditional Japanese music with Western classical forms.</p>

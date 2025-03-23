@@ -13,30 +13,70 @@ document.addEventListener('DOMContentLoaded', function() {
     updateHeroHeight();
     window.addEventListener('resize', updateHeroHeight);
     
-    // Ensure autoplay works for the featured video
-    const featuredVideo = document.querySelector('#featured-video');
+    // IMPROVED YOUTUBE LOADING - Load YouTube videos after page is fully loaded
+    function loadDeferredVideos() {
+        const deferredVideos = document.querySelectorAll('iframe[data-src]');
+        
+        deferredVideos.forEach(video => {
+            // Only set the src if it hasn't been set yet
+            if (video.getAttribute('data-src') && !video.src) {
+                // Set a small timeout to stagger the loading of videos
+                setTimeout(() => {
+                    video.src = video.getAttribute('data-src');
+                    // Track when the video was loaded for autoplay checking
+                    video._loadTime = Date.now();
+                    console.log('Loading deferred video:', video.getAttribute('data-src'));
+                }, 1000); // Delay loading the videos by 1 second after page load
+            }
+        });
+    }
     
-    // Simple check to ensure video is playing
+    // Wait until the page is fully loaded before loading videos
+    window.addEventListener('load', loadDeferredVideos);
+    
+    // Ensure autoplay works for the featured video - with improved handling
     function checkVideoPlaying() {
-        // If iframe exists but video isn't playing, reload it
-        if (featuredVideo && featuredVideo.src) {
-            const currentSrc = featuredVideo.src;
-            // Force a refresh of the iframe to trigger autoplay again
-            featuredVideo.src = currentSrc;
-            console.log('Ensuring video autoplay is active');
+        const videoFrames = document.querySelectorAll('.autoplay-video');
+        
+        videoFrames.forEach(video => {
+            // If the video is loaded but not playing, try to restart it
+            if (video.src && video.src.includes('autoplay=1')) {
+                // Only refresh if the video has been loaded for some time (avoid reload loops)
+                if (video._loadTime && (Date.now() - video._loadTime > 5000)) {
+                    console.log('Refreshing video to ensure autoplay:', video.src);
+                    const currentSrc = video.src;
+                    video.src = currentSrc;
+                }
+            }
+        });
+    }
+    
+    // Check videos after they've had time to load
+    setTimeout(checkVideoPlaying, 3000);
+    
+    // More efficient scroll handler using requestAnimationFrame for smoother performance
+    let ticking = false;
+    
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // Run other scroll-based animations only if they're in view
+                handleParallaxEffects();
+                checkFade();
+                
+                ticking = false;
+            });
+            ticking = true;
         }
     }
     
-    // Check after a short delay to ensure the page has fully loaded
-    setTimeout(checkVideoPlaying, 1500);
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    window.addEventListener('scroll', onScroll);
     
     // Mobile menu toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
@@ -96,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    window.addEventListener('scroll', checkFade);
-    checkFade(); // Check on initial load
+    // Call once on initial load
+    checkFade();
     
     // Video autoplay on scroll
     const videoCards = document.querySelectorAll('.video-container');
@@ -170,74 +210,68 @@ document.addEventListener('DOMContentLoaded', function() {
         return emailRegex.test(email);
     }
 
-    // NEW ANIMATION FUNCTIONS
+    // NEW ANIMATION FUNCTIONS - OPTIMIZED
     
-    // 1. Parallax scrolling for sections
-    function initParallaxScrolling() {
-        const sections = document.querySelectorAll('.section');
-        
-        window.addEventListener('scroll', () => {
-            sections.forEach(section => {
-                const scrollPosition = window.scrollY;
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                
-                // Only apply effect when section is in view
-                if (scrollPosition > sectionTop - window.innerHeight && 
-                    scrollPosition < sectionTop + sectionHeight) {
-                    
-                    // Calculate how far into the section we've scrolled
-                    const scrollPercentage = (scrollPosition - (sectionTop - window.innerHeight)) / 
-                                          (sectionHeight + window.innerHeight);
-                    
-                    // Apply subtle movement to section title
-                    const title = section.querySelector('.section-title');
-                    if (title) {
-                        title.style.transform = `translateY(${scrollPercentage * -30}px)`;
-                        title.style.opacity = 1 - (scrollPercentage * 0.3);
-                    }
-                }
-            });
-        });
-    }
+    // Cache DOM elements and viewport dimensions for performance
+    const sections = document.querySelectorAll('.section');
+    const hero = document.querySelector('.hero');
+    const viewportHeight = window.innerHeight;
     
-    // 2. Parallax effect for hero section
-    function heroParallax() {
-        const hero = document.querySelector('.hero');
-        if (!hero) return;
+    // Handle all parallax effects in a single function to reduce calculations
+    function handleParallaxEffects() {
+        const scrollPosition = window.scrollY;
         
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-            if (scrollPosition < window.innerHeight) {
-                const parallaxAmount = scrollPosition * 0.4;
-                hero.style.setProperty('--parallax-offset', `${parallaxAmount}px`);
-                
-                if (hero.querySelector('.hero-image')) {
-                    hero.querySelector('.hero-image').style.transform = 
-                        `scale(${1 + scrollPosition * 0.0005}) translateY(${scrollPosition * 0.05}px)`;
+        // Only apply hero parallax if in view
+        if (hero && scrollPosition < viewportHeight) {
+            const parallaxAmount = scrollPosition * 0.4;
+            
+            // Use transform instead of custom properties for better performance
+            if (hero.querySelector('.hero-image')) {
+                hero.querySelector('.hero-image').style.transform = 
+                    `scale(${1 + scrollPosition * 0.0003}) translateY(${scrollPosition * 0.03}px)`;
+            }
+        }
+        
+        // Apply section title animations only to visible sections
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            
+            // Only process if section is visible
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+                const title = section.querySelector('.section-title');
+                if (title) {
+                    // Calculate how far into the section we've scrolled (0-1)
+                    const progress = Math.max(0, Math.min(1, 
+                        1 - (rect.top / viewportHeight)
+                    ));
+                    
+                    // Apply subtle movement (reduced from previous values)
+                    title.style.transform = `translateY(${progress * -15}px)`;
+                    title.style.opacity = 1 - (progress * 0.2);
                 }
-                
-                // Move the pseudo-element for a subtle depth effect
-                hero.style.setProperty('--gradient-offset', `${scrollPosition * -0.2}px`);
             }
         });
     }
     
-    // 3. Smooth reveal animations on scroll
+    // Initialize scroll reveal with Intersection Observer for better performance
     function initScrollReveal() {
         // Options for the Intersection Observer
         const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
+            rootMargin: '0px 0px -10% 0px',
+            threshold: 0.1
         };
         
         // Create an observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    observer.unobserve(entry.target); // Stop observing once revealed
+                    // Use a shorter delay before revealing
+                    setTimeout(() => {
+                        entry.target.classList.add('revealed');
+                    }, parseInt(entry.target.dataset.delay || 0));
+                    
+                    // Stop observing once revealed
+                    observer.unobserve(entry.target);
                 }
             });
         }, options);
@@ -245,32 +279,41 @@ document.addEventListener('DOMContentLoaded', function() {
         // Select elements to observe
         const elements = document.querySelectorAll('.card, .album-card, .social-card, .section-title');
         
-        // Add base class and observe each element
+        // Add base class and observe each element with reduced staggering
         elements.forEach((element, index) => {
-            // Add staggered delay based on element index within its container
-            element.style.transitionDelay = `${index * 0.05}s`;
+            // Reduce delay for faster reveal
+            element.dataset.delay = (index % 5) * 50; // Group elements to load faster
             element.classList.add('reveal-element');
             observer.observe(element);
         });
     }
     
-    // 4. Magnetic button effect for CTAs
+    // Initialize magnetic buttons with throttled event listener
     function initMagneticButtons() {
         const buttons = document.querySelectorAll('.cta-button');
+        let isThrottled = false;
         
         buttons.forEach(button => {
             button.addEventListener('mousemove', (e) => {
-                const rect = button.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const moveX = (x - centerX) / 10;
-                const moveY = (y - centerY) / 10;
-                
-                button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                if (!isThrottled) {
+                    isThrottled = true;
+                    
+                    requestAnimationFrame(() => {
+                        const rect = button.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        
+                        // Reduced movement amount for subtlety
+                        const moveX = (x - centerX) / 15;
+                        const moveY = (y - centerY) / 15;
+                        
+                        button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                        isThrottled = false;
+                    });
+                }
             });
             
             button.addEventListener('mouseleave', () => {
@@ -279,9 +322,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Initialize all new animation functions
-    initParallaxScrolling();
-    heroParallax();
-    initScrollReveal();
-    initMagneticButtons();
+    // Initialize all new animation functions with a slight delay to prioritize content loading
+    setTimeout(function() {
+        initScrollReveal();
+        initMagneticButtons();
+        // Initial call to set up animations
+        handleParallaxEffects();
+    }, 500);
+
+    // Optimize image loading
+    function optimizeImages() {
+        // Get all images that aren't in the viewport
+        const images = document.querySelectorAll('img:not([loading])');
+        
+        // Add loading="lazy" to images that don't already have it
+        images.forEach(img => {
+            // Skip small images or images that are already visible (like the hero image)
+            const rect = img.getBoundingClientRect();
+            if (rect.top > window.innerHeight) {
+                img.setAttribute('loading', 'lazy');
+            }
+        });
+    }
+    
+    // Run image optimization right away
+    optimizeImages();
 });
