@@ -561,6 +561,7 @@ p {
     margin-bottom: 4rem;
 }
 
+/* Grid items will auto-fill their grid area based on available space */
 .card {
     background-color: var(--bg-color);
     border-radius: var(--border-radius);
@@ -704,24 +705,108 @@ p {
 
 /* Events */
 .event {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: var(--bg-light);
+    transition: all 0.3s ease;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    gap: 1.5rem;
 }
 
-.event:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+.event:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.event h4 {
-    margin-bottom: 0.5rem;
+.event-date {
+    text-align: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding-right: 1.5rem;
 }
 
 .date {
-    color: var(--accent-color);
+    font-family: var(--font-mono);
     font-weight: 600;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.date-day {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+    margin: 0.5rem 0;
+    color: var(--text-color);
+}
+
+.date-year {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: block;
+}
+
+.event-info h4 {
     margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.event-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.event-detail {
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.event-detail i {
+    margin-right: 0.4rem;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.event-description {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.event-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--accent-color);
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-top: 0.25rem;
+}
+
+.event-link i {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+    margin-left: 0.4rem;
+}
+
+.event-link:hover {
+    color: var(--primary-color);
+}
+
+.event-link:hover i {
+    transform: translateX(3px);
 }
 
 /* Contact */
@@ -1286,30 +1371,6 @@ p {
         margin: 0 1.2rem;
     }
     
-    /* YouTube card grid adjustments */
-    .card .social-card .social-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-        padding-bottom: 0.75rem; /* Reduce bottom padding */
-    }
-    
-    /* Hide the third and fourth YouTube thumbnails */
-    .card .social-card .social-grid .social-post:nth-child(3),
-    .card .social-card .social-grid .social-post:nth-child(4) {
-        display: none;
-    }
-    
-    /* Increase the size of the remaining thumbnails */
-    .card .social-card .social-grid .social-post {
-        padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    }
-    
-    /* Reduce card height to remove blank space */
-    .card .social-card {
-        height: auto;
-        min-height: 0;
-    }
-    
     .nav-list {
         gap: 1.2rem;
     }
@@ -1500,6 +1561,26 @@ p {
     .social-grid.instagram-grid {
         grid-template-columns: 1fr 1fr;
     }
+    
+    .event {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .event-date {
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 0 0 1rem 0;
+        margin-bottom: 1rem;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .date-day {
+        margin: 0 0.5rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1605,4 +1686,172 @@ p {
 .revealed {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Enhanced responsive behavior */
+@media (min-width: 1200px) {
+    .card-wide {
+        grid-column: span 8;
+    }
+    
+    .card-medium {
+        grid-column: span 6;
+    }
+    
+    .card-small {
+        grid-column: span 4;
+    }
+    
+    .card-tiny {
+        grid-column: span 3;
+    }
+    
+    .albums-row {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column: span 12;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 992px) {
+    .organic-grid {
+        gap: 1.5rem;
+    }
+    
+    .card-wide {
+        grid-column: span 8;
+    }
+    
+    .card-medium {
+        grid-column: span 6;
+    }
+    
+    .card-small {
+        grid-column: span 4;
+    }
+    
+    .card-tiny {
+        grid-column: span 4;
+    }
+    
+    .social-card .card-medium {
+        grid-column: span 6;
+    }
+    
+    .albums-row {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column: span 12;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+    .organic-grid {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .card-wide, .card[style*="grid-column: span 12"] {
+        grid-column: span 8 !important;
+    }
+    
+    .card-medium {
+        grid-column: span 4;
+    }
+    
+    .card-small, .card[style*="grid-column: span 4"] {
+        grid-column: span 4 !important;
+    }
+    
+    .albums-row {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column: span 8;
+        gap: 1.5rem;
+    }
+    
+    /* Force 3rd album to new row but maintain alignment */
+    .albums-row > div:nth-child(3) {
+        grid-column: 1 / span 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .organic-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+    
+    .card-wide, 
+    .card-medium,
+    .card-small,
+    .card-tiny,
+    .card[style*="grid-column"] {
+        grid-column: span 4 !important; /* Force all cards to full width */
+    }
+    
+    .albums-row {
+        grid-template-columns: 1fr;
+        grid-column: span 4;
+        gap: 1rem;
+    }
+    
+    /* Specific adjustments for events layout */
+    .event {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .event-date {
+        text-align: left;
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .date-day {
+        margin: 0 0.5rem;
+    }
+}
+
+/* Improved adaptive layout for 500-650px range */
+@media (min-width: 500px) and (max-width: 650px) {
+    .organic-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .card-wide, 
+    .card[style*="grid-column: span 12"],
+    .card[style*="grid-column: span 8"] {
+        grid-column: span 2 !important;
+    }
+    
+    .card-medium, 
+    .card-small, 
+    .card-tiny,
+    .card[style*="grid-column: span 6"],
+    .card[style*="grid-column: span 4"],
+    .card[style*="grid-column: span 3"] {
+        grid-column: span 1 !important;
+    }
+}
+
+/* Additional optimization for very small screens */
+@media (max-width: 499px) {
+    .organic-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .card-wide, 
+    .card-medium, 
+    .card-small, 
+    .card-tiny,
+    .card[style*="grid-column"] {
+        grid-column: 1 / -1 !important; /* All cards full width */
+    }
 }
