@@ -221,26 +221,22 @@ p {
     width: 100%;
     z-index: 1000;
     padding: 1.5rem 0;
-    transition: var(--transition);
-}
-
-.header.scrolled {
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 1rem 0;
-    backdrop-filter: blur(10px);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* Keep space-between consistent */
     padding: 0 1rem;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .logo-container {
     display: flex;
     align-items: center;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin-right: auto; /* Push to left */
 }
 
 .logo {
@@ -270,6 +266,7 @@ p {
 .nav {
     display: flex;
     align-items: center;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .nav-list {
@@ -302,11 +299,21 @@ p {
     color: var(--text-color);
 }
 
+.header.scrolled .nav {
+    /* These position changes were causing the navigation to move */
+    /* position: relative;
+    left: 0;
+    transform: translateX(0);
+    margin-left: 2rem; */
+}
+
 .header-right {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    transition: gap 0.3s ease;
+    gap: 1rem;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 1;
+    visibility: visible;
 }
 
 .cta-button {
@@ -331,7 +338,7 @@ p {
     color: var(--bg-color);
 }
 
-.header.scrolled .cta-button:hover {
+.cta-button:hover {
     background-color: var(--text-color);
     color: var(--bg-color);
 }
@@ -1379,14 +1386,6 @@ p {
         padding: 1rem 0.5rem 0.6rem;
     }
     
-    .header-right {
-        gap: 1rem;
-    }
-    
-    .cta-button {
-        padding: 0.5rem 1.2rem;
-    }
-    
     /* Restore these styles for other elements */
     .hero-title {
         font-size: 4rem;
@@ -1477,8 +1476,9 @@ p {
         padding: 4rem 0;
     }
     
+    /* Keep the section title font size at 4.5rem */
     .section-title {
-        font-size: 2.2rem;
+        font-size: 4.5rem;
     }
     
     .nav-list {
@@ -1496,6 +1496,32 @@ p {
     
     .card-wide, .card-medium, .card-small, .card-tiny {
         grid-column: span 12;
+    }
+    
+    /* Ensure specific cards take full width */
+    [style*="grid-column: span 4"] {
+        grid-column: span 12 !important;
+        width: 100%;
+    }
+    
+    /* Ensure Instagram card takes full width */
+    .social-card {
+        width: 100%;
+    }
+    
+    /* Ensure Kurofune card takes full width */
+    .card-small[style*="max-height"] {
+        grid-column: span 12 !important;
+        width: 100%;
+    }
+    
+    /* Style adjustments for specific cards */
+    .card .card-image[src*="Kurofune"],
+    .card .card-image[src*="practice-hacks"],
+    .card .card-image[src*="Boston-Violin-Intensive"],
+    .card .card-image[src*="Patreon"] {
+        height: 300px;
+        object-position: top;
     }
     
     .contact-grid {
@@ -1544,8 +1570,9 @@ p {
         padding: 3rem 0;
     }
     
+    /* Keep the section title font size at 4.5rem */
     .section-title {
-        font-size: 2rem;
+        font-size: 4.5rem;
     }
     
     .footer-grid {
@@ -1579,6 +1606,64 @@ p {
     
     .date-day {
         margin: 0 0.5rem;
+    }
+    
+    /* Ensure all cards are full width */
+    .card-wide, .card-medium, .card-small, .card-tiny {
+        grid-column: span 12 !important;
+    }
+    
+    /* Ensure specific cards take full width */
+    [style*="grid-column: span 4"] {
+        grid-column: span 12 !important;
+        width: 100%;
+    }
+    
+    /* Ensure Instagram card takes full width */
+    .social-card {
+        width: 100%;
+    }
+    
+    /* Ensure Kurofune card takes full width */
+    .card-small[style*="max-height"] {
+        grid-column: span 12 !important;
+        width: 100%;
+    }
+    
+    /* Style adjustments for specific cards */
+    .card .card-image[src*="Kurofune"],
+    .card .card-image[src*="practice-hacks"],
+    .card .card-image[src*="Boston-Violin-Intensive"],
+    .card .card-image[src*="Patreon"] {
+        height: 300px;
+        object-position: top;
+    }
+    
+    /* Fix for any nested containers with multiple cards */
+    [style*="grid-column: span"] {
+        grid-column: span 12 !important;
+        display: block !important;
+    }
+    
+    /* Ensure album cards are full width */
+    .albums-row {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
+    }
+    
+    /* Ensure proper spacing between cards */
+    .organic-grid {
+        gap: 2rem;
+    }
+    
+    /* Remove any column layouts for social grids */
+    .social-grid, .social-grid.instagram-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Allow Instagram posts to be taller */
+    .social-post {
+        padding-bottom: 80%;
     }
 }
 
@@ -1615,6 +1700,38 @@ p {
     
     .card-content {
         padding: 1.5rem;
+    }
+    
+    /* Ensure all cards are full width on smallest screens */
+    .card-wide, .card-medium, .card-small, .card-tiny {
+        grid-column: span 12 !important;
+    }
+    
+    /* Fix for any nested containers with multiple cards */
+    [style*="grid-column: span"] {
+        grid-column: span 12 !important;
+        display: block !important;
+    }
+    
+    /* Ensure album cards are full width */
+    .albums-row {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
+    }
+    
+    /* Ensure proper spacing between cards */
+    .organic-grid {
+        gap: 2rem;
+    }
+    
+    /* Remove any column layouts for social grids */
+    .social-grid, .social-grid.instagram-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Allow Instagram posts to be taller */
+    .social-post {
+        padding-bottom: 80%;
     }
 }
 
@@ -1656,43 +1773,12 @@ p {
 }
 
 .instagram-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-}
-
-.social-post {
-    display: block;
-    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
     overflow: hidden;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.social-post:hover {
-    transform: scale(1.02);
-}
-
-.social-post img {
-    width: 100%;
-    display: block;
-    transition: filter 0.3s ease;
-}
-
-.social-post:hover img {
-    filter: brightness(1.05);
-}
-
-.social-post::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.2) 100%);
-    pointer-events: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
 }
 
 /* Fix for YouTube thumbnails */
@@ -1747,4 +1833,16 @@ p {
 .subtle-link:hover::after {
     transform: scaleX(1);
     transform-origin: left;
+}
+
+.header.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    backdrop-filter: blur(10px);
+}
+
+.header.scrolled .cta-button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
 }
