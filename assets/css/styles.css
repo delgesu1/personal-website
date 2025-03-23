@@ -1017,11 +1017,9 @@ p {
 
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
-    padding: 0 1.5rem 1.5rem;
-    flex-grow: 1;
-    margin-top: auto;
+    margin-top: 1rem;
 }
 
 .social-grid.instagram-grid {
@@ -1415,6 +1413,15 @@ p {
     
     .albums-row {
         grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .social-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Hide the 3rd and 4th items on smaller screens */
+    .social-grid .social-post:nth-child(n+3) {
+        display: none;
     }
 }
 
