@@ -82,21 +82,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const mobileMenuClose = document.querySelector('.mobile-menu-close');
     const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
     
     mobileMenuToggle.addEventListener('click', function() {
-        mobileMenu.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        mobileMenu.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     });
     
     mobileMenuClose.addEventListener('click', function() {
         mobileMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    mobileMenuOverlay.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
         document.body.style.overflow = '';
     });
     
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', function() {
             mobileMenu.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
             document.body.style.overflow = '';
         });
     });
