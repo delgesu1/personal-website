@@ -347,4 +347,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Run image optimization right away
     optimizeImages();
+
+    // Make cards with data-url attribute clickable
+    function makeCardsClickable() {
+        // Updated selector to include critic-quote
+        const clickableCards = document.querySelectorAll('.card[data-url], .album-card[data-url], .social-card[data-url], .critic-quote[data-url]');
+        
+        clickableCards.forEach(card => {
+            // Add cursor pointer style to indicate clickable
+            card.style.cursor = 'pointer';
+            
+            // Add click event listener
+            card.addEventListener('click', function(e) {
+                // Check if the click was on a link or button inside the card
+                if (!e.target.closest('a, button, .social-follow-btn')) {
+                    // If not, open the card's URL in a new tab
+                    const url = this.getAttribute('data-url');
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                }
+            });
+        });
+    }
+
+    // Initialize clickable cards
+    makeCardsClickable();
 });

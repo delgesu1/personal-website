@@ -77,7 +77,7 @@
             
             <div class="organic-grid">
                 <!-- Featured Performance - Autoplay Video Card (full width) -->
-                <div class="card" style="grid-column: span 12;">
+                <div id="featured-video-wrapper" class="card" style="grid-column: span 12;" data-url="https://www.youtube.com/watch?v=c43thu5bBZY">
                     <div class="autoplay-video-card">
                         <!-- Using loading="lazy" and a data-src attribute to defer loading -->
                         <iframe class="autoplay-video" id="featured-video" data-src="https://www.youtube.com/embed/c43thu5bBZY?autoplay=1&mute=1&loop=1&playlist=c43thu5bBZY&rel=0" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -87,7 +87,7 @@
                 <!-- Albums Row -->
                 <div class="albums-row">
                     <!-- Album 1 - 2023 -->
-                    <div class="album-card">
+                    <div class="album-card" data-url="https://haensslerprofil.de/shop/kammermusik-instrumental/the-brahms-age/">
                         <div class="album-image-container">
                             <img src="assets/images/Card Photos/The-Brahms-Age-2023-Album-Cover.jpg" alt="Brahms Violin Sonatas Album" class="album-image" loading="lazy">
                         </div>
@@ -99,7 +99,7 @@
                     </div>
                     
                     <!-- Album 2 - 2021 -->
-                    <div class="album-card">
+                    <div class="album-card" data-url="https://www.orchidclassics.com/releases/orc100182-daniel-kurganov/">
                         <div class="album-image-container">
                             <img src="assets/images/Card Photos/Rhythm-Borrowed-Past-2021-Album-cover.jpg" alt="World Premieres Album" class="album-image" loading="lazy">
                         </div>
@@ -111,7 +111,7 @@
                     </div>
                     
                     <!-- Album 3 - 2018 -->
-                    <div class="album-card">
+                    <div class="album-card" data-url="https://ffm.to/violin">
                         <div class="album-image-container">
                             <img src="assets/images/Card Photos/Between-The-Notes-2018-Album-Cover.jpg" alt="Debut Album" class="album-image" loading="lazy">
                         </div>
@@ -124,7 +124,7 @@
                 </div>
                 
                 <!-- Aegis Piano Trio -->
-                <div class="card card-medium">
+                <div class="card card-medium" data-url="https://www.kurganov.org">
                     <img src="assets/images/Card Photos/aegis-piano-trio.jpg" alt="Aegis Piano Trio" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Aegis Piano Trio</h3>
@@ -133,7 +133,7 @@
                 </div>
                 
                 <!-- Duo with Constantine Finehouse -->
-                <div class="card card-medium">
+                <div class="card card-medium" data-url="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4gS0zHaWAULx1jJDQ1M9U1">
                     <img src="assets/images/Card Photos/Kurganov-Finehouse-Duo.jpg" alt="Kurganov-Finehouse Duo" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Kurganov-Finehouse Duo</h3>
@@ -141,8 +141,131 @@
                     </div>
                 </div>
                 
+                <!-- Upcoming Concerts (full width) -->
+                <div class="card" style="grid-column: 1 / -1;">
+                    <div class="card-content">
+                        <h3 class="card-title">Upcoming Concerts</h3>
+                        
+                        <div class="events-grid">
+                            <div class="event">
+                                <div class="event-date">
+                                    <span class="date">MAR</span>
+                                    <span class="date-day">06</span>
+                                    <span class="date-year">2025</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>Chamber Music with Julian Schwarz</h4>
+                                    <div class="event-details">
+                                        <span class="event-detail"><i class="fas fa-map-marker-alt"></i> YIVO Center for Jewish Research, NYC</span>
+                                        <span class="event-detail"><i class="far fa-clock"></i> 7:00 PM</span>
+                                    </div>
+                                    <p class="event-description">Music of Krein, Achron, Weiser, Prokofiev</p>
+                                    <a href="https://yivo.org/Andrzej-Cieplinski" target="_blank" class="event-link">Event Details <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div class="event">
+                                <div class="event-date">
+                                    <span class="date">APR</span>
+                                    <span class="date-day">27</span>
+                                    <span class="date-year">2025</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>Aegis Trio & Essex Chamber Music Players</h4>
+                                    <div class="event-details">
+                                        <span class="event-detail"><i class="fas fa-map-marker-alt"></i> Lawrence Public Library, MA</span>
+                                        <span class="event-detail"><i class="far fa-clock"></i> 2:00 PM</span>
+                                    </div>
+                                    <p class="event-description">Program Inspired by the Poetry of Robert Frost</p>
+                                    <a href="https://www.ecmp.org/concerts" target="_blank" class="event-link">Event Details <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div class="event">
+                                <div class="event-date">
+                                    <span class="date">APR</span>
+                                    <span class="date-day">28</span>
+                                    <span class="date-year">2025</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>Experiments in Biomechanics of Playing Music</h4>
+                                    <div class="event-details">
+                                        <span class="event-detail"><i class="fas fa-map-marker-alt"></i> MIT Nanolab, Cambridge MA</span>
+                                    </div>
+                                    <p class="event-description">Collaboration with Ben Laude and MIT Nanolab</p>
+                                    <a href="https://mitnano.mit.edu/form/mit-iap-2025-biomechanics-piano" target="_blank" class="event-link">Registration <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div class="event">
+                                <div class="event-date">
+                                    <span class="date">MAY</span>
+                                    <span class="date-day">25</span>
+                                    <span class="date-year">2025</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>Aegis Trio: Beethoven Across the Epochs</h4>
+                                    <div class="event-details">
+                                        <span class="event-detail"><i class="fas fa-map-marker-alt"></i> Frederick Collection of Pianos, MA</span>
+                                    </div>
+                                    <p class="event-description">Featuring an original Tröndlin piano, ca.1830</p>
+                                    <a href="https://www.frederickcollection.org/" target="_blank" class="event-link">Event Details <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div class="event">
+                                <div class="event-date">
+                                    <span class="date">JUN</span>
+                                    <span class="date-day">29</span>
+                                    <span class="date-year">2025</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>Kurganov-Finehouse Duo</h4>
+                                    <div class="event-details">
+                                        <span class="event-detail"><i class="fas fa-map-marker-alt"></i> FPAC Harbor Harmonies, Boston MA</span>
+                                    </div>
+                                    <p class="event-description">Music of Debussy, Franck, Beach</p>
+                                    <a href="https://www.fortpointarts.org/events/fpac-harbor-harmonies-concert/" target="_blank" class="event-link">Event Details <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div class="event">
+                                <div class="event-date">
+                                    <span class="date">OCT</span>
+                                    <span class="date-day">18</span>
+                                    <span class="date-year">2025</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>Kurganov-Finehouse Duo</h4>
+                                    <div class="event-details">
+                                        <span class="event-detail"><i class="fas fa-map-marker-alt"></i> La Grua Center, Stonington, CT</span>
+                                        <span class="event-detail"><i class="far fa-clock"></i> 5:00 PM</span>
+                                    </div>
+                                    <p class="event-description">Music of Franck, Brahms on an original 1882 Erard piano</p>
+                                </div>
+                            </div>
+                            
+                            <div class="event">
+                                <div class="event-date">
+                                    <span class="date">OCT</span>
+                                    <span class="date-day">19</span>
+                                    <span class="date-year">2025</span>
+                                </div>
+                                <div class="event-info">
+                                    <h4>Aegis Trio</h4>
+                                    <div class="event-details">
+                                        <span class="event-detail"><i class="fas fa-map-marker-alt"></i> Amherst College, Amherst MA</span>
+                                        <span class="event-detail"><i class="far fa-clock"></i> 2:00 PM</span>
+                                    </div>
+                                    <p class="event-description">Rachmaninoff Trio No. 2</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Press & Reviews -->
-                <div class="card card-medium">
+                <div class="card card-medium" id="reviews-card" data-url="https://www.kurganov.org">
                     <div class="card-content">
                         <h3 class="card-title">Press & Reviews</h3>
                         <div class="review">
@@ -161,7 +284,7 @@
                 </div>
                 
                 <!-- YouTube Channel -->
-                <div class="card card-medium">
+                <div class="card card-medium" id="youtube-card" data-url="https://www.youtube.com/@DanielKurganov">
                     <div class="social-card">
                         <div class="social-card-header">
                             <div class="social-profile">
@@ -193,130 +316,9 @@
                     </div>
                 </div>
                 
-                <!-- Upcoming Concerts (moved from below) -->
-                <div class="card card-wide">
-                    <div class="card-content">
-                        <h3 class="card-title">Upcoming Concerts</h3>
-                        
-                        <div class="event">
-                            <div class="event-date">
-                                <span class="date">MAR</span>
-                                <span class="date-day">06</span>
-                                <span class="date-year">2025</span>
-                            </div>
-                            <div class="event-info">
-                                <h4>Chamber Music with Julian Schwarz</h4>
-                                <div class="event-details">
-                                    <span class="event-detail"><i class="fas fa-map-marker-alt"></i> YIVO Center for Jewish Research, NYC</span>
-                                    <span class="event-detail"><i class="far fa-clock"></i> 7:00 PM</span>
-                                </div>
-                                <p class="event-description">Music of Krein, Achron, Weiser, Prokofiev</p>
-                                <a href="https://yivo.org/Andrzej-Cieplinski" target="_blank" class="event-link">Event Details <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div class="event">
-                            <div class="event-date">
-                                <span class="date">APR</span>
-                                <span class="date-day">27</span>
-                                <span class="date-year">2025</span>
-                            </div>
-                            <div class="event-info">
-                                <h4>Aegis Trio & Essex Chamber Music Players</h4>
-                                <div class="event-details">
-                                    <span class="event-detail"><i class="fas fa-map-marker-alt"></i> Lawrence Public Library, MA</span>
-                                    <span class="event-detail"><i class="far fa-clock"></i> 2:00 PM</span>
-                                </div>
-                                <p class="event-description">Program Inspired by the Poetry of Robert Frost</p>
-                                <a href="https://www.ecmp.org/concerts" target="_blank" class="event-link">Event Details <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div class="event">
-                            <div class="event-date">
-                                <span class="date">APR</span>
-                                <span class="date-day">28</span>
-                                <span class="date-year">2025</span>
-                            </div>
-                            <div class="event-info">
-                                <h4>Experiments in Biomechanics of Playing Music</h4>
-                                <div class="event-details">
-                                    <span class="event-detail"><i class="fas fa-map-marker-alt"></i> MIT Nanolab, Cambridge MA</span>
-                                </div>
-                                <p class="event-description">Collaboration with Ben Laude and MIT Nanolab</p>
-                                <a href="https://mitnano.mit.edu/form/mit-iap-2025-biomechanics-piano" target="_blank" class="event-link">Registration <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div class="event">
-                            <div class="event-date">
-                                <span class="date">MAY</span>
-                                <span class="date-day">25</span>
-                                <span class="date-year">2025</span>
-                            </div>
-                            <div class="event-info">
-                                <h4>Aegis Trio: Beethoven Across the Epochs</h4>
-                                <div class="event-details">
-                                    <span class="event-detail"><i class="fas fa-map-marker-alt"></i> Frederick Collection of Pianos, MA</span>
-                                </div>
-                                <p class="event-description">Featuring an original Tröndlin piano, ca.1830</p>
-                                <a href="https://www.frederickcollection.org/" target="_blank" class="event-link">Event Details <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div class="event">
-                            <div class="event-date">
-                                <span class="date">JUN</span>
-                                <span class="date-day">29</span>
-                                <span class="date-year">2025</span>
-                            </div>
-                            <div class="event-info">
-                                <h4>Kurganov-Finehouse Duo</h4>
-                                <div class="event-details">
-                                    <span class="event-detail"><i class="fas fa-map-marker-alt"></i> FPAC Harbor Harmonies, Boston MA</span>
-                                </div>
-                                <p class="event-description">Music of Debussy, Franck, Beach</p>
-                                <a href="https://www.fortpointarts.org/events/fpac-harbor-harmonies-concert/" target="_blank" class="event-link">Event Details <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div class="event">
-                            <div class="event-date">
-                                <span class="date">OCT</span>
-                                <span class="date-day">18</span>
-                                <span class="date-year">2025</span>
-                            </div>
-                            <div class="event-info">
-                                <h4>Kurganov-Finehouse Duo</h4>
-                                <div class="event-details">
-                                    <span class="event-detail"><i class="fas fa-map-marker-alt"></i> La Grua Center, Stonington, CT</span>
-                                    <span class="event-detail"><i class="far fa-clock"></i> 5:00 PM</span>
-                                </div>
-                                <p class="event-description">Music of Franck, Brahms on an original 1882 Erard piano</p>
-                            </div>
-                        </div>
-                        
-                        <div class="event">
-                            <div class="event-date">
-                                <span class="date">OCT</span>
-                                <span class="date-day">19</span>
-                                <span class="date-year">2025</span>
-                            </div>
-                            <div class="event-info">
-                                <h4>Aegis Trio</h4>
-                                <div class="event-details">
-                                    <span class="event-detail"><i class="fas fa-map-marker-alt"></i> Amherst College, Amherst MA</span>
-                                    <span class="event-detail"><i class="far fa-clock"></i> 2:00 PM</span>
-                                </div>
-                                <p class="event-description">Rachmaninoff Trio No. 2</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="grid-column: span 4; display: flex; flex-direction: column; gap: 2rem;">
+                <div style="grid-column: span 4; display: flex; flex-direction: column; gap: 2rem;" id="insta-kuro-container">
                     <!-- Instagram -->
-                    <div class="card card-small">
+                    <div class="card card-small" data-url="https://www.instagram.com/violinvention">
                         <div class="social-card">
                             <div class="social-card-header">
                                 <div class="social-profile">
@@ -331,19 +333,22 @@
                                     Follow
                                 </a>
                             </div>
-                            <div class="instagram-grid" style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="instagram-grid social-grid">
                                 <div class="social-post">
                                     <img src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 1" loading="lazy">
                                 </div>
                                 <div class="social-post">
                                     <img src="assets/images/Card Photos/Instagram Thumbnail 2.jpg" alt="Instagram Thumbnail 2" loading="lazy">
                                 </div>
+                                <div class="social-post">
+                                    <img src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 3" loading="lazy">
+                                </div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Kurofune Project -->
-                    <div class="card card-small" style="max-height: 500px;">
+                    <div class="card card-small" data-url="https://www.kurganov.org">
                         <img src="assets/images/Card Photos/Kurofune-Ensemble.jpg" alt="Kurofune Project" class="card-image" loading="lazy">
                         <div class="card-content">
                             <h3 class="card-title">Kurofune Project (2018)</h3>
@@ -368,12 +373,12 @@
             
             <div class="organic-grid">
                 <!-- First row with Masterclasses and Patreon side by side -->
-                <div class="card card-wide" style="padding: 0; overflow: hidden; grid-column: span 8;">
+                <div class="card card-wide" style="padding: 0; overflow: hidden; grid-column: span 8;" data-url="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4EdoSU8Tjgso1lvH7ggVfl">
                     <img src="assets/images/Kurganov-Masterclasses.png" alt="Daniel Kurganov Masterclasses" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 </div>
                 
                 <!-- Patreon - now positioned to the right -->
-                <div class="card card-small" style="grid-column: span 4;">
+                <div class="card card-small" data-url="https://www.patreon.com/artiststechnique">
                     <div class="social-card">
                         <div class="social-card-header">
                             <div class="social-profile">
@@ -410,7 +415,7 @@
                 
                 <div class="card-stack">
                     <!-- 64 Practice Hacks -->
-                    <div class="card card-small">
+                    <div class="card card-small" data-url="https://payhip.com/violin">
                         <img src="assets/images/Card Photos/64 practice hacks.jpg" alt="64 Practice Hacks" class="card-image">
                         <div class="card-content">
                             <h3 class="card-title">64 Practice Hacks</h3>
@@ -419,7 +424,7 @@
                     </div>
                     
                     <!-- Boston Violin Intensive -->
-                    <div class="card card-small">
+                    <div class="card card-small" data-url="https://www.kurganov.org">
                         <img src="assets/images/Card Photos/Boston-Violin-Intensive.jpeg" alt="Boston Violin Intensive" class="card-image">
                         <div class="card-content">
                             <h3 class="card-title">Boston Violin Intensive</h3>
@@ -429,7 +434,7 @@
                 </div>
                 
                 <!-- Strad Articles -->
-                <div class="card card-medium">
+                <div class="card card-medium" data-url="https://www.thestrad.com/daniel-kurganov/6784.tag">
                     <img src="assets/images/Card Photos/The-Strad.jpg" alt="The Strad Magazine" class="card-image" style="object-fit: contain; background-color: white; margin-bottom: 0;">
                     <div class="card-content" style="padding-top: 0;">
                         <p class="card-text">My contributions to The Strad Magazine explore various aspects of violin technique, historical performance practice, and contemporary approaches to classical music.</p>
@@ -465,11 +470,20 @@
                 </style>
                 
                 <!-- Workshops -->
-                <div class="card card-medium">
+                <div class="card card-medium" data-url="https://docs.google.com/document/d/113RhmatJquXJeyLpdMyVvjr6R2W6Jwi2tpeqVyqb374/edit?usp=sharing">
                     <img src="assets/images/Card Photos/Workshops-and-Masterclasses.jpg" alt="Workshops and Masterclasses" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Workshops & Masterclasses</h3>
                         <p class="card-text">Specialized workshops worldwide focusing on technical development, musical interpretation, and career guidance for violinists.</p>
+                    </div>
+                </div>
+
+                <!-- After the Workshops card in the Educator section -->
+                <div class="card card-medium" data-url="https://www.tonebase.co/violin-courses/vln-daniel-kurganov-18-experiments-for-the-practice-room">
+                    <img src="assets/images/Card Photos/tonebase.jpg" alt="Tonebase Course" class="card-image" style="object-fit: contain; background-color: white;">
+                    <div class="card-content">
+                        <h3 class="card-title">Tonebase</h3>
+                        <p class="card-text">Check out my course for Tonebase. Inspiration and experimentation have been crucial to my musical growth. By learning from other musicians and recordings, I translate fresh ideas into practical solutions in the practice room, resolving challenges and discovering new expressive possibilities.</p>
                     </div>
                 </div>
             </div>
@@ -485,7 +499,7 @@
             
             <div class="organic-grid">
                 <!-- Arco AI -->
-                <div class="card card-small">
+                <div class="card card-small" data-url="https://www.violinvention.com">
                     <img src="assets/images/Card Photos/ArcoAI-Image.png" alt="Arco AI" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">ArcoAI</h3>
@@ -494,7 +508,7 @@
                 </div>
                 
                 <!-- Arco Connect -->
-                <div class="card card-small">
+                <div class="card card-small" data-url="https://www.kurganov.org">
                     <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Arco Connect" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Arco Connect</h3>
@@ -503,7 +517,7 @@
                 </div>
                 
                 <!-- Arco Library -->
-                <div class="card card-small">
+                <div class="card card-small" data-url="https://www.kurganov.org">
                     <img src="assets/images/Card Photos/arco library image.jpg" alt="Arco Library" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Arco Library</h3>
@@ -512,7 +526,7 @@
                 </div>
                 
                 <!-- Audio & Video Engineering -->
-                <div class="card card-wide">
+                <div class="card card-wide" data-url="https://www.overtoneartists.com">
                     <img src="assets/images/Card Photos/audio video engineer.jpg" alt="Audio & Video Production" class="card-image">
                     <div class="audio-engineering-content">
                         <h3 class="card-title">Audio & Video Production</h3>
@@ -524,7 +538,7 @@
                 </div>
                 
                 <!-- AI Classical Music Experiments -->
-                <div class="card card-small">
+                <div class="card card-small" data-url="https://www.thestrad.com/video/did-ai-just-kill-classical-music-a-video-from-violinist-daniel-kurganov/18010.article?adredir=1&adredir=1">
                     <img src="assets/images/Card Photos/AI Classical Music Experiments.jpg" alt="AI Classical Music Experiments" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">AI Classical Music Experiments</h3>
@@ -533,7 +547,7 @@
                 </div>
                 
                 <!-- Audience Perspective Emulation System -->
-                <div class="card card-small">
+                <div class="card card-small" data-url="assets/documents/Audience Perspective Emulation System (APES).pdf">
                     <img src="assets/images/Card Photos/Audience Perspective Emulation System.jpeg" alt="Audience Perspective Emulation System" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Audience Perspective Emulation System</h3>
@@ -575,7 +589,7 @@
                     </ul>
                 </div>
                 
-                <blockquote class="critic-quote">
+                <blockquote class="critic-quote" data-url="https://www.kurganov.org">
                     "The duo's fine musicianship was on display throughout, channeling pathos and joy using the full possibilities of their instruments."
                     <cite>— The Boston Musical Intelligencer (2021)</cite>
                 </blockquote>
@@ -583,7 +597,7 @@
             
             <div class="organic-grid">
                 <!-- Photography -->
-                <div class="card card-medium">
+                <div class="card card-medium" data-url="https://overtoneartists.wixsite.com/photo">
                     <img src="assets/images/Card Photos/photography.jpg" alt="Photography" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Photography</h3>
