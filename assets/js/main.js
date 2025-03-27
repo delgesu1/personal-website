@@ -350,8 +350,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Make cards with data-url attribute clickable
     function makeCardsClickable() {
-        // Updated selector to include critic-quote
-        const clickableCards = document.querySelectorAll('.card[data-url], .album-card[data-url], .social-card[data-url], .critic-quote[data-url]');
+        // Select all cards with data-url attribute
+        const clickableCards = document.querySelectorAll('.card[data-url], .album-card[data-url], .social-card[data-url]');
         
         clickableCards.forEach(card => {
             // Add cursor pointer style to indicate clickable

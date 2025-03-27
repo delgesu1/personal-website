@@ -2309,3 +2309,69 @@ p {
         margin-bottom: 2rem;
     }
 }
+
+/* Ultra-minimalist buttons with refined hover effects */
+.cv-download-minimal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.2rem;
+    margin: 0 0.7rem;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+    font-family: var(--font-orator);
+    font-size: 0.8rem;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    position: relative;
+}
+
+.cv-download-minimal::after {
+    content: '';
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    width: 25%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform: translateX(-50%);
+}
+
+.cv-download-minimal:hover {
+    color: rgba(0, 0, 0, 0.8);
+    transform: translateY(-1px);
+}
+
+.cv-download-minimal:hover::after {
+    width: 70%;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.cv-download-minimal:active {
+    transform: translateY(0);
+}
+
+/* Button container with refined spacing */
+.hero-buttons {
+    display: flex;
+    margin-top: 2.8rem;
+    margin-bottom: 0.5rem;
+    justify-content: center;
+}
+
+/* Responsive adjustments with improved touch targets */
+@media (max-width: 768px) {
+    .hero-buttons {
+        margin-top: 2.2rem;
+    }
+    
+    .cv-download-minimal {
+        font-size: 0.75rem;
+        letter-spacing: 1.7px;
+        padding: 0.9rem 1.1rem; /* Slightly larger touch target on mobile */
+    }
+}
+
