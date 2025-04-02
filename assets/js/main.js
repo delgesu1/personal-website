@@ -60,11 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function onScroll() {
         if (!ticking) {
             window.requestAnimationFrame(function() {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+                updateHeaderStyle(); // Call the new header styling function
                 
                 // Run other scroll-based animations only if they're in view
                 handleParallaxEffects();
@@ -77,6 +73,66 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     window.addEventListener('scroll', onScroll);
+    window.addEventListener('resize', updateHeaderStyle); // Also update styles on resize
+    
+    // Function to handle header style changes based on scroll and width
+    function updateHeaderStyle() {
+        if (!header || !heroSection) return; // Ensure elements exist
+        
+        const scrollPosition = window.scrollY;
+        const screenWidth = window.innerWidth;
+        const headerHeight = header.offsetHeight;
+        const maxBlur = 8; // Max blur in pixels
+        let currentBlur = 0;
+        
+        // Small screen logic (<= 768px)
+        if (screenWidth <= 768) {
+            const blurStartPoint = heroHeight / 3; // Start blur earlier (changed from / 2)
+            const blurEndPoint = heroHeight * 0.95; // End blur later for more gradual effect (changed from 0.85)
+
+            // --- Header Transition Logic (Existing) ---
+            if (scrollPosition < (heroHeight * 2 / 3)) {
+                header.classList.add('header-hero-overlap');
+                header.classList.remove('scrolled');
+            } else {
+                header.classList.remove('header-hero-overlap');
+                header.classList.add('scrolled');
+            }
+            
+            // --- Gradual Blur Logic (New) ---
+            if (scrollPosition > blurStartPoint) {
+                const scrollRange = blurEndPoint - blurStartPoint;
+                if (scrollRange > 0) { // Avoid division by zero
+                    const progress = Math.min(1, (scrollPosition - blurStartPoint) / scrollRange);
+                    currentBlur = progress * maxBlur;
+                } else {
+                    currentBlur = (scrollPosition >= blurEndPoint) ? maxBlur : 0;
+                } 
+            } else {
+                currentBlur = 0;
+            }
+
+        } 
+        // Large screen logic (> 768px)
+        else {
+             // --- Header Transition Logic (Existing) ---
+            header.classList.remove('header-hero-overlap'); // Ensure overlap class is removed
+            if (scrollPosition > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            // Ensure blur is 0 on larger screens
+            currentBlur = 0;
+        }
+        
+        // Apply the calculated blur value via CSS variable
+        // Using documentElement ensures the variable is globally available
+        document.documentElement.style.setProperty('--hero-blur', `${currentBlur}px`);
+    }
+
+    // Initial call to set the correct header style on load
+    updateHeaderStyle();
     
     // Mobile menu toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
@@ -291,8 +347,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const parallaxAmount = scrollPosition * 0.4;
             
             // Use transform instead of custom properties for better performance
-            if (hero.querySelector('.hero-image')) {
-                hero.querySelector('.hero-image').style.transform = 
+            const targetImage = window.innerWidth <= 768 ? 
+                                hero.querySelector('.hero-image-mobile') : 
+                                hero.querySelector('.hero-image-desktop');
+
+            if (targetImage) {
+                targetImage.style.transform = 
                     `scale(${1 + scrollPosition * 0.0003}) translateY(${scrollPosition * 0.03}px)`;
             }
         }

@@ -724,15 +724,36 @@ p {
     overflow: hidden;
 }
 
-.hero-image {
+.hero-image-desktop,
+.hero-image-mobile {
     width: 100%;
     height: auto;
     display: block;
     max-height: 65vh;
     object-fit: contain;
     transition: all 0.5s ease;
-    animation: heroImageReveal 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    will-change: transform;
+    will-change: transform, filter; /* Updated will-change */
+}
+
+/* Default: Show desktop, hide mobile */
+.hero-image-desktop {
+    display: block;
+}
+.hero-image-mobile {
+    display: none;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Make image cover the container */
+    max-height: none; /* Override any previous max-height */
+    animation: none; /* Disable entry animation if needed */
+    /* Apply blur using a CSS variable, default to 0px */
+    filter: blur(var(--hero-blur, 0px));
+    /* Transition the filter property for smooth effect */
+    transition: filter 0.3s ease-out;
+    will-change: filter; /* Hint for performance */
 }
 
 .scroll-indicator {
@@ -1474,30 +1495,27 @@ p {
 
 /* --- Form Submission Status Styles --- */
 .form-status {
-    margin-top: 1.5rem;
+    display: block !important; /* Override any potential hiding */
+    margin-top: 1rem;
     padding: 0.75rem 1rem;
     border-radius: 4px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-align: center;
-    display: none; /* Hidden by default */
 }
 
 .form-status.status-loading {
-    background-color: #e9ecef;
-    color: #495057;
-    border: 1px solid #ced4da;
+    background-color: #e0e0e0;
+    color: #333;
 }
 
 .form-status.status-success {
     background-color: #d4edda;
     color: #155724;
-    border: 1px solid #c3e6cb;
 }
 
 .form-status.status-error {
     background-color: #f8d7da;
     color: #721c24;
-    border: 1px solid #f5c6cb;
 }
 
 /* Footer */
@@ -2310,6 +2328,28 @@ p {
     padding: 1rem 0;
     backdrop-filter: blur(10px);
 }
+
+/* Ensure all text elements and icons are dark when scrolled */
+.header.scrolled .logo,
+.header.scrolled .nav-link,
+.header.scrolled .nav-submenu-link,
+.header.scrolled .mobile-menu-toggle,
+.header.scrolled .cta-button {
+    color: var(--text-color) !important; /* Use dark text color */
+}
+
+.header.scrolled .logo-divider,
+.header.scrolled .mobile-menu-toggle .menu-icon,
+.header.scrolled .mobile-menu-toggle .menu-icon::before,
+.header.scrolled .mobile-menu-toggle .menu-icon::after,
+.header.scrolled .nav-submenu::before {
+    background-color: var(--text-color) !important; /* Use dark color for lines/dividers */
+}
+
+.header.scrolled .cta-button {
+    border-color: var(--text-color) !important; /* Ensure border is dark */
+}
+
 .header.scrolled .cta-button:hover {
     background-color: var(--text-color);
     color: var(--bg-color);
@@ -2389,5 +2429,136 @@ p {
     height: 1.6em;
     display: inline-block;
     margin-left: 0;
+}
+
+/* --- Responsive Adjustments for Small Screens (Hero Section Focus) --- */
+@media (max-width: 768px) {
+    .hero {
+        /* Remove default background and padding if they interfere */
+        background-color: transparent;
+        padding-top: 0; /* Adjust if header overlap is needed */
+        min-height: 0; /* Allow height to be determined by vh */
+        height: 100vh; /* Ensure it takes full viewport height */
+        display: block; /* Change display if flexbox causes issues */
+        position: relative; /* Ensure positioning context */
+    }
+
+    .hero-image-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        z-index: 0; /* Behind content and header */
+        background-color: transparent; /* Ensure no background color */
+        overflow: hidden; /* Keep image contained */
+    }
+
+    .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Make image cover the container */
+        max-height: none; /* Override any previous max-height */
+        animation: none; /* Disable entry animation if needed */
+        /* Apply blur using a CSS variable, default to 0px */
+        filter: blur(var(--hero-blur, 0px));
+        /* Transition the filter property for smooth effect */
+        transition: filter 0.3s ease-out;
+        will-change: filter; /* Hint for performance */
+    }
+
+    .hero-content {
+        position: relative; /* Ensure it's above the background image */
+        z-index: 2; /* Above image */
+        padding-top: var(--header-height); /* Add padding to avoid overlap with fixed header */
+        height: 100%; /* Allow content to potentially fill height */
+        justify-content: space-between; /* Push elements apart vertically */
+        padding-bottom: 100px; /* Extra space at bottom */
+    }
+
+    .header {
+        /* background-color: transparent !important; /* Ensure header is transparent */ /* REMOVED */
+        position: fixed; /* Keep header fixed */
+        z-index: 3; /* Above image and content background */
+    }
+
+    /* New rule: Apply transparent background only when this class is added via JS */
+    .header.header-hero-overlap {
+        background-color: transparent !important;
+        box-shadow: none; /* Also remove shadow when transparent */
+    }
+
+    /* --- Text Color Changes --- */
+    .header .logo,
+    .header .nav-link, /* Although hidden, style for consistency if it appears */
+    .header .nav-submenu-link, /* Style for consistency */
+    .mobile-menu-toggle,
+    .cv-download-minimal,
+    .header .cta-button, /* Added Contact button */
+    .scroll-indicator {
+        color: var(--text-light) !important;
+    }
+
+    /* Ensure CV buttons are fully opaque */
+    .cv-download-minimal {
+        opacity: 1 !important;
+    }
+
+    /* --- Line/Icon Color Changes --- */
+    .header .logo-divider,
+    .mobile-menu-toggle .menu-icon,
+    .mobile-menu-toggle .menu-icon::before,
+    .mobile-menu-toggle .menu-icon::after,
+    .cv-download-minimal::after,
+    .scroll-indicator::after {
+        background-color: var(--text-light) !important;
+    }
+
+    /* Ensure Contact button border is also white in this state */
+    .header.header-hero-overlap .cta-button {
+        border-color: var(--text-light) !important;
+    }
+
+    /* Adjust specific download link position if needed */
+    .hero-downloads, .hero-buttons { /* Target both possibilities */
+      position: absolute; /* Position relative to .hero */
+      bottom: 150px; /* scroll-indicator bottom (20px) + 80px gap - INCREASED */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%; /* Ensure it spans */
+      display: flex; /* Use flex to center content if needed */
+      justify-content: center; /* Center buttons */
+      z-index: 2; /* Ensure it's above the background image */
+      margin-top: 0; /* Override previous margin */
+    }
+
+     .scroll-indicator {
+        z-index: 2; /* Ensure it's above the background image */
+        bottom: 20px; /* Adjust position if needed */
+     }
+
+    /* Show mobile, hide desktop */
+    .hero-image-desktop {
+        display: none;
+    }
+    .hero-image-mobile {
+        display: block;
+    }
+
+    /* Apply blur/styles to both, but only mobile is visible */
+    .hero-image-desktop,
+    .hero-image-mobile {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Make image cover the container */
+        max-height: none; /* Override any previous max-height */
+        animation: none; /* Disable entry animation if needed */
+        /* Apply blur using a CSS variable, default to 0px */
+        filter: blur(var(--hero-blur, 0px));
+        /* Transition the filter property for smooth effect */
+        transition: filter 0.3s ease-out;
+        will-change: filter; /* Hint for performance */
+    }
 }
 
