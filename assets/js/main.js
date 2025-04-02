@@ -112,22 +112,48 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link, .nav-submenu-link');
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             
             const targetId = this.getAttribute('href');
+            // Special handling for #contact if it's just a placeholder/no section
+            if (targetId === '#contact' && !document.querySelector(targetId)) {
+                console.log("Contact section not found, attempting smooth scroll to element.");
+                const contactElem = document.getElementById('contact'); // Assuming #contact is the section ID
+                if (contactElem) {
+                     const targetPosition = contactElem.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 10;
+                     window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                     });
+                } else {
+                    console.warn("#contact element not found.");
+                }
+                return; 
+            }
+            
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                const targetPosition = targetSection.offsetTop - header.offsetHeight;
+                // Use getBoundingClientRect for more accurate position relative to viewport
+                const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 10; // Added slight offset
                 
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
+                
+                // Close mobile menu if open
+                if (mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            } else {
+                console.warn(`Target section ${targetId} not found for smooth scroll.`);
             }
         });
     });
@@ -164,58 +190,87 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Form validation
-    const contactForm = document.querySelector('.contact-form form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const subjectInput = document.getElementById('subject');
-            const messageInput = document.getElementById('message');
-            
-            let isValid = true;
-            
-            // Simple validation
-            if (!nameInput.value.trim()) {
-                nameInput.classList.add('error');
-                isValid = false;
-            } else {
-                nameInput.classList.remove('error');
-            }
-            
-            if (!emailInput.value.trim() || !isValidEmail(emailInput.value)) {
-                emailInput.classList.add('error');
-                isValid = false;
-            } else {
-                emailInput.classList.remove('error');
-            }
-            
-            if (!subjectInput.value.trim()) {
-                subjectInput.classList.add('error');
-                isValid = false;
-            } else {
-                subjectInput.classList.remove('error');
-            }
-            
-            if (!messageInput.value.trim()) {
-                messageInput.classList.add('error');
-                isValid = false;
-            } else {
-                messageInput.classList.remove('error');
-            }
-            
-            if (isValid) {
-                // In a real implementation, you would send the form data to a server
-                alert('Thank you for your message! I will get back to you soon.');
-                contactForm.reset();
-            }
+    // --- NEW Web3Forms Validation & Submission Logic --- 
+    (function () {
+        'use strict';
+        
+        // Fetch all the forms we want to apply custom validation styles to
+        const forms = document.querySelectorAll('.needs-validation');
+        const resultElement = document.getElementById('form-result'); // Use the ID added to the HTML
+        
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                // Original preventDefault moved inside the 'else' for fetch submission
+                
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    form.querySelectorAll(':invalid')[0].focus();
+                } else {
+                    // Prevent default submission ONLY if validation passes
+                    event.preventDefault();
+                    event.stopPropagation();
+                    
+                    const formData = new FormData(form);
+                    const object = Object.fromEntries(formData);
+                    const json = JSON.stringify(object);
+                    
+                    if(resultElement) { // Check if result element exists
+                         resultElement.innerHTML = "Please wait...";
+                         resultElement.style.display = 'block'; // Make sure it's visible
+                         resultElement.className = 'form-status status-loading'; // Reset classes
+                    } else {
+                        console.error("#form-result element not found");
+                        // Optionally provide feedback elsewhere or just proceed
+                    }
+
+                    fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: json
+                    })
+                    .then(async (response) => {
+                        let jsonResponse = await response.json();
+                        if (resultElement) {
+                            if (response.status == 200) {
+                                resultElement.innerHTML = jsonResponse.message || "Form submitted successfully!";
+                                resultElement.className = 'form-status status-success';
+                            } else {
+                                console.error("Web3Forms Error:", jsonResponse);
+                                resultElement.innerHTML = jsonResponse.message || "An error occurred.";
+                                resultElement.className = 'form-status status-error';
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Fetch Error:", error);
+                        if (resultElement) {
+                            resultElement.innerHTML = "Something went wrong! Please try again.";
+                            resultElement.className = 'form-status status-error';
+                        }
+                    })
+                    .then(function () {
+                        form.reset();
+                        form.classList.remove('was-validated');
+                        if (resultElement) {
+                            setTimeout(() => {
+                                resultElement.style.display = 'none';
+                            }, 6000); // Keep message visible longer
+                        }
+                    });
+                }
+                form.classList.add('was-validated');
+            }, false);
         });
-    }
-    
+    })();
+    // --- END Web3Forms Logic --- 
+
     function isValidEmail(email) {
+        // Keep this function if needed elsewhere, otherwise it can be removed
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }

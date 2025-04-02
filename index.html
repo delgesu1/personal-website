@@ -19,17 +19,21 @@
     <header class="header">
         <div class="container header-container">
             <div class="logo-container">
-            <a href="#" class="logo">Daniel Kurganov&nbsp;</a>
-                <span class="logo-divider"></span>
+                <a href="#" class="logo">Daniel Kurganov&nbsp;</a>
+            </div>
             <nav class="nav">
                 <ul class="nav-list">
-                        <li><a href="#violinist" class="nav-link">Violinist</a></li>
+                    <li class="nav-item nav-item-has-submenu">
+                        <a href="#violinist" class="nav-link">Violinist</a>
+                        <ul class="nav-submenu">
+                            <li><a href="#upcoming-events" class="nav-submenu-link">Events</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#educator" class="nav-link">Educator</a></li>
-                        <li><a href="#technology" class="nav-link">Technology</a></li>
-                        <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#technology" class="nav-link">Technology</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
                 </ul>
             </nav>
-            </div>
             <div class="header-right">
                 <a href="#contact" class="cta-button">Contact</a>
                 <button class="mobile-menu-toggle">
@@ -46,6 +50,7 @@
         </button>
         <ul class="mobile-nav-list">
             <li><a href="#violinist" class="mobile-nav-link">Violinist</a></li>
+            <li><a href="#upcoming-events" class="mobile-nav-link">Events</a></li
             <li><a href="#educator" class="mobile-nav-link">Educator</a></li>
             <li><a href="#technology" class="mobile-nav-link">Technology</a></li>
             <li><a href="#about" class="mobile-nav-link">About</a></li>
@@ -91,6 +96,16 @@
         </div>
     </section>
 
+    <!-- Stretched Block for Featured Video - MOVED HERE -->
+    <div class="block block-stretched">
+        <!-- Featured Performance - Autoplay Video Card (full width) -->
+        <div id="featured-video-wrapper" class="card" data-url="https://www.youtube.com/watch?v=c43thu5bBZY">
+            <div class="autoplay-video-card">
+                <iframe class="autoplay-video" id="featured-video" data-src="https://www.youtube.com/embed/c43thu5bBZY?autoplay=1&mute=1&loop=1&playlist=c43thu5bBZY&rel=0" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Violinist Section -->
     <section id="violinist" class="section section-violinist">
         <div class="container">
@@ -98,77 +113,71 @@
                 <h2 class="section-title">Violinist</h2>
             </div>
             
-            <div class="organic-grid">
-                <!-- Featured Performance - Autoplay Video Card (full width) -->
-                <div id="featured-video-wrapper" class="card" style="grid-column: span 12;" data-url="https://www.youtube.com/watch?v=c43thu5bBZY">
-                    <div class="autoplay-video-card">
-                        <!-- Using loading="lazy" and a data-src attribute to defer loading -->
-                        <iframe class="autoplay-video" id="featured-video" data-src="https://www.youtube.com/embed/c43thu5bBZY?autoplay=1&mute=1&loop=1&playlist=c43thu5bBZY&rel=0" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-                
-                <!-- Albums Row -->
-                <div class="albums-row">
-                    <!-- Album 1 - 2023 -->
-                    <div class="album-card" data-url="https://haensslerprofil.de/shop/kammermusik-instrumental/the-brahms-age/">
-                        <div class="album-image-container">
-                            <img src="assets/images/Card Photos/The-Brahms-Age-2023-Album-Cover.jpg" alt="Brahms Violin Sonatas Album" class="album-image" loading="lazy">
-                        </div>
-                        <div class="album-content">
-                            <h3 class="album-title">Complete Brahms Violin Sonatas</h3>
-                            <p class="album-year">2023 | Haenssler Classics</p>
-                            <p class="album-text">Pairing a 1706 Guarneri violin (strung with sheep gut) with original 19th-c pianos</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Album 2 - 2021 -->
-                    <div class="album-card" data-url="https://www.orchidclassics.com/releases/orc100182-daniel-kurganov/">
-                        <div class="album-image-container">
-                            <img src="assets/images/Card Photos/Rhythm-Borrowed-Past-2021-Album-cover.jpg" alt="World Premieres Album" class="album-image" loading="lazy">
-                        </div>
-                        <div class="album-content">
-                            <h3 class="album-title">World-premiere Recordings</h3>
-                            <p class="album-year">2021 | Orchid Classics</p>
-                            <p class="album-text">Music of Lera Auerbach and Richard Beaudoin with works by Cage and Messiaen</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Album 3 - 2018 -->
-                    <div class="album-card" data-url="https://ffm.to/violin">
-                        <div class="album-image-container">
-                            <img src="assets/images/Card Photos/Between-The-Notes-2018-Album-Cover.jpg" alt="Debut Album" class="album-image" loading="lazy">
-                        </div>
-                        <div class="album-content">
-                            <h3 class="album-title">Debut Album</h3>
-                            <p class="album-year">2018 | Spice Classics</p>
-                            <p class="album-text">Featuring works by Brahms, Prokofiev, Tchaikovsky, Wagner, Rachmaninoff and Schemmer</p>
-                        </div>
-                    </div>
-                </div>
-                
+            <!-- Events Block for Duos -->
+            <div class="block block-events">
                 <!-- Aegis Piano Trio -->
-                <div class="card card-medium" data-url="https://www.kurganov.org">
+                <div class="card" data-url="https://www.kurganov.org"> 
                     <img src="assets/images/Card Photos/aegis-piano-trio.jpg" alt="Aegis Piano Trio" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Aegis Piano Trio</h3>
-                        <p class="card-text">Performing with Constantine Finehouse and Daniel Lelchuk, the Aegis Piano Trio explores the rich repertoire of piano trios with a focus on both classic masterpieces and contemporary works.</p>
+                        <p class="card-text">Performing with pianist Constantine Finehouse and cellist Daniel Lelchuk</p>
                     </div>
                 </div>
                 
                 <!-- Duo with Constantine Finehouse -->
-                <div class="card card-medium" data-url="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4gS0zHaWAULx1jJDQ1M9U1">
+                <div class="card" data-url="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4gS0zHaWAULx1jJDQ1M9U1">
                     <img src="assets/images/Card Photos/Kurganov-Finehouse-Duo.jpg" alt="Kurganov-Finehouse Duo" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Kurganov-Finehouse Duo</h3>
-                        <p class="card-text">A longstanding musical partnership exploring the violin and piano repertoire with a focus on artistic nuance and historical context.</p>
+                        <p class="card-text">A longstanding musical partnership exploring the violin and piano repertoire with a focus on artistic nuance and historical context</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Even Block for Albums -->
+            <div class="block block-even">
+                <!-- Album 1 - 2023 -->
+                <div class="album-card" data-url="https://haensslerprofil.de/shop/kammermusik-instrumental/the-brahms-age/">
+                    <div class="album-image-container">
+                        <img src="assets/images/Card Photos/The-Brahms-Age-2023-Album-Cover.jpg" alt="Brahms Violin Sonatas Album" class="album-image" loading="lazy">
+                    </div>
+                    <div class="album-content">
+                        <h3 class="album-title">Complete Brahms Violin Sonatas</h3>
+                        <p class="album-year">2023 | Haenssler Classics</p>
+                        <p class="album-text">Pairing a 1706 Guarneri violin (strung with sheep gut) with original 19th-century pianos</p>
                     </div>
                 </div>
                 
-                <!-- Upcoming Concerts (full width) -->
-                <div class="card" style="grid-column: 1 / -1;">
+                <!-- Album 2 - 2021 -->
+                <div class="album-card" data-url="https://www.orchidclassics.com/releases/orc100182-daniel-kurganov/">
+                    <div class="album-image-container">
+                        <img src="assets/images/Card Photos/Rhythm-Borrowed-Past-2021-Album-cover.jpg" alt="World Premieres Album" class="album-image" loading="lazy">
+                    </div>
+                    <div class="album-content">
+                        <h3 class="album-title">Rhythm and the Borrowed Past</h3>
+                        <p class="album-year">2021 | Orchid Classics</p>
+                        <p class="album-text">World-premiere recordings of the works of Lera Auerbach and Richard Beaudoin as well as masterpieces by Cage and Messiaen</p>
+                    </div>
+                </div>
+                
+                <!-- Album 3 - 2018 -->
+                <div class="album-card" data-url="https://ffm.to/violin">
+                    <div class="album-image-container">
+                        <img src="assets/images/Card Photos/Between-The-Notes-2018-Album-Cover.jpg" alt="Debut Album" class="album-image" loading="lazy">
+                    </div>
+                    <div class="album-content">
+                        <h3 class="album-title">Debut Album</h3>
+                        <p class="album-year">2018 | Spice Classics</p>
+                        <p class="album-text">Featuring works by Brahms, Prokofiev, Tchaikovsky, Wagner, Rachmaninoff and Schemmer</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- One Card Block for Upcoming Concerts -->
+            <div class="block block-one-card" id="upcoming-events">
+                <div class="card"> 
                     <div class="card-content">
                         <h3 class="card-title">Upcoming Concerts</h3>
-                        
                         <div class="events-grid">
                             <div class="event">
                                 <div class="event-date">
@@ -216,7 +225,7 @@
                                         <span class="event-detail"><i class="fas fa-map-marker-alt"></i> MIT Nanolab, Cambridge MA</span>
                                     </div>
                                     <p class="event-description">Collaboration with Ben Laude and MIT Nanolab</p>
-                                    <a href="https://mitnano.mit.edu/form/mit-iap-2025-biomechanics-piano" target="_blank" class="event-link">Registration <i class="fas fa-arrow-right"></i></a>
+                                    <a href="https://mitnano.mit.edu/form/mit-iap-2025-biomechanics-piano" target="_blank" class="event-link">More Info <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                             
@@ -239,7 +248,7 @@
                             <div class="event">
                                 <div class="event-date">
                                     <span class="date">JUN</span>
-                                    <span class="date-day">29</span>
+                                    <span class="date-day">21</span>
                                     <span class="date-year">2025</span>
                                 </div>
                                 <div class="event-info">
@@ -280,15 +289,18 @@
                                         <span class="event-detail"><i class="fas fa-map-marker-alt"></i> Amherst College, Amherst MA</span>
                                         <span class="event-detail"><i class="far fa-clock"></i> 2:00 PM</span>
                                     </div>
-                                    <p class="event-description">Rachmaninoff Trio No. 2</p>
+                                    <p class="event-description">S. Rachmaninoff's Trio No. 2</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+            </div>
+
+            <!-- Tetris Block for Social/Press -->
+            <div class="block block-tetris" id="violinist-tetris-block"> 
                 <!-- Press & Reviews -->
-                <div class="card card-medium" id="reviews-card">
+                <div class="card" id="reviews-card">
                     <div class="card-content">
                         <h3 class="card-title">Press & Reviews</h3>
                         <div class="review">
@@ -307,7 +319,7 @@
                 </div>
                 
                 <!-- YouTube Channel -->
-                <div class="card card-medium" id="youtube-card" data-url="https://www.youtube.com/@DanielKurganov">
+                <div class="card" id="youtube-card" data-url="https://www.youtube.com/@DanielKurganov">
                     <div class="social-card">
                         <div class="social-card-header">
                             <div class="social-profile">
@@ -338,45 +350,43 @@
                         </div>
                     </div>
                 </div>
-                
-                <div style="grid-column: span 4; display: flex; flex-direction: column; gap: 2rem;" id="insta-kuro-container">
-                    <!-- Instagram -->
-                    <div class="card card-small" data-url="https://www.instagram.com/violinvention">
-                        <div class="social-card">
-                            <div class="social-card-header">
-                                <div class="social-profile">
-                                    <div class="social-icon instagram">
-                                        <i class="fab fa-instagram" style="color: white;"></i>
-                                    </div>
-                                    <div class="social-info">
-                                        <div class="social-username">violinvention</div>
-                                    </div>
+
+                <!-- Instagram -->
+                <div class="card" id="instagram-card" data-url="https://www.instagram.com/violinvention">
+                    <div class="social-card">
+                        <div class="social-card-header">
+                            <div class="social-profile">
+                                <div class="social-icon instagram">
+                                    <i class="fab fa-instagram" style="color: white;"></i>
                                 </div>
-                                <a href="https://www.instagram.com/violinvention" target="_blank" class="social-follow-btn instagram-btn">
-                                    Follow
-                                </a>
+                                <div class="social-info">
+                                    <div class="social-username">violinvention</div>
+                                </div>
                             </div>
-                            <div class="instagram-grid social-grid">
-                                <div class="social-post">
-                                    <img src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 1" loading="lazy">
-                                </div>
-                                <div class="social-post">
-                                    <img src="assets/images/Card Photos/Instagram Thumbnail 2.jpg" alt="Instagram Thumbnail 2" loading="lazy">
-                                </div>
-                                <div class="social-post">
-                                    <img src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 3" loading="lazy">
-                                </div>
+                            <a href="https://www.instagram.com/violinvention" target="_blank" class="social-follow-btn instagram-btn">
+                                Follow
+                            </a>
+                        </div>
+                        <div class="instagram-grid social-grid">
+                            <div class="social-post">
+                                <img src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 1" loading="lazy">
+                            </div>
+                            <div class="social-post">
+                                <img src="assets/images/Card Photos/Instagram Thumbnail 2.jpg" alt="Instagram Thumbnail 2" loading="lazy">
+                            </div>
+                            <div class="social-post">
+                                <img src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 3" loading="lazy">
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Kurofune Project -->
-                    <div class="card card-small" data-url="https://www.kurganov.org">
-                        <img src="assets/images/Card Photos/Kurofune-Ensemble.jpg" alt="Kurofune Project" class="card-image" loading="lazy">
-                        <div class="card-content">
-                            <h3 class="card-title">Kurofune Project (2018)</h3>
-                            <p class="card-text">A collaborative project blending traditional Japanese music with Western classical forms.</p>
-                        </div>
+                </div>
+                
+                <!-- Kurofune Project -->
+                <div class="card" id="kurofune-card" data-url="https://www.kurganov.org">
+                    <img src="assets/images/Card Photos/Kurofune-Ensemble.jpg" alt="Kurofune Project" class="card-image" loading="lazy">
+                    <div class="card-content">
+                        <h3 class="card-title">Kurofune Project (2018)</h3>
+                        <p class="card-text">A collaborative project blending traditional Japanese music with Western classical forms.</p>
                     </div>
                 </div>
             </div>
@@ -390,20 +400,24 @@
                 <h2 class="section-title">Educator</h2>
             </div>
             
-            <div class="educator-intro">
-                <p>My mission is to empower others to bridge the gap between their fingers and their hearts. Standing in the direct lineage of Jascha Heifetz, I see the great tradition of violin playing and incredible artistic nuance achieved in the 20th century as both a science and an art—something to be studied, preserved, and continually reimagined. My own late start on the violin and the setbacks I faced compelled me to dissect each element of technique, artistry, and learning, ultimately shaping a teaching philosophy that balances deep study of the masters with attention to each student's unique musical voice.</p>
+            <!-- Text Block for Intro -->
+            <div class="block block-text">
+                <div class="educator-intro">
+                    <p>My mission is to empower others to bridge the gap between their fingers and their hearts. Standing in the direct lineage of Jascha Heifetz, I see the great tradition of violin playing and incredible artistic nuance achieved in the 20th century as both a science and an art—something to be studied, preserved, and continually reimagined. My own late start on the violin and the setbacks I faced compelled me to dissect each element of technique, artistry, and learning, ultimately shaping a teaching philosophy that balances deep study of the masters with attention to each student's unique musical voice.</p>
+                </div>
             </div>
             
-            <div class="organic-grid">
-                <!-- First row with Masterclasses and Patreon side by side -->
-                <div class="card card-wide" style="padding: 0; overflow: hidden; grid-column: span 8;" data-url="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4EdoSU8Tjgso1lvH7ggVfl">
-                    <img src="assets/images/Kurganov-Masterclasses.png" alt="Daniel Kurganov Masterclasses" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <!-- Tetris Block for Educator Cards -->
+            <div class="block block-tetris">
+                <!-- Masterclasses Card -->
+                <div class="card" data-url="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4EdoSU8Tjgso1lvH7ggVfl">
+                    <img src="assets/images/Kurganov-Masterclasses.png" alt="Daniel Kurganov Masterclasses" class="card-image" style="object-fit: cover; height: 100%;"> 
                 </div>
                 
-                <!-- Patreon - now positioned to the right -->
-                <div class="card card-small" data-url="https://www.patreon.com/artiststechnique">
-                    <div class="social-card">
-                        <div class="social-card-header">
+                <!-- Patreon Card -->
+                <div class="card" data-url="https://www.patreon.com/artiststechnique">
+                    <div class="social-card"> 
+                         <div class="social-card-header">
                             <div class="social-profile">
                                 <div class="social-icon patreon">
                                     <i class="fab fa-patreon" style="color: white;"></i>
@@ -416,10 +430,10 @@
                                 Join
                             </a>
                         </div>
-                        <div class="card-content">
-                            <p class="card-text">Join my Patreon community for exclusive educational content, practice guides, and personalized feedback.</p>
-                        </div>
-                        <div class="patreon-thumbnails">
+                         <div class="card-content">
+                            <p class="card-text">Join my Patreon community for exclusive educational content, practice guides, personalized feedback and bi-weekly live Q&A sessions.</p>
+                         </div>
+                         <div class="patreon-thumbnails">
                             <div class="patreon-thumbnail">
                                 <img src="assets/images/Card Photos/Patreon-Image-1.jpg" alt="Patreon Content 1">
                             </div>
@@ -436,45 +450,40 @@
                     </div>
                 </div>
                 
-                <div class="card-stack">
-                    <!-- 64 Practice Hacks -->
-                    <div class="card card-small" data-url="https://payhip.com/violin">
-                        <img src="assets/images/Card Photos/64 practice hacks.jpg" alt="64 Practice Hacks" class="card-image">
-                        <div class="card-content">
-                            <h3 class="card-title">64 Practice Hacks</h3>
-                            <p class="card-text">My e-book offering practical strategies to transform your practice sessions and accelerate your musical growth.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Boston Violin Intensive -->
-                    <div class="card card-small" data-url="https://www.kurganov.org">
-                        <img src="assets/images/Card Photos/Boston-Violin-Intensive.jpeg" alt="Boston Violin Intensive" class="card-image">
-                        <div class="card-content">
-                            <h3 class="card-title">Boston Violin Intensive</h3>
-                            <p class="card-text">An immersive program designed to accelerate technical and artistic growth through focused study and performance opportunities.</p>
-                        </div>
+                 <!-- 64 Practice Hacks Card -->
+                <div class="card" data-url="https://payhip.com/violin">
+                    <img src="assets/images/Card Photos/64 practice hacks.jpg" alt="64 Practice Hacks" class="card-image practice-hacks">
+                    <div class="card-content practice-hacks">
+                        <h3 class="card-title">64 Practice Hacks</h3>
+                        <p class="card-text">My e-book offering practical strategies to transform your practice sessions and accelerate your musical growth.</p>
                     </div>
                 </div>
                 
-                <!-- Strad Articles -->
-                <div class="card card-medium" data-url="https://www.thestrad.com/daniel-kurganov/6784.tag">
-                    <img src="assets/images/Card Photos/The-Strad.jpg" alt="The Strad Magazine" class="card-image" style="object-fit: contain; background-color: white; margin-bottom: 0;">
+                <!-- Boston Violin Intensive Card -->
+                <div class="card" data-url="https://www.kurganov.org/intensive">
+                    <img src="assets/images/Card Photos/Boston-Violin-Intensive.jpeg" alt="Boston Violin Intensive" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Boston Violin Intensive</h3>
+                        <p class="card-text">An immersive program designed to accelerate technical and artistic growth through focused study and performance opportunities.</p>
+                    </div>
+                </div>
+                
+                <!-- Strad Articles Card -->
+                <div class="card" data-url="https://www.thestrad.com/daniel-kurganov/6784.tag">
+                    <img src="assets/images/Card Photos/The-Strad.jpg" alt="The Strad Magazine" class="card-image" style="object-fit: contain; background-color: white;">
                     <div class="card-content" style="padding-top: 0;">
                         <p class="card-text">My contributions to The Strad Magazine explore various aspects of violin technique, historical performance practice, and contemporary approaches to classical music.</p>
-                        
-                        <div class="strad-articles">
+                        <div class="strad-articles"> 
                             <div class="strad-article" style="border-bottom: 1px solid rgba(0,0,0,0.05); padding: 8px 0; margin-bottom: 8px; transition: all 0.2s ease-in-out; cursor: pointer;">
                                 <h4>The Strad Podcast #108: In search of authenticity</h4>
                                 <p class="article-date">8 February 2024</p>
                                 <p class="article-preview">Exploring Brahms's Violin Sonata no.2 with a focus on historical performance approach and the quest for authenticity.</p>
                             </div>
-                            
                             <div class="strad-article" style="border-bottom: 1px solid rgba(0,0,0,0.05); padding: 8px 0; margin-bottom: 8px; transition: all 0.2s ease-in-out; cursor: pointer;">
                                 <h4>Masterclass: Brahms Violin Sonata no.2</h4>
                                 <p class="article-date">14 February 2024</p>
                                 <p class="article-preview">Taking inspiration from the composer's Lieder and highlighting the importance of emulating vocal lines in Brahms's second violin sonata.</p>
                             </div>
-                            
                             <div class="strad-article" style="padding: 8px 0; transition: all 0.2s ease-in-out; cursor: pointer;">
                                 <h4>On starting the violin at age 16</h4>
                                 <p class="article-date">24 May 2022</p>
@@ -484,29 +493,21 @@
                     </div>
                 </div>
                 
-                <style>
-                    .strad-article:hover {
-                        background-color: rgba(0,0,0,0.02);
-                        transform: scale(1.01);
-                        padding-left: 4px !important;
-                    }
-                </style>
-                
-                <!-- Workshops -->
-                <div class="card card-medium" data-url="https://docs.google.com/document/d/113RhmatJquXJeyLpdMyVvjr6R2W6Jwi2tpeqVyqb374/edit?usp=sharing">
+                <!-- Workshops Card -->
+                <div class="card" data-url="https://docs.google.com/document/d/113RhmatJquXJeyLpdMyVvjr6R2W6Jwi2tpeqVyqb374/edit?usp=sharing">
                     <img src="assets/images/Card Photos/Workshops-and-Masterclasses.jpg" alt="Workshops and Masterclasses" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Workshops & Masterclasses</h3>
-                        <p class="card-text">Specialized workshops worldwide focusing on technical development, musical interpretation, and career guidance for violinists.</p>
+                        <p class="card-text">Specialized workshops worldwide focusing on technical development, musical interpretation, and career guidance for musicians.</p>
                     </div>
                 </div>
 
-                <!-- After the Workshops card in the Educator section -->
-                <div class="card card-medium" data-url="https://www.tonebase.co/violin-courses/vln-daniel-kurganov-18-experiments-for-the-practice-room">
+                <!-- Tonebase Card -->
+                <div class="card" data-url="https://www.tonebase.co/violin-courses/vln-daniel-kurganov-18-experiments-for-the-practice-room">
                     <img src="assets/images/Card Photos/tonebase.jpg" alt="Tonebase Course" class="card-image" style="object-fit: contain; background-color: white;">
                     <div class="card-content">
-                        <h3 class="card-title">Tonebase</h3>
-                        <p class="card-text">Check out my course for Tonebase. Inspiration and experimentation have been crucial to my musical growth. By learning from other musicians and recordings, I translate fresh ideas into practical solutions in the practice room, resolving challenges and discovering new expressive possibilities.</p>
+                        <h3 class="card-title">Tonebase Course</h3>
+                        <p class="card-text">Inspiration and experimentation have been crucial to my musical growth. By learning from other musicians and recordings, I have tried to translate fresh ideas into practical solutions in the practice room, resolving challenges and discovering new expressive possibilities.</p>
                     </div>
                 </div>
             </div>
@@ -520,40 +521,40 @@
                 <h2 class="section-title">Technology</h2>
             </div>
             
-            <div class="organic-grid">
+            <!-- Tetris Block for Technology Cards -->
+            <div class="block block-tetris">
                 <!-- Arco AI -->
-                <div class="card card-small" data-url="https://www.violinvention.com">
+                <div class="card" data-url="https://www.violinvention.com">
                     <img src="assets/images/Card Photos/ArcoAI-Image.png" alt="Arco AI" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">ArcoAI</h3>
-                        <p class="card-text">An advanced, AI-driven app designed for violinists and teachers seeking to refine their artistry and pedagogy. ArcoAI combines a customizable etude library and an AI chatbot trained on the wisdom of the world's greatest violin pedagogues.</p>
+                        <p class="card-text">A revolutionary AI Agent that understands centuries of pedagogical wisdom, and as well can understand your unique violin journey better than even you can.</p>
                     </div>
                 </div>
                 
                 <!-- Arco Connect -->
-                <div class="card card-small" data-url="https://www.kurganov.org">
+                <div class="card" data-url="https://www.kurganov.org">
                     <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Arco Connect" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Arco Connect</h3>
-                        <p class="card-text">A platform that helps violin teachers organize their teaching and guide student practice with digital resources, personalized practice guides, and progress tracking.</p>
+                        <p class="card-text">A platform that helps violin teachers organize their teaching and students learn more effectively. Everything from scheduling, to practice tracking, to lesson notes, AI-powered analysis and more.</p>
                     </div>
                 </div>
                 
                 <!-- Arco Library -->
-                <div class="card card-small" data-url="https://www.kurganov.org">
+                <div class="card" data-url="https://www.kurganov.org">
                     <img src="assets/images/Card Photos/arco library image.jpg" alt="Arco Library" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Arco Library</h3>
-                        <p class="card-text">An ever-growing knowledge base for teachers and students, allowing natural discussions with a dynamic library of lessons, books, and masterclasses.</p>
+                        <p class="card-text">An ever-growing customizable library of violin study materials for teachers and students.</p>
                     </div>
                 </div>
                 
                 <!-- Audio & Video Engineering -->
-                <div class="card card-wide" data-url="https://www.overtoneartists.com">
+                <div class="card" data-url="https://www.overtoneartists.com">
                     <img src="assets/images/Card Photos/audio video engineer.jpg" alt="Audio & Video Production" class="card-image">
-                    <div class="audio-engineering-content">
+                    <div class="audio-engineering-content card-content"> <!-- Re-using card-content padding -->
                         <h3 class="card-title">Audio & Video Production</h3>
-                        
                         <p class="card-text">
                             <a href="https://www.overtoneartists.com" target="_blank" class="subtle-link">OvertoneArtists</a> is a boutique production company devoted to meticulously capturing nuances in sound and picture, and telling a story. Our sister label, <a href="https://www.spice-classics.com" target="_blank" class="subtle-link">Spice Classics</a>, curates a distinctive catalog that resurrects forgotten masterpieces, supports emerging virtuosos, and showcases artists whose cultural heritage brings authentic interpretive insight to their performances.
                         </p>
@@ -561,16 +562,16 @@
                 </div>
                 
                 <!-- AI Classical Music Experiments -->
-                <div class="card card-small" data-url="https://www.thestrad.com/video/did-ai-just-kill-classical-music-a-video-from-violinist-daniel-kurganov/18010.article?adredir=1&adredir=1">
+                <div class="card" data-url="https://www.thestrad.com/video/did-ai-just-kill-classical-music-a-video-from-violinist-daniel-kurganov/18010.article?adredir=1&adredir=1">
                     <img src="assets/images/Card Photos/AI Classical Music Experiments.jpg" alt="AI Classical Music Experiments" class="card-image">
                     <div class="card-content">
-                        <h3 class="card-title">AI Classical Music Experiments</h3>
+                        <h3 class="card-title">AI Music Experiments</h3>
                         <p class="card-text">Exploring the creative possibilities of AI in classical music composition and performance.</p>
                     </div>
                 </div>
                 
                 <!-- Audience Perspective Emulation System -->
-                <div class="card card-small" data-url="https://www.kurganov.org">
+                <div class="card" data-url="assets/documents/Audience Perspective Emulation System (APES).pdf">
                     <img src="assets/images/Card Photos/Audience Perspective Emulation System.jpeg" alt="Audience Perspective Emulation System" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Audience Perspective Emulation System</h3>
@@ -588,35 +589,39 @@
                 <h2 class="section-title">About</h2>
             </div>
             
-            <div class="about-intro">
-                <p>Violinist Daniel Kurganov, praised for his "extraordinary fervor, commitment, and technical prowess" (Classics Today), has recently given recitals at venues including Merkin Hall and BargeMusic (NYC), the Boston Museum of Fine Arts, The Harvard Musical Association (Boston), The Boston Conservatory, The University of Maryland, The Jewish Institute of Research (NYC), Musikhoschule Münster (Germany) and the Harvard ArtLab (Boston). In Sion, Switzerland, he worked with the Violins of Hope project, performing on an instrument rescued from Auschwitz alongside Maestros Shlomo Mintz and Rudolf Koelman.</p>
-                
-                <p>Daniel's 2018 debut album with pianist Constantine Finehouse received universal acclaim. In 2021, he recorded world premieres by Lera Auerbach and Richard Beaudoin for Orchid Classics. His 2023 release of the complete Brahms Violin Sonatas on Hänssler Classics features a 1706 Guarneri violin (strung with sheep gut) and an 1868 Streicher "Brahms Piano." This project, which he designed as a collaboration between instrument and string makers, historians, piano and violin collections, was praised by The Strad for "vivid immediacy" and a "searing performance," while Jed Distler awarded it a 10/10 rating. Daniel is also a professional audio and video engineer and producer, runs the Spice Classics classical label and the production company Overtone Artists.</p>
-                
-                <p>Committed to innovative music education, Daniel founded the Boston Violin Intensive, a 10-day training program. His YouTube channel offers in-depth educational content to over 80,000 subscribers. Daniel's pedagogy is rooted in a spirit of experimentation, intense listening, and deep study of violinists past and present—the same approach that enabled him to progress rapidly on the instrument despite starting at age 16. He conducts workshops and masterclasses worldwide, including recent engagements at the Boston Conservatory, the University of Maryland, and Musikhochschule Münster. His sessions explore a wide range of topics, from approaching fundamental technique through first principles, to leveraging AI for musicians, to understanding the rich string-playing traditions of the late 19th and early 20th centuries. Regularly featured in The Strad magazine, he was voted "Best of The Strad 2021." In 2025, Daniel was a visiting teacher at Boston University, working with graduate/doctoral violin students of Bayla Keyes.</p>
+            <!-- Text Block for About Intro, Discography, Quote -->
+            <div class="block block-text">
+                <div class="about-intro">
+                    <p>Violinist Daniel Kurganov, praised for his "extraordinary fervor, commitment, and technical prowess" (Classics Today), has recently given recitals at venues including Merkin Hall and BargeMusic (NYC), the Boston Museum of Fine Arts, The Harvard Musical Association (Boston), The Boston Conservatory, The University of Maryland, The Jewish Institute of Research (NYC), Musikhoschule Münster (Germany) and the Harvard ArtLab (Boston). In Sion, Switzerland, he worked with the Violins of Hope project, performing on an instrument rescued from Auschwitz alongside Maestros Shlomo Mintz and Rudolf Koelman.</p>
+                    
+                    <p>Daniel's 2018 debut album with pianist Constantine Finehouse received universal acclaim. In 2021, he recorded world premieres by Lera Auerbach and Richard Beaudoin for Orchid Classics. His 2023 release of the complete Brahms Violin Sonatas on Hänssler Classics features a 1706 Guarneri violin (strung with sheep gut) and an 1868 Streicher "Brahms Piano." This project, which he designed as a collaboration between instrument and string makers, historians, piano and violin collections, was praised by The Strad for "vivid immediacy" and a "searing performance," while Jed Distler awarded it a 10/10 rating. Daniel is also a professional audio and video engineer and producer, runs the Spice Classics classical label and the production company Overtone Artists.</p>
+                    
+                    <p>Committed to innovative music education, Daniel founded the Boston Violin Intensive, a 10-day training program. His YouTube channel offers in-depth educational content to over 80,000 subscribers. Daniel's pedagogy is rooted in a spirit of experimentation, intense listening, and deep study of violinists past and present—the same approach that enabled him to progress rapidly on the instrument despite starting at age 16. He conducts workshops and masterclasses worldwide, including recent engagements at the Boston Conservatory, the University of Maryland, and Musikhochschule Münster. His sessions explore a wide range of topics, from approaching fundamental technique through first principles, to leveraging AI for musicians, to understanding the rich string-playing traditions of the late 19th and early 20th centuries. Regularly featured in The Strad magazine, he was voted "Best of The Strad 2021." In 2025, Daniel was a visiting teacher at Boston University, working with graduate/doctoral violin students of Bayla Keyes.</p>
 
-                <p>As a former lead team member at Tonebase, Daniel has produced workshops and courses in collaboration with renowned artists such as Pinchas Zukerman, Seymour Bernstein, and Ron Carter. He also directed Tonebase's East Coast operations, violin live-streaming, managed an AI-powered localization campaign, and helped the company become the world's premiere online classical music platform. Daniel is also the founder of ARCO, a forthcoming AI-powered knowledge base for violinists and teachers, enhancing access to centuries of pedagogical wisdom.</p>
-                
-                <p>Born in Minsk, Belarus, and raised in Chicago, Daniel began playing piano at six, later studying guitar, and finally taking up the violin at sixteen. He completed his Masters studies under Rudolf Koelman, a protégé of Jascha Heifetz, at the Zurich University of the Arts (ZHdK), and is an alumnus of the Keshet Eilon International Mastercourse.</p>
-                
-                <div class="discography">
-                    <h4>Kurganov-Finehouse Studio Discography</h4>
-                    <ul>
-                        <li><strong>[2018]</strong> Debut album featuring works by Brahms, Prokofiev, Tchaikovsky, Wagner, Rachmaninoff and Schemmer (Spice Classics)</li>
-                        <li><strong>[2021]</strong> World-premiere recordings of the music of Lera Auerbach and Richard Beaudoin and works by Cage an Messiaen (Orchid Classics)</li>
-                        <li><strong>[2023]</strong> Complete Brahms Violin Sonatas pairing a 1706 Guarneri violin (strung with sheep gut) with original 19th-c pianos (Haenssler Classics)</li>
-                    </ul>
+                    <p>As a former lead team member at Tonebase, Daniel has produced workshops and courses in collaboration with renowned artists such as Pinchas Zukerman, Seymour Bernstein, and Ron Carter. He also directed Tonebase's East Coast operations, violin live-streaming, managed an AI-powered localization campaign, and helped the company become the world's premiere online classical music platform. Daniel is also the founder of ARCO, a forthcoming AI-powered knowledge base for violinists and teachers, enhancing access to centuries of pedagogical wisdom.</p>
+                    
+                    <p>Born in Minsk, Belarus, and raised in Chicago, Daniel began playing piano at six, later studying guitar, and finally taking up the violin at sixteen. He completed his Masters studies under Rudolf Koelman, a protégé of Jascha Heifetz, at the Zurich University of the Arts (ZHdK), and is an alumnus of the Keshet Eilon International Mastercourse.</p>
+                    
+                    <div class="discography">
+                        <h4>Kurganov-Finehouse Studio Discography</h4>
+                        <ul>
+                            <li><strong>[2018]</strong> Debut album featuring works by Brahms, Prokofiev, Tchaikovsky, Wagner, Rachmaninoff and Schemmer (Spice Classics)</li>
+                            <li><strong>[2021]</strong> World-premiere recordings of the music of Lera Auerbach and Richard Beaudoin and works by Cage an Messiaen (Orchid Classics)</li>
+                            <li><strong>[2023]</strong> Complete Brahms Violin Sonatas pairing a 1706 Guarneri violin (strung with sheep gut) with original 19th-c pianos (Haenssler Classics)</li>
+                        </ul>
+                    </div>
+                    
+                    <blockquote class="critic-quote">
+                        "The duo's fine musicianship was on display throughout, channeling pathos and joy using the full possibilities of their instruments."
+                        <cite>— The Boston Musical Intelligencer (2021)</cite>
+                    </blockquote>
                 </div>
-                
-                <blockquote class="critic-quote" data-url="https://www.yourChosenURL.com">
-                    "The duo's fine musicianship was on display throughout, channeling pathos and joy using the full possibilities of their instruments."
-                    <cite>— The Boston Musical Intelligencer (2021)</cite>
-                </blockquote>
             </div>
             
-            <div class="organic-grid">
+            <!-- Events Block for Photography Card -->
+            <div class="block block-events">
                 <!-- Photography -->
-                <div class="card card-medium" data-url="https://overtoneartists.wixsite.com/photo">
+                <div class="card" data-url="https://overtoneartists.wixsite.com/photo">
                     <img src="assets/images/Card Photos/photography.jpg" alt="Photography" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Photography</h3>
@@ -638,29 +643,56 @@
                 <div class="contact-info">
                     <h3>Get in Touch</h3>
                     <p>For booking inquiries, collaborations, or questions about my educational programs, please don't hesitate to reach out.</p>
-                    <p><strong>Email:</strong> contact@danielkurganov.com</p>
-                    <p><strong>Management:</strong> management@danielkurganov.com</p>
+                    <p><img src="assets/images/email.jpg" alt="email address" class="email-image"></p>
+                  
                 </div>
                 
                 <div class="contact-form">
-                    <form>
+                    <!-- Updated form attributes and added hidden fields -->
+                    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="needs-validation" novalidate>
+                        
+                        <!-- Web3Forms Required Fields -->
+                        <input type="hidden" name="access_key" value="7d4b8ad1-28fc-484d-a469-bdb2ab71db11">
+                        <input type="hidden" name="subject" value="New Contact Form Submission from Kurganov.org">
+                        <input type="hidden" name="from_name" value="Kurganov.org Contact Form">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        
+                        <!-- Form Fields with Validation -->
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            <div class="empty-feedback">
+                                Please provide your name.
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                            <div class="empty-feedback">
+                                Please provide your email address.
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a valid email address.
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
+                            <input type="text" id="subject" name="subject_user" placeholder="Subject of your message" required>
+                             <div class="empty-feedback">
+                                Please provide a subject for your message.
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+                            <div class="empty-feedback">
+                                Please enter your message.
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary btn-submit">Send Message</button>
+                        
+                        <!-- Form Result Feedback -->
+                        <p id="form-result" class="form-status"></p>
                     </form>
                 </div>
             </div>
