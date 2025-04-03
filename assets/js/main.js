@@ -473,6 +473,362 @@ document.addEventListener('DOMContentLoaded', function() {
     // Run image optimization right away
     optimizeImages();
 
+    // --- NEW: Album Carousel Logic for Mobile --- 
+    let isDragging = false;
+    let startX;
+    let scrollLeftStart;
+    let dragTicking = false; // Throttling flag for drag updates
+    let scrollTicking = false; // Throttling flag for scroll updates
+    let albumCarouselObserver = null; // For intersection observer
+
+    const albumCarousel = document.querySelector('#violinist .block-even');
+    const dotsContainer = document.querySelector('.carousel-dots'); // Get dots container
+    let carouselDidDrag = false; // Flag to track drag vs click
+
+    function initAlbumCarousel() {
+        if (window.innerWidth > 768 || !albumCarousel) {
+            destroyAlbumCarousel(); // Clean up if screen is too wide or container not found
+            return;
+        }
+
+        // Prevent re-initialization
+        if (albumCarouselObserver) return;
+
+        const albumCards = albumCarousel.querySelectorAll('.album-card');
+        if (albumCards.length === 0) return;
+
+        // --- Create Dots ---
+        if (dotsContainer) {
+            dotsContainer.innerHTML = ''; // Clear previous dots
+            albumCards.forEach((card, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add('carousel-dot');
+                dot.setAttribute('data-index', index);
+                dot.setAttribute('aria-label', `Go to album ${index + 1}`);
+                dot.addEventListener('click', () => {
+                    const targetCard = albumCards[index];
+                    if (targetCard) {
+                        const cardLeft = targetCard.offsetLeft;
+                        const cardWidth = targetCard.offsetWidth;
+                        const containerWidth = albumCarousel.offsetWidth;
+                        const targetScrollLeft = cardLeft + cardWidth / 2 - containerWidth / 2;
+                        
+                        albumCarousel.scrollTo({
+                            left: targetScrollLeft,
+                            behavior: 'smooth'
+                        });
+                        // Manually update state after click
+                        setTimeout(() => evaluateCarouselState(), 50); 
+                    }
+                });
+                dotsContainer.appendChild(dot);
+            });
+            dotsContainer.style.display = 'block'; // Show dots container
+        }
+        // --- End Create Dots ---
+
+        const options = {
+            root: albumCarousel,
+            rootMargin: '0px',
+            threshold: 0.4 // Trigger when 40% visible (changed from 0.6)
+        };
+
+        albumCarouselObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+                    // This card is considered 'active' (centered enough)
+                    entry.target.classList.remove('is-inactive');
+                } else {
+                    // This card is considered 'inactive' (peeking or scrolled past)
+                    entry.target.classList.add('is-inactive');
+                }
+            });
+            
+            // Ensure at least one card is active if container is scrolled (fallback)
+            // Find the card closest to the center if none meet threshold strictly
+            let hasActiveCard = false;
+            albumCards.forEach(card => {
+                if (!card.classList.contains('is-inactive')) {
+                    hasActiveCard = true;
+                }
+            });
+
+            if (!hasActiveCard && albumCards.length > 0) {
+                // Fallback: Find card closest to center
+                let closestCard = null;
+                let minDistance = Infinity;
+                const containerCenter = albumCarousel.offsetWidth / 2;
+
+                albumCards.forEach(card => {
+                    const cardRect = card.getBoundingClientRect();
+                    const containerRect = albumCarousel.getBoundingClientRect();
+                    const cardCenter = cardRect.left - containerRect.left + cardRect.width / 2;
+                    const distance = Math.abs(cardCenter - containerCenter);
+                    
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestCard = card;
+                    }
+                });
+                
+                if (closestCard) {
+                    // Deactivate all first, then activate the closest one
+                     albumCards.forEach(card => card.classList.add('is-inactive'));
+                     closestCard.classList.remove('is-inactive');
+                }
+            }
+
+        }, options);
+
+        albumCards.forEach(card => {
+            albumCarouselObserver.observe(card);
+             // Set initial state - all inactive except maybe the first?
+             // Let observer handle initial state based on initial intersection
+        });
+        
+        // --- Add Drag Scrolling Logic ---
+        let isDown = false;
+        let startX;
+        let scrollLeftStart;
+        let dragTicking = false; // Throttling flag for mousemove evaluation
+
+        const mouseDownHandler = (e) => {
+            isDown = true;
+            albumCarousel.classList.add('is-dragging');
+            startX = e.pageX - albumCarousel.offsetLeft;
+            scrollLeftStart = albumCarousel.scrollLeft;
+            carouselDidDrag = false; // Reset drag flag on mouse down
+        };
+
+        const mouseLeaveHandler = () => {
+            if (!isDown) return;
+            isDown = false;
+            // Don't remove dragging class immediately
+            // albumCarousel.classList.remove('is-dragging');
+            
+            // Calculate target and smoothly scroll
+            smoothScrollToNearestSnapPoint();
+            
+            // Re-evaluate state after scroll animation likely finishes
+            // REMOVED: setTimeout(evaluateCarouselState, 400); 
+        };
+
+        const mouseUpHandler = () => {
+            if (!isDown) return;
+            isDown = false;
+            // Don't remove dragging class immediately
+            // albumCarousel.classList.remove('is-dragging');
+            
+            // Calculate target and smoothly scroll
+            smoothScrollToNearestSnapPoint();
+            
+            // Re-evaluate state after scroll animation likely finishes
+            // REMOVED: setTimeout(evaluateCarouselState, 400); 
+        };
+
+        const mouseMoveHandler = (e) => {
+            if (!isDown) return;
+            const x = e.pageX - albumCarousel.offsetLeft;
+            const walk = x - startX;
+            // Check if movement exceeds a threshold to count as a drag
+            if (Math.abs(walk) > 5) { 
+                carouselDidDrag = true;
+            }
+            
+            e.preventDefault(); // Prevent text selection/default drag behavior only if dragging
+            albumCarousel.scrollLeft = scrollLeftStart - (walk * 1.5); // Use walk for calculation
+            
+            // Evaluate state during drag, throttled with requestAnimationFrame
+            if (!dragTicking) {
+                window.requestAnimationFrame(() => {
+                    evaluateCarouselState(); // Evaluate based on new scrollLeft
+                    dragTicking = false;
+                });
+                dragTicking = true;
+            }
+        };
+
+        albumCarousel.addEventListener('mousedown', mouseDownHandler);
+        albumCarousel.addEventListener('mouseleave', mouseLeaveHandler);
+        albumCarousel.addEventListener('mouseup', mouseUpHandler);
+        albumCarousel.addEventListener('mousemove', mouseMoveHandler);
+        
+        // Store handlers to remove them later
+        albumCarousel._carouselMouseHandlers = {
+            mousedown: mouseDownHandler,
+            mouseleave: mouseLeaveHandler,
+            mouseup: mouseUpHandler,
+            mousemove: mouseMoveHandler
+        };
+        // --- End Drag Scrolling Logic ---
+
+        // --- Helper function for smooth scroll to snap point ---
+        function smoothScrollToNearestSnapPoint() {
+             if (!albumCarousel) return;
+             const albumCards = albumCarousel.querySelectorAll('.album-card');
+             if (albumCards.length === 0) return;
+
+             const containerScrollLeft = albumCarousel.scrollLeft;
+             const containerWidth = albumCarousel.offsetWidth;
+             const containerCenter = containerScrollLeft + containerWidth / 2;
+
+             let closestCard = null;
+             let minDistance = Infinity;
+             let targetScrollLeft = containerScrollLeft; // Default to current
+
+             albumCards.forEach(card => {
+                 const cardLeft = card.offsetLeft;
+                 const cardWidth = card.offsetWidth;
+                 const cardCenter = cardLeft + cardWidth / 2;
+                 const distance = Math.abs(cardCenter - containerCenter);
+
+                 if (distance < minDistance) {
+                     minDistance = distance;
+                     closestCard = card;
+                     // Calculate the scrollLeft needed to center this card
+                     targetScrollLeft = cardLeft + cardWidth / 2 - containerWidth / 2;
+                 }
+             });
+
+             albumCarousel.scrollTo({
+                 left: targetScrollLeft,
+                 behavior: 'smooth'
+             });
+
+             // After the smooth scroll, remove dragging class and re-evaluate state
+             // We need to estimate scroll duration, or use scrollend event if supported
+             // For simplicity, using a timeout. Adjust duration as needed.
+             setTimeout(() => {
+                 albumCarousel.classList.remove('is-dragging');
+                 evaluateCarouselState(); // Update active/inactive based on final position
+             }, 400); // Adjust timeout based on perceived scroll duration
+        }
+        // --- End Helper Function ---
+
+        // Ensure initial state looks right - briefly make all inactive then let observer correct
+        albumCards.forEach(card => card.classList.add('is-inactive'));
+
+        // --- NEW: Set Initial Scroll to Second Card --- 
+        if (albumCards.length > 1) {
+            const secondCard = albumCards[1];
+            const cardLeft = secondCard.offsetLeft;
+            const cardWidth = secondCard.offsetWidth;
+            const containerWidth = albumCarousel.offsetWidth;
+            const targetScrollLeft = cardLeft + cardWidth / 2 - containerWidth / 2;
+            albumCarousel.scrollLeft = targetScrollLeft; // Set initial scroll directly
+        }
+        // --- END: Set Initial Scroll --- 
+
+        // Run observer logic shortly after to set the correct initial active card and dots
+        setTimeout(() => {
+            evaluateCarouselState(); // A helper function to run the core logic
+        }, 50); 
+
+        // Add scroll listener to update dots on manual scroll/swipe
+        albumCarousel.addEventListener('scroll', scrollHandler, { passive: true });
+
+        // // Initial evaluation -- MOVED INSIDE setTimeout above to ensure scroll is set first
+        // evaluateCarouselState(); 
+    }
+    
+    function evaluateCarouselState() { // Helper to run core logic
+         if (!albumCarousel) return;
+         const albumCards = albumCarousel.querySelectorAll('.album-card');
+         if (albumCards.length === 0) return;
+
+          // Re-implement finding the most centered card logic here
+            let closestCard = null;
+            let closestIndex = -1;
+            let minDistance = Infinity;
+            const containerScrollLeft = albumCarousel.scrollLeft;
+            const containerCenter = containerScrollLeft + albumCarousel.offsetWidth / 2;
+
+            albumCards.forEach((card, index) => {
+                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                const distance = Math.abs(cardCenter - containerCenter);
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestCard = card;
+                    closestIndex = index; // Store the index of the closest card
+                }
+            });
+
+            albumCards.forEach((card, index) => {
+                if (card === closestCard) {
+                    card.classList.remove('is-inactive');
+                } else {
+                    card.classList.add('is-inactive');
+                }
+            });
+
+            // --- Update Active Dot ---
+            if (dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('.carousel-dot');
+                dots.forEach((dot, index) => {
+                    if (index === closestIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            // --- End Update Active Dot ---
+    }
+
+    // Simplified calculation (might not be perfectly accurate)
+    function calculateIntersectionRatio(element, container) {
+        const elemRect = element.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        
+        const intersectionLeft = Math.max(elemRect.left, containerRect.left);
+        const intersectionRight = Math.min(elemRect.right, containerRect.right);
+        const intersectionWidth = Math.max(0, intersectionRight - intersectionLeft);
+        
+        return intersectionWidth / elemRect.width;
+    }
+
+    function destroyAlbumCarousel() {
+        if (albumCarouselObserver) {
+            albumCarouselObserver.disconnect();
+            albumCarouselObserver = null;
+        }
+        // Reset styles by removing the class
+        if (albumCarousel) {
+             albumCarousel.querySelectorAll('.album-card').forEach(card => {
+                 card.classList.remove('is-inactive');
+             });
+             // --- Remove Drag Scrolling Listeners ---
+             if (albumCarousel._carouselMouseHandlers) {
+                 albumCarousel.removeEventListener('mousedown', albumCarousel._carouselMouseHandlers.mousedown);
+                 albumCarousel.removeEventListener('mouseleave', albumCarousel._carouselMouseHandlers.mouseleave);
+                 albumCarousel.removeEventListener('mouseup', albumCarousel._carouselMouseHandlers.mouseup);
+                 albumCarousel.removeEventListener('mousemove', albumCarousel._carouselMouseHandlers.mousemove);
+                 delete albumCarousel._carouselMouseHandlers; // Clean up property
+             }
+             // --- End Remove Drag Scrolling Listeners ---
+
+             // --- Hide and Clear Dots ---
+             if (dotsContainer) {
+                 dotsContainer.innerHTML = '';
+                 dotsContainer.style.display = 'none';
+             }
+             // --- End Hide and Clear Dots ---
+        }
+    }
+
+    // Debounce resize handler
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            initAlbumCarousel(); // Will also call destroy if needed
+        }, 250);
+    });
+
+    // Initial check on load
+    initAlbumCarousel();
+
     // Make cards with data-url attribute clickable
     function makeCardsClickable() {
         // Select all cards with data-url attribute
@@ -484,9 +840,51 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Add click event listener
             card.addEventListener('click', function(e) {
+                // Check if a drag happened before this click
+                if (carouselDidDrag) {
+                    // If drag occurred, prevent click action
+                    e.preventDefault();
+                    e.stopPropagation();
+                    carouselDidDrag = false; // Reset flag
+                    return; 
+                }
+
                 // Check if the click was on a link or button inside the card
                 if (!e.target.closest('a, button, .social-follow-btn')) {
-                    // If not, open the card's URL in a new tab
+                    
+                    // --- NEW: Carousel Click Handling ---
+                    const isMobile = window.innerWidth <= 768;
+                    const isAlbumCard = this.classList.contains('album-card');
+                    const isInactive = this.classList.contains('is-inactive');
+                    const isInCarousel = this.closest('#violinist .block-even');
+                    
+                    if (isMobile && isAlbumCard && isInactive && isInCarousel) {
+                        // Prevent opening the URL if the card is inactive in the mobile carousel
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Scroll the container to center the clicked card
+                        const container = this.closest('.block-even');
+                        if (container) {
+                            const cardRect = this.getBoundingClientRect();
+                            const containerRect = container.getBoundingClientRect();
+                            
+                            // Calculate scroll amount to center the card
+                            const scrollLeftTarget = container.scrollLeft + 
+                                                     (cardRect.left - containerRect.left) + 
+                                                     (cardRect.width / 2) - 
+                                                     (containerRect.width / 2);
+                                                     
+                            container.scrollTo({
+                                left: scrollLeftTarget,
+                                behavior: 'smooth'
+                            });
+                        }
+                        return; // Stop further execution for this click
+                    }
+                    // --- END: Carousel Click Handling ---
+                    
+                    // Original logic: open the card's URL in a new tab
                     const url = this.getAttribute('data-url');
                     if (url) {
                         window.open(url, '_blank');
@@ -498,4 +896,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize clickable cards
     makeCardsClickable();
+
+    // --- Scroll Handler for Dot Updates ---
+    function scrollHandler() {
+        if (!scrollTicking) {
+            window.requestAnimationFrame(() => {
+                evaluateCarouselState();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    }
 });

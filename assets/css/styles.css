@@ -403,7 +403,7 @@ p {
     padding: 0.45rem 1.1rem 0.25rem; 
     background-color: transparent;
     color: var(--text-nav);
-    border: 1px solid var(--text-nav); 
+    border: 1px solid var(--text-nav);
     border-radius: 0; 
     font-weight: 500; 
     transition: all 0.3s ease;
@@ -2094,7 +2094,7 @@ p {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
     }
-
+    
     /* Deleted card span rules */
     /* Deleted rules targeting [style*="grid-column"] */
     /* Deleted .organic-grid > .card-* rules */
@@ -2444,10 +2444,10 @@ p {
     }
 
     .hero-image-container {
-        position: absolute;
+    position: absolute;
         top: 0;
-        left: 0;
-        width: 100%;
+    left: 0;
+    width: 100%;
         height: 100%;
         max-width: none;
         z-index: 0; /* Behind content and header */
@@ -2549,8 +2549,8 @@ p {
     /* Apply blur/styles to both, but only mobile is visible */
     .hero-image-desktop,
     .hero-image-mobile {
-        width: 100%;
-        height: 100%;
+    width: 100%;
+    height: 100%;
         object-fit: cover; /* Make image cover the container */
         max-height: none; /* Override any previous max-height */
         animation: none; /* Disable entry animation if needed */
@@ -2559,6 +2559,128 @@ p {
         /* Transition the filter property for smooth effect */
         transition: filter 0.3s ease-out;
         will-change: filter; /* Hint for performance */
+    }
+}
+
+/* --- NEW: Album Carousel for Mobile --- */
+@media (max-width: 768px) {
+    #violinist .block-even {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1.5rem; /* Space between cards */
+        padding: 0 3rem 2.5rem 3rem; /* ADD bottom padding for shadow */
+        margin: 0 -3rem 0.5rem -3rem; /* ADJUST bottom margin to compensate for padding */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+        position: relative; /* For potential absolute positioned children/pseudo-elements */
+        align-items: center; /* Vertically center cards */
+    }
+    
+    #violinist .block-even::-webkit-scrollbar { 
+        display: none; /* Chrome/Safari/Opera */
+    }
+
+    #violinist .block-even .album-card {
+        flex: 0 0 calc(100% - 6rem); /* Card width = viewport - side padding */
+        scroll-snap-align: center; /* Snap cards to the center */
+        margin-bottom: 0; /* Override default card margin */
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    opacity 0.4s ease; /* Smooth transitions for JS effects */
+        transform: scale(1); /* Default state */
+        opacity: 1; /* Default state */
+    }
+
+    /* Style for inactive (partially visible) cards */
+    #violinist .block-even .album-card.is-inactive {
+        transform: scale(0.92);
+        opacity: 0.6;
+    }
+
+    /* Style for when dragging */
+    #violinist .block-even.is-dragging {
+        cursor: grabbing;
+        scroll-snap-type: none; /* Disable snap during drag for smoother feel */
+        user-select: none; /* Prevent text selection */
+        -webkit-user-select: none; 
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+}
+
+/* --- Carousel Dot Navigation Styles --- */
+.carousel-dots {
+    display: none; /* Hidden by default */
+    text-align: center;
+    margin-top: -1.5rem; /* Reduced space below carousel, pull up slightly */
+    margin-bottom: 5rem; /* Increased space between dots and next section */
+    position: relative; /* Needed if using negative margin */
+    z-index: 10; /* Ensure dots are above carousel if overlap occurs */
+}
+
+.carousel-dot {
+    display: inline-block;
+    width: 7px; /* Slightly smaller */
+    height: 7px; /* Slightly smaller */
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.15); /* Translucent light gray */
+    margin: 0 5px; /* Slightly more space between dots */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none; /* Ensure no border */
+    outline: none; /* Ensure no outline */
+    padding: 0; /* Remove default button padding */
+}
+
+.carousel-dot.active {
+    background-color: rgba(0, 0, 0, 0.4); /* Darker translucent gray */
+}
+
+@media (max-width: 768px) {
+    .carousel-dots {
+        display: block;
+    }
+    #violinist .block-even {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1.5rem; /* Space between cards */
+        padding: 0 3rem 2.5rem 3rem; /* ADD bottom padding for shadow */
+        margin: 0 -3rem 0.5rem -3rem; /* ADJUST bottom margin to compensate for padding */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+        position: relative; /* For potential absolute positioned children/pseudo-elements */
+        align-items: center; /* Vertically center cards */
+    }
+    
+    #violinist .block-even::-webkit-scrollbar { 
+        display: none; /* Chrome/Safari/Opera */
+    }
+
+    #violinist .block-even .album-card {
+        flex: 0 0 calc(100% - 6rem); /* Card width = viewport - side padding */
+        scroll-snap-align: center; /* Snap cards to the center */
+        margin-bottom: 0; /* Override default card margin */
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    opacity 0.4s ease; /* Smooth transitions for JS effects */
+        transform: scale(1); /* Default state */
+        opacity: 1; /* Default state */
+    }
+
+    /* Style for inactive (partially visible) cards */
+    #violinist .block-even .album-card.is-inactive {
+        transform: scale(0.92);
+        opacity: 0.6;
+    }
+
+    /* Style for when dragging */
+    #violinist .block-even.is-dragging {
+        cursor: grabbing;
+        scroll-snap-type: none; /* Disable snap during drag for smoother feel */
+        user-select: none; /* Prevent text selection */
+        -webkit-user-select: none; 
+        -moz-user-select: none;
+        -ms-user-select: none;
     }
 }
 
