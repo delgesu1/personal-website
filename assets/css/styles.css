@@ -2790,5 +2790,25 @@ p {
     font-weight: normal;
 }
 
+/* --- Adjust album card font size on very small screens --- */
+@media (max-width: 550px) {
+    .album-card .album-content {
+        padding: 1rem; /* Reduce padding slightly too */
+    }
+    .album-card .album-title {
+        font-size: 0.87rem; /* Approx 30% smaller than 1.2rem */
+        margin-bottom: 0.3rem;
+    }
+    .album-card .album-year {
+        font-size: 0.85rem; /* Approx 30% smaller than 0.9rem */
+    }
+    .album-card .album-text {
+        font-size: 0.85rem;  /* Approx 30% smaller than 1rem (assuming default) */
+        line-height: 1.5; /* Adjust line height for smaller text */
+    }
+}
+
+/* Position the autoplay-video-card as relative for proper layout */
+
 
 
