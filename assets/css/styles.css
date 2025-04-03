@@ -909,7 +909,7 @@ p {
 /* --- Block Layout System START --- */
 
 .block {
-    margin-bottom: 4rem; /* Common spacing */
+    margin-bottom: 2.5rem; /* Reduced Common spacing */
 }
 
 /* --- Text Block --- */
@@ -1058,7 +1058,10 @@ p {
 
 /* --- Responsive Adjustments for Blocks --- */
 @media (max-width: 1199px) { 
-    .block-tetris { column-count: 2; }
+    .block-tetris { 
+        column-count: 2; 
+        margin-bottom: 1.5rem; /* Reduced margin specifically for 2-column tetris */
+    }
     .block-even { grid-template-columns: repeat(2, 1fr); }
 }
 
