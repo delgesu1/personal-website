@@ -106,6 +106,13 @@
             </div>
         </div>
     </div>
+    <!-- Unmute indicator - positioned outside the block -->
+    <div class="unmute-container">
+        <div class="unmute-indicator">
+            <span class="unmute-arrow">↑</span>
+            <span class="unmute-text">UNMUTE</span>
+        </div>
+    </div>
 
     <!-- Violinist Section -->
     <section id="violinist" class="section section-violinist">
@@ -140,7 +147,7 @@
                 <!-- Album 1 - 2023 -->
                 <div class="album-card" data-url="https://haensslerprofil.de/shop/kammermusik-instrumental/the-brahms-age/">
                     <div class="album-image-container">
-                        <img src="assets/images/Card Photos/The-Brahms-Age-2023-Album-Cover.jpg" alt="Brahms Violin Sonatas Album" class="album-image" loading="lazy">
+                        <img src="assets/images/Card Photos/The-Brahms-Age-2023-Album-Cover.jpg" alt="Brahms Violin Sonatas Album" class="album-image" loading="lazy" draggable="false">
                     </div>
                     <div class="album-content">
                         <h3 class="album-title">Complete Brahms Violin Sonatas</h3>
@@ -152,7 +159,7 @@
                 <!-- Album 2 - 2021 -->
                 <div class="album-card" data-url="https://www.orchidclassics.com/releases/orc100182-daniel-kurganov/">
                     <div class="album-image-container">
-                        <img src="assets/images/Card Photos/Rhythm-Borrowed-Past-2021-Album-cover.jpg" alt="World Premieres Album" class="album-image" loading="lazy">
+                        <img src="assets/images/Card Photos/Rhythm-Borrowed-Past-2021-Album-cover.jpg" alt="World Premieres Album" class="album-image" loading="lazy" draggable="false">
                     </div>
                     <div class="album-content">
                         <h3 class="album-title">Rhythm and the Borrowed Past</h3>
@@ -164,7 +171,7 @@
                 <!-- Album 3 - 2018 -->
                 <div class="album-card" data-url="https://ffm.to/violin">
                     <div class="album-image-container">
-                        <img src="assets/images/Card Photos/Between-The-Notes-2018-Album-Cover.jpg" alt="Debut Album" class="album-image" loading="lazy">
+                        <img src="assets/images/Card Photos/Between-The-Notes-2018-Album-Cover.jpg" alt="Debut Album" class="album-image" loading="lazy" draggable="false">
                     </div>
                     <div class="album-content">
                         <h3 class="album-title">Debut Album</h3>
@@ -173,12 +180,14 @@
                     </div>
                 </div>
             </div>
+            <!-- Dot Navigation for Mobile Carousel -->
+            <div class="carousel-dots"></div>
             
             <!-- One Card Block for Upcoming Concerts -->
             <div class="block block-one-card" id="upcoming-events">
                 <div class="card"> 
                     <div class="card-content">
-                        <h3 class="card-title">Upcoming Concerts</h3>
+                        <h3 class="card-title">Upcoming Events</h3>
                         <div class="events-grid">
                             <div class="event">
                                 <div class="event-date">

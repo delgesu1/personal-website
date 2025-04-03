@@ -181,7 +181,7 @@ p {
 
 /* Preserve original padding for violinist section */
 #violinist {
-    padding-top: 4rem;
+    padding-top: 7rem; /* Increased from 4rem to 7rem */
 }
 
 .section-header {
@@ -2731,5 +2731,74 @@ p {
         -moz-user-select: none;
         -ms-user-select: none;
     }
+}
+
+/* Unmute Indicator Container */
+.unmute-container {
+    width: 100%;
+    position: relative;
+    margin-top: -30px;
+    margin-bottom: 25px;
+    z-index: 5;
+}
+
+/* Unmute Indicator */
+.unmute-indicator {
+    position: absolute;
+    left: 25%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    pointer-events: none;
+    user-select: none;
+    box-shadow: none;
+    font-family: var(--font-mono);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* Removing the horizontal line by disabling the ::after pseudo-element */
+.unmute-indicator::after {
+    display: none;
+}
+
+/* Desktop position for unmute indicator */
+@media (min-width: 769px) {
+    .unmute-indicator {
+        left: 12%;
+    }
+}
+
+.unmute-arrow {
+    font-size: 12px;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.unmute-text {
+    font-weight: normal;
+}
+
+/* Position the autoplay-video-card as relative for proper layout */
+.autoplay-video-card {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden;
+}
+
+.autoplay-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
