@@ -437,6 +437,8 @@ p {
     color: var(--accent-color); 
     border-color: var(--accent-color);
     background-color: transparent;
+    transform: translateY(-1px); /* Slight lift effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .mobile-menu-toggle {
@@ -2400,8 +2402,11 @@ p {
 }
 
 .header.scrolled .cta-button:hover {
-    background-color: var(--text-color);
-    color: var(--bg-color);
+    background-color: rgba(0, 0, 0, 0.05); /* Very light background instead of solid fill */
+    color: var(--accent-color); /* Use accent color for better contrast */
+    border-color: var(--accent-color); /* Match border to text */
+    transform: translateY(-1px); /* Slight lift effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 /* --- End header scrolled styles --- */
 .cv-download-minimal {
