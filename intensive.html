@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston Violin Intensive | Daniel Kurganov</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/css/styles.css" as="style">
+    <link rel="preload" href="assets/js/main.js" as="script">
+    <link rel="preload" href="assets/images/Card Photos/Boston-Violin-Intensive.jpeg" as="image">
+    
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Additional styles for Boston Violin Intensive page */
+        /* Make header always have white background on this page */
+        .header {
+            background-color: white !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header .nav-link, 
+        .header .nav-submenu-link,
+        .header .logo {
+            color: var(--text-color) !important;
+        }
+        
+        .header .nav-link:hover,
+        .header .nav-submenu-link:hover {
+            color: var(--accent-color) !important;
+        }
+        
+        /* Fix for mobile contact button and hamburger icon */
+        .header .cta-button {
+            color: var(--text-color) !important;
+            border-color: var(--text-color) !important;
+        }
+        
+        .header .menu-icon,
+        .header .menu-icon::before,
+        .header .menu-icon::after {
+            background-color: var(--text-color) !important;
+        }
+        
+        .bvi-hero {
+            min-height: 80vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 4rem 2rem;
+            overflow: hidden;
+        }
+        
+        .bvi-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        .bvi-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 1rem;
+        }
+        
+        .bvi-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-forum);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.1;
+        }
+        
+        .bvi-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            font-family: var(--font-sans);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            letter-spacing: 0.05em;
+            font-weight: 400;
+            opacity: 0.9;
+            line-height: 1.4;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .bvi-tagline {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            font-style: italic;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+            padding: 0 1rem;
+        }
+        
+        .bvi-tagline::before,
+        .bvi-tagline::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 1px;
+            background-color: rgba(255,255,255,0.6);
+        }
+        
+        .bvi-tagline::before {
+            left: -40px;
+        }
+        
+        .bvi-tagline::after {
+            right: -40px;
+        }
+        
+        .bvi-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .bvi-button {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .bvi-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .bvi-button-outline {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+        
+        .bvi-button-outline:hover {
+            background-color: white;
+            color: var(--accent-color);
+        }
+        
+        .bvi-section {
+            padding: 5rem 0;
+        }
+        
+        .bvi-section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-forum);
+            text-align: center;
+        }
+        
+        .bvi-section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-muted);
+        }
+        
+        .bvi-intro {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+        
+        .bvi-director {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .bvi-director-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .bvi-director-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .bvi-approach {
+            position: relative;
+            padding: 5rem 0;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+        
+        .bvi-approach::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .bvi-approach-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .bvi-highlights-section {
+            background-color: rgba(248, 248, 248, 0.5);
+            padding: 3rem 0 4rem;
+            margin: 2rem 0;
+        }
+        
+        .bvi-highlights-section .bvi-section-title {
+            margin-bottom: 5rem;
+            position: relative;
+        }
+        
+        .bvi-highlights-section .bvi-section-title:after {
+            content: "";
+            position: absolute;
+            bottom: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .bvi-highlights {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            column-count: 1;
+            column-gap: 3rem;
+        }
+        
+        @media (min-width: 768px) {
+            .bvi-highlights {
+                column-count: 2;
+            }
+        }
+        
+        .bvi-highlight-paragraph {
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+            padding-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .bvi-highlight-paragraph:not(:last-child) {
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .bvi-highlight-title {
+            font-weight: 600;
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.02em;
+            font-family: var(--font-serif);
+        }
+        
+        .bvi-faculty {
+            background: var(--bg-light);
+            padding: 5rem 0;
+        }
+        
+        .bvi-faculty-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 980px) {
+            .bvi-faculty-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .bvi-faculty-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .bvi-faculty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .bvi-faculty-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .bvi-faculty-content {
+            padding: 1.5rem;
+        }
+        
+        .bvi-faculty-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .bvi-faculty-position {
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .bvi-process-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .bvi-process-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .bvi-process-content {
+            padding: 2rem;
+        }
+        
+        .bvi-process-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .bvi-process-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .bvi-process-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+        
+        .bvi-pricing {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .bvi-pricing h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .bvi-price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .bvi-price-item:last-child {
+            border-bottom: none;
+        }
+        
+        .bvi-price-value {
+            font-weight: 600;
+        }
+        
+        .bvi-logistics {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .bvi-logistics-items {
+            margin-top: 1.5rem;
+        }
+        
+        .bvi-logistics-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .bvi-logistics-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .bvi-logistics-icon {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+        
+        .bvi-logistics-content {
+            flex: 1;
+        }
+        
+        .bvi-logistics-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+        
+        .bvi-gallery {
+            margin-top: 4rem;
+        }
+        
+        .bvi-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .bvi-gallery-item {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .bvi-gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .bvi-gallery-item:hover .bvi-gallery-image {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .bvi-title {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .bvi-subtitle {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .bvi-tagline {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .bvi-tagline::before,
+            .bvi-tagline::after {
+                width: 30px;
+            }
+            
+            .bvi-tagline::before {
+                left: -20px;
+            }
+            
+            .bvi-tagline::after {
+                right: -20px;
+            }
+            
+            .bvi-director {
+                grid-template-columns: 1fr;
+            }
+            
+            .bvi-process-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .bvi-process-image {
+                height: 300px;
+            }
+            
+            .bvi-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        .bvi-pricing-logistics-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 769px) {
+            .bvi-pricing-logistics-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .bvi-pricing, .bvi-logistics {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">Daniel Kurganov&nbsp;</a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item nav-item-has-submenu">
+                        <a href="index.html#violinist" class="nav-link">Violinist</a>
+                        <ul class="nav-submenu">
+                            <li><a href="index.html#upcoming-events" class="nav-submenu-link">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#educator" class="nav-link">Educator</a></li>
+                    <li><a href="index.html#innovation" class="nav-link">Innovation</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <a href="#contact" class="cta-button">Contact</a>
+                <button class="mobile-menu-toggle">
+                    <span class="menu-icon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <button class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-nav-list">
+            <li><a href="index.html#violinist" class="mobile-nav-link">Violinist</a></li>
+            <li><a href="index.html#upcoming-events" class="mobile-nav-link">Events</a></li>
+            <li><a href="index.html#educator" class="mobile-nav-link">Educator</a></li>
+            <li><a href="index.html#innovation" class="mobile-nav-link">Innovation</a></li>
+            <li><a href="index.html#about" class="mobile-nav-link">About</a></li>
+            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+        </ul>
+        
+        <div class="mobile-social-links">
+            <a href="https://www.youtube.com/@DanielKurganov" class="mobile-social-link" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.instagram.com/violinvention" class="mobile-social-link" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.patreon.com/artiststechnique" class="mobile-social-link" target="_blank">
+                <i class="fab fa-patreon"></i>
+            </a>
+        </div>
+        
+        <div class="mobile-menu-footer">
+            <p>&copy; 2025 Daniel Kurganov</p>
+        </div>
+    </div>
+    <div class="mobile-menu-overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="bvi-hero" style="background-image: url('assets/images/BVI/main banner.jpg');">
+        <div class="bvi-hero-content">
+            <h1 class="bvi-title">Boston Violin Intensive</h1>
+            <h2 class="bvi-subtitle">Summer Session | Boston, Massachusetts<br>Daniel Kurganov, Director</h2>
+            <p class="bvi-tagline">10 days of everything violin</p>
+            <div class="bvi-buttons">
+                <a href="#contact" class="bvi-button">Contact</a>
+                <a href="#application" class="bvi-button bvi-button-outline">Application</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="bvi-section">
+        <div class="container">
+            <div class="bvi-intro">
+                <p>Are you preparing for important concerts, competitions, orchestral, or school auditions? Do you want to significantly boost your violin playing and musicianship? The Boston Violin Intensive offers a unique summer opportunity to immerse yourself in focused study, refine your skills, and achieve rapid progress in a supportive environment.</p>
+            </div>
+            
+            <!-- About the Director -->
+            <div class="bvi-director">
+                <img src="assets/images/kurganov-headshot.jpg" alt="Daniel Kurganov" class="bvi-director-image">
+                <div class="bvi-director-content">
+                    <h3>About the Director: Daniel Kurganov</h3>
+                    <p>This is an opportunity to study closely with acclaimed violinist Daniel Kurganov. A student of the Jascha Heifetz protégé Rudolf Koelman, Daniel is one of the only musicians in the world to have built an internationally recognized performing and recording career despite having started the violin at the relatively late age of 16.</p>
+                    <p>His unique journey provides him with a conscious understanding of student progression and the specific guidance needed to foster efficient development and unlock potential. Learn effective strategies for fast progress directly from him.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Kurganov Method -->
+    <section class="bvi-approach" style="background-image: url('assets/images/BVI/Our Approach.jpg');">
+        <div class="container">
+            <div class="bvi-approach-content">
+                <h2 class="bvi-section-title" style="color: white;">Our Approach: The Kurganov Method</h2>
+                <p>I'm deeply passionate about teaching, pedagogy, and supporting young people in their development. This passion is rooted in my own journey—having started the violin at the age of 16. That experience has given me a more conscious understanding of how students progress, what they need at various stages of development, and how to guide them effectively.</p>
+                <p>At the heart of my teaching is the deep study of the great musicians of the past and analyzing how they do what they do, and how we can learn from them in the search for our own unique voice. In school, I developed a reputation for coaching fellow students in preparation for orchestral auditions. Some of those colleagues went on to win major jobs such as positions in the Zurich Chamber Orchestra, The Gulbenkian Orchestra of Portugal and the Israel Chamber Orchestra.</p>
+                <p>By merging my extensive knowledge of the Russian, European and American violin traditions, analysis of all major violin studies, and values derived from HIP (historically informed performance) practice, I have been able to construct a method that is centered around problem-solving techniques, creating an efficient workflow, and fostering an understanding of how technique and musical expression are inevitably connected. Having started playing the violin at age 16, I have excellent recollection of my intense studies during those years. I remember all of the mistakes and the experimentation -- what works and what doesn't. I believe in a very organized methodology and have compiled my own progressive technical manual for advanced violinists.</p>
+                <p>Related to my teaching practice is my constant exploration of style and rhetoric in musical performance. I was privileged to study intensely with emissaries of the "golden era" of violin playing, and this sparked a greater interest in how style functions in music, and if cross-fertilization exists across musical techniques of various aesthetics and even national traditions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Highlights -->
+    <section class="bvi-section bvi-highlights-section">
+        <div class="container">
+            <h2 class="bvi-section-title">What You Will Gain: Program Highlights</h2>
+            <div class="bvi-highlights">
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Personalized Instruction</span>
+                    Accelerate your progress with at least 5 hours of private lessons directly with Daniel Kurganov.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Performance Experience</span>
+                    Gain confidence through performance classes, mock auditions, and opportunities to play in a supportive setting.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Efficient Practice Techniques</span>
+                    Learn how to practice more effectively and maximize your progress.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Collaborative Piano</span>
+                    Work closely with a professional collaborative pianist throughout the intensive.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Essential Workshops</span>
+                    Participate in workshops covering Baroque techniques, Alexander Technique, Applied Music Theory, and other vital topics.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Dedicated Practice Time</span>
+                    Hone your skills anytime with 24/7 access to practice rooms.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Repertoire & Technique Focus</span>
+                    Work intensively on your chosen repertoire, technical challenges, and orchestral excerpts.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Analytical Skills</span>
+                    Learn how to analyze and learn from the recordings and performances of great violinists and musicians.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Career Guidance</span>
+                    Receive valuable career and goal-setting advice.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Exclusive Resources</span>
+                    Receive Daniel's new violin method books and guides for free.
+                </div>
+                
+                <div class="bvi-highlight-paragraph">
+                    <span class="bvi-highlight-title">Community & Location</span>
+                    Enjoy the vibrant city of Boston and collaborate within a small class of other passionate musicians.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section class="bvi-faculty">
+        <div class="container">
+            <h2 class="bvi-section-title">Faculty</h2>
+            <p class="bvi-section-subtitle">Learn from experienced artists and educators dedicated to your growth.</p>
+            
+            <div class="bvi-faculty-grid">
+                <div class="bvi-faculty-card">
+                    <img src="assets/images/BVI/JenTao.jpg" alt="JenTao Yu" class="bvi-faculty-image">
+                    <div class="bvi-faculty-content">
+                        <h3 class="bvi-faculty-name">JenTao Yu</h3>
+                        <p class="bvi-faculty-position">Collaborative Pianist</p>
+                        <p>Dr. JenTao Yu, praised by critics like David Dubal (NY Times) and artists like Martha Argerich, is an accomplished Taiwanese pianist. He won First Prize at the 2018 Concert Artists International Virtuoso Competition and concertizes internationally in venues like Carnegie Hall's Weill Recital Hall, Juilliard, and major halls in Beijing and Taipei.</p>
+                        <p>Dr. Yu actively engages with the community through outreach concerts and has participated in numerous international festivals. A dedicated educator, he holds MM and DMA degrees from Manhattan School of Music and Boston University, respectively.</p>
+                    </div>
+                </div>
+                
+                <div class="bvi-faculty-card">
+                    <img src="assets/images/BVI/Matthew.jpeg" alt="Matthew Vera" class="bvi-faculty-image">
+                    <div class="bvi-faculty-content">
+                        <h3 class="bvi-faculty-name">Matthew Vera</h3>
+                        <p class="bvi-faculty-position">Violin, Orchestral Skills</p>
+                        <p>Violinist Matthew Vera is known for his versatility as a soloist, chamber musician, orchestral leader, and teacher. A member of the Boston Philharmonic since 2010, he earned acclaim as guest concertmaster, praised for his "pure tone" and "wholly captivating" playing.</p>
+                        <p>A graduate of the New England Conservatory, where he studied with James Buswell, Lucy Chapman, and Donald Weilerstein, Matthew brings extensive performance and pedagogical experience to the Intensive.</p>
+                    </div>
+                </div>
+                
+                <div class="bvi-faculty-card">
+                    <img src="assets/images/BVI/Constantine.jpg" alt="Constantine Finehouse" class="bvi-faculty-image">
+                    <div class="bvi-faculty-content">
+                        <h3 class="bvi-faculty-name">Constantine Finehouse</h3>
+                        <p class="bvi-faculty-position">Musicianship, Collaborative Piano</p>
+                        <p>Praised for interpretations of "depth and maturity," Constantine Finehouse performs widely in the US and abroad, including venues like the Mozarteum (Salzburg) and Carnegie's Weill Recital Hall. His recordings feature collaborations and solo work with a focus on Brahms and contemporary composers.</p>
+                        <p>Holding degrees from Juilliard and Yale, Finehouse teaches at New England Conservatory and Westmont College, focusing on musicianship and collaborative piano skills crucial for developing musicians.</p>
+                    </div>
+                </div>
+                
+                <div class="bvi-faculty-card">
+                    <img src="assets/images/BVI/Lisa.jpg" alt="Lisa Sailer" class="bvi-faculty-image">
+                    <div class="bvi-faculty-content">
+                        <h3 class="bvi-faculty-name">Lisa Sailer</h3>
+                        <p class="bvi-faculty-position">Alexander Technique Instructor / Violist</p>
+                        <p>Lisa Sailer combines her expertise as a violist with her certification as an Alexander Technique teacher. Based in Boston, she directs string ensembles and teaches privately, emphasizing a holistic approach.</p>
+                        <p>Her teaching focuses on the 'Use of the self,' helping musicians find ease, prevent injury, manage anxiety, and enhance expression through improved physical awareness, bringing a unique perspective on integrating mindful movement with musical performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Process -->
+    <section class="bvi-section" id="application">
+        <div class="container">
+            <div class="row">
+                <div class="bvi-process-card">
+                    <img src="assets/images/BVI/application process.jpg" alt="Application Process" class="bvi-process-image">
+                    <div class="bvi-process-content">
+                        <h2 class="bvi-section-title">Application Process & Requirements</h2>
+                        <ul class="bvi-process-list">
+                            <li>No Application Fee.</li>
+                            <li>Fill out the introductory form using the Apply link below.</li>
+                            <li>Submission of a representative video or audio recording is required with the application. YouTube links are preferred.</li>
+                            <li>All ages are welcome to apply.</li>
+                        </ul>
+                        <div class="bvi-buttons" style="justify-content: flex-start; margin-top: 2rem;">
+                            <a href="#" class="bvi-button">Apply Today</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing & Logistics -->
+    <section class="bvi-section">
+        <div class="container">
+            <div class="bvi-pricing-logistics-row">
+                <div class="bvi-pricing">
+                    <h2 class="bvi-section-title">Program Fees & Scholarships</h2>
+                    <div class="bvi-price-item">
+                        <span>Full Course Fee</span>
+                        <span class="bvi-price-value">$1200</span>
+                    </div>
+                    <div class="bvi-price-item">
+                        <span>Deposit (upon acceptance)</span>
+                        <span class="bvi-price-value">$200</span>
+                    </div>
+                    <div class="bvi-price-item">
+                        <span>Remaining Fee (due 30 days prior)</span>
+                        <span class="bvi-price-value">$1000</span>
+                    </div>
+                    <p style="margin-top: 1.5rem;">The fee includes all private lessons, masterclasses, workshops, and work with the accompanist during the 10-day program.</p>
+                    <p><strong>Scholarships:</strong> Merit & need-based scholarships are available. Please inquire for details.</p>
+                    <p><strong>Extended Course & Partial Participation:</strong> An Extended Course option with extra lessons is available. Partial participation may also be possible. These options can be discussed privately.</p>
+                </div>
+                
+                <div class="bvi-logistics">
+                    <h2 class="bvi-section-title">Housing, Meals & Logistics</h2>
+                    <div class="bvi-logistics-items">
+                        <div class="bvi-logistics-item">
+                            <div class="bvi-logistics-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="bvi-logistics-content">
+                                <div class="bvi-logistics-title">Accommodations</div>
+                                <p>Housing and meals are the participant's responsibility. We will provide suggestions for affordable local accommodations, including Airbnbs where students may choose to stay together.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bvi-logistics-item">
+                            <div class="bvi-logistics-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div class="bvi-logistics-content">
+                                <div class="bvi-logistics-title">International Students</div>
+                                <p>Languages spoken by faculty/staff: English, Russian, German, Chinese, Spanish.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bvi-logistics-item">
+                            <div class="bvi-logistics-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="bvi-logistics-content">
+                                <div class="bvi-logistics-title">Location</div>
+                                <p>The Boston Violin Intensive takes place in the heart of Boston, with easy access to public transportation and cultural attractions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact</h2>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>For booking inquiries, collaborations, or questions about my educational programs, please don't hesitate to reach out.</p>
+                    <p><img src="assets/images/email.jpg" alt="email address" class="email-image"></p>
+                  
+                </div>
+                
+                <div class="contact-form">
+                    <!-- Updated form attributes and added hidden fields -->
+                    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="needs-validation" novalidate>
+                        
+                        <!-- Web3Forms Required Fields -->
+                        <input type="hidden" name="access_key" value="7d4b8ad1-28fc-484d-a469-bdb2ab71db11">
+                        <input type="hidden" name="subject" value="New Contact Form Submission from Kurganov.org">
+                        <input type="hidden" name="from_name" value="Kurganov.org Contact Form">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        
+                        <!-- Form Fields with Validation -->
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            <div class="empty-feedback">
+                                Please provide your name.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                            <div class="empty-feedback">
+                                Please provide your email address.
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a valid email address.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject_user" placeholder="Subject of your message" required>
+                             <div class="empty-feedback">
+                                Please provide a subject for your message.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+                            <div class="empty-feedback">
+                                Please enter your message.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit">Send Message</button>
+                        
+                        <!-- Form Result Feedback -->
+                        <p id="form-result" class="form-status"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="bvi-gallery">
+        <div class="container">
+            <h2 class="bvi-section-title">Gallery</h2>
+            <div class="bvi-gallery-grid">
+                <div class="bvi-gallery-item">
+                    <img src="assets/images/BVI/gallery1.png" alt="Boston Violin Intensive" class="bvi-gallery-image">
+                </div>
+                <div class="bvi-gallery-item">
+                    <img src="assets/images/BVI/gallery2.png" alt="Boston Violin Intensive" class="bvi-gallery-image">
+                </div>
+                <div class="bvi-gallery-item">
+                    <img src="assets/images/BVI/gallery3.jpg" alt="Boston Violin Intensive" class="bvi-gallery-image">
+                </div>
+                <div class="bvi-gallery-item">
+                    <img src="assets/images/BVI/gallery4.png" alt="Boston Violin Intensive" class="bvi-gallery-image">
+                </div>
+                <div class="bvi-gallery-item">
+                    <img src="assets/images/BVI/gallery5.png" alt="Boston Violin Intensive" class="bvi-gallery-image">
+                </div>
+                <div class="bvi-gallery-item">
+                    <img src="assets/images/BVI/gallery6.jpg" alt="Boston Violin Intensive" class="bvi-gallery-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html> 

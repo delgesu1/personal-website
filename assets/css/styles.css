@@ -1681,11 +1681,17 @@ p {
 
 .social-grid {
     display: grid;
+    /* Default to 2 columns */
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
     padding: 0 1.5rem 1.5rem;
     flex-grow: 1;
     margin-top: auto;
+}
+
+/* Specific override for YouTube card: 1 column */
+#youtube-card .social-grid {
+    grid-template-columns: 1fr;
 }
 
 .social-grid.instagram-grid {
@@ -1694,15 +1700,24 @@ p {
 
 .social-post {
     position: relative;
-    padding-bottom: 100%;
     overflow: hidden;
-    border-radius: 4px;
+    /* Default square aspect ratio */
+    aspect-ratio: 1 / 1; 
+    border-radius: 6px; /* Slightly rounded corners */
+    background-color: var(--bg-light); /* Placeholder bg */
+}
+
+/* Add this new rule for Instagram's 9:16 aspect ratio */
+.instagram-grid .social-post {
+    aspect-ratio: 9 / 16;
+}
+
+/* Add this new rule for YouTube's 16:9 aspect ratio */
+#youtube-card .social-grid .social-post {
+    aspect-ratio: 16 / 9;
 }
 
 .social-post img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
