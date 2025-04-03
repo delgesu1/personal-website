@@ -2259,6 +2259,55 @@ p {
         margin-bottom: 0;
         padding-bottom: 0;
     }
+
+    /* Remove rounded corners from the first stretched video block */
+    .block-stretched .card {
+        border-radius: 0 !important; /* Override default card radius */
+        overflow: hidden; /* Ensure content (video) clips to sharp corners */
+    }
+
+    #violinist .block-even {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1.5rem; /* Space between cards */
+        padding: 0 3rem 2.5rem 3rem; /* ADD bottom padding for shadow */
+        margin: 0 -3rem 0.5rem -3rem; /* ADJUST bottom margin to compensate for padding */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+        position: relative; /* For potential absolute positioned children/pseudo-elements */
+        align-items: center; /* Vertically center cards */
+    }
+    
+    #violinist .block-even::-webkit-scrollbar { 
+        display: none; /* Chrome/Safari/Opera */
+    }
+
+    #violinist .block-even .album-card {
+        flex: 0 0 calc(100% - 6rem); /* Card width = viewport - side padding */
+        scroll-snap-align: center; /* Snap cards to the center */
+        margin-bottom: 0; /* Override default card margin */
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    opacity 0.4s ease; /* Smooth transitions for JS effects */
+        transform: scale(1); /* Default state */
+        opacity: 1; /* Default state */
+    }
+
+    /* Style for inactive (partially visible) cards */
+    #violinist .block-even .album-card.is-inactive {
+        transform: scale(0.92);
+        opacity: 0.6;
+    }
+
+    /* Style for when dragging */
+    #violinist .block-even.is-dragging {
+        cursor: grabbing;
+        scroll-snap-type: none; /* Disable snap during drag for smoother feel */
+        user-select: none; /* Prevent text selection */
+        -webkit-user-select: none; 
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
 }
 
 /* --- DELETED OBSOLETE RULES within @media (max-width: 576px) --- */
