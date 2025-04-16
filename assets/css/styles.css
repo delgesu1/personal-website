@@ -2829,5 +2829,81 @@ p {
 
 /* Position the autoplay-video-card as relative for proper layout */
 
+/* Add new height-based media queries for desktop with shorter heights */
+@media (min-width: 976px) and (max-height: 1100px) {
+    .hero {
+        height: 85vh; /* Reduce from 100vh to 85vh */
+        min-height: 600px; /* Adjust minimum height */
+    }
+    
+    .hero-image-container {
+        max-width: 70%; /* Make the container a bit smaller */
+    }
+    
+    .hero-image-desktop {
+        max-height: 55vh; /* Reduce max height from 65vh */
+    }
+    
+    .hero-content {
+        margin-bottom: 30px; /* Reduce bottom margin */
+    }
+    
+    .scroll-indicator {
+        bottom: 15px; /* Move up a bit */
+    }
+}
+
+@media (min-width: 976px) and (max-height: 900px) {
+    .hero {
+        height: 80vh;
+        min-height: 550px;
+    }
+    
+    .hero-image-container {
+        max-width: 65%; 
+    }
+    
+    .hero-image-desktop {
+        max-height: 48vh; /* Further reduce max height */
+    }
+    
+    .hero-content {
+        margin-bottom: 20px;
+    }
+    
+    .scroll-indicator {
+        bottom: 10px;
+    }
+}
+
+@media (min-width: 976px) and (max-height: 750px) {
+    .hero {
+        height: 75vh;
+        min-height: 500px;
+    }
+    
+    .hero-image-container {
+        max-width: 60%;
+    }
+    
+    .hero-image-desktop {
+        max-height: 42vh;
+    }
+    
+    .hero-buttons {
+        margin-top: 10px; /* Reduce space between image and buttons */
+    }
+    
+    .scroll-indicator {
+        bottom: 5px;
+        font-size: 9px; /* Smaller text */
+        padding-bottom: 20px;
+    }
+    
+    .scroll-indicator::after {
+        height: 15px; /* Shorter scroll indicator line */
+    }
+}
+
 
 
