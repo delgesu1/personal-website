@@ -3190,5 +3190,21 @@ body.menu-open {
     padding-bottom: 3rem; /* add clear space after unmute */
 }
 
+/* Mobile view overrides: ensure download buttons and scroll indicator are white */
+@media (max-width: 768px) {
+    .cv-download-minimal {
+        color: var(--text-light) !important;
+    }
+    .cv-download-minimal::after {
+        background-color: var(--text-light) !important;
+    }
+    .scroll-indicator {
+        color: var(--text-light) !important;
+    }
+    .scroll-indicator::after {
+        background-color: var(--text-light) !important;
+    }
+}
+
 
 
