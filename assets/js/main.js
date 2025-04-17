@@ -57,70 +57,96 @@ document.addEventListener('DOMContentLoaded', function() {
         // Skip if IntersectionObserver is not supported (fallback to native lazy loading)
         if (!('IntersectionObserver' in window)) {
             console.warn('IntersectionObserver not supported, falling back to native lazy loading');
+            
+            // Fallback for browsers without IntersectionObserver - load all data-src images immediately
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                img.src = img.getAttribute('data-src');
+            });
+            
             return;
         }
-        
-        // 1. Handle images that don't have loading attribute already
-        const images = document.querySelectorAll('img:not([loading])');
         
         // Identify the hero image and autoplay section - these should not be lazy loaded
         const heroSection = document.querySelector('.hero');
         const featuredVideoSection = document.querySelector('#featured-video-wrapper');
         
-        // Create an observer for images
-        const imageObserver = new IntersectionObserver(
-            (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        
-                        // Check if image has a data-src attribute
-                        const dataSrc = img.getAttribute('data-src');
-                        if (dataSrc) {
-                            img.src = dataSrc;
-                        }
-                        
-                        // Add loading="lazy" for native optimization
-                        img.setAttribute('loading', 'lazy');
-                        
-                        // Fade in the image
-                        img.style.opacity = '0';
-                        img.style.transition = 'opacity 0.3s ease-in';
-                        setTimeout(() => {
-                            img.style.opacity = '1';
-                        }, 50);
-                        
-                        // Stop observing this image
-                        observer.unobserve(img);
-                    }
-                });
-            },
-            { rootMargin: '200px' } // Start loading when image is 200px from viewport
-        );
+        // 1. First pass: Process all data-src images
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        console.log('Found', lazyImages.length, 'images with data-src');
         
-        // Apply lazy loading to all images except in hero and featured video sections
-        images.forEach(img => {
-            // Skip hero section images - load them immediately
-            if (heroSection && heroSection.contains(img)) {
+        if (lazyImages.length > 0) {
+            // Create an observer for images
+            const imageObserver = new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            
+                            // Get the data-src value
+                            const dataSrc = img.getAttribute('data-src');
+                            if (dataSrc) {
+                                console.log('Loading image:', dataSrc);
+                                img.src = dataSrc;
+                                img.removeAttribute('data-src'); // Clean up
+                            }
+                            
+                            // Ensure image is visible
+                            if (img.style.opacity === '0') {
+                                img.style.transition = 'opacity 0.3s ease-in';
+                                setTimeout(() => {
+                                    img.style.opacity = '1';
+                                }, 50);
+                            }
+                            
+                            // Stop observing this image
+                            observer.unobserve(img);
+                        }
+                    });
+                },
+                { rootMargin: '200px' } // Start loading when image is 200px from viewport
+            );
+            
+            // Apply lazy loading to all images with data-src
+            lazyImages.forEach(img => {
+                // Skip hero section images - load them immediately
+                if (heroSection && heroSection.contains(img)) {
+                    img.src = img.getAttribute('data-src');
+                    img.removeAttribute('data-src');
+                    return;
+                }
+                
+                // Skip featured video section images - load them immediately
+                if (featuredVideoSection && featuredVideoSection.contains(img)) {
+                    img.src = img.getAttribute('data-src');
+                    img.removeAttribute('data-src');
+                    return;
+                }
+                
+                // Set initial opacity for fade-in effect
+                if (!img.style.opacity) {
+                    img.style.opacity = '0';
+                }
+                
+                // Start observing
+                imageObserver.observe(img);
+            });
+        }
+        
+        // 2. Second pass: Handle any other images that don't already have loading="lazy"
+        const nonLazyImages = document.querySelectorAll('img:not([loading]):not([data-src])');
+        
+        nonLazyImages.forEach(img => {
+            // Skip hero and featured sections
+            if ((heroSection && heroSection.contains(img)) || 
+                (featuredVideoSection && featuredVideoSection.contains(img))) {
                 return;
             }
             
-            // Skip featured video section images - load them immediately
-            if (featuredVideoSection && featuredVideoSection.contains(img)) {
-                return;
-            }
-            
-            // Add a placeholder effect
-            img.style.opacity = '0';
-            
-            // For images using background-image CSS, we'd handle differently
-            // but we're focusing on <img> tags here
-            
-            // Start observing
-            imageObserver.observe(img);
+            // Add native lazy loading
+            img.setAttribute('loading', 'lazy');
         });
         
-        // 2. Handle iframes (like YouTube embeds)
+        // 3. Handle iframes (like YouTube embeds)
         const iframes = document.querySelectorAll('iframe:not([data-src])');
         iframes.forEach(iframe => {
             // Skip iframes already handled by our custom video loader
@@ -155,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
             iframeObserver.observe(iframe);
         });
         
-        // 3. Handle background images
+        // 4. Handle background images
         const elementsWithBackgroundImages = document.querySelectorAll('[data-bg]');
         elementsWithBackgroundImages.forEach(el => {
             const bgObserver = new IntersectionObserver(
@@ -173,6 +199,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             bgObserver.observe(el);
         });
+        
+        console.log('Lazy loading initialized');
     }
 
     // Initialize lazy loading when DOM is ready
