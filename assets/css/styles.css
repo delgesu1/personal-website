@@ -2930,6 +2930,7 @@ p {
         display: flex;
         justify-content: center;
         z-index: 3;
+        transform: none; /* Ensure no transform is applied */
     }
     
     /* Adjust scroll indicator to the absolute bottom */
@@ -3061,6 +3062,7 @@ p {
         display: flex;
         justify-content: center;
         z-index: 3;
+        transform: none; /* Ensure no transform is applied */
     }
     
     .scroll-indicator {
