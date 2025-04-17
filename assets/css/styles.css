@@ -2927,6 +2927,7 @@ p {
         bottom: 100px; /* Position above scroll indicator */
         left: 0;
         width: 100%;
+        max-width: none; /* Ensure it spans full width */
         display: flex;
         justify-content: center;
         z-index: 3;
@@ -3059,10 +3060,11 @@ p {
         bottom: 100px;
         left: 0;
         width: 100%;
+        max-width: none; /* Ensure it spans full width */
         display: flex;
         justify-content: center;
         z-index: 3;
-        transform: none !important; /* Ensure this transform overrides mobile styles */
+        transform: none; /* Ensure no transform is applied */
     }
     
     .scroll-indicator {
@@ -3098,6 +3100,8 @@ p {
     /* Use same full-screen approach, just adjust button positions */
     .hero-buttons {
         bottom: 80px; /* Move up slightly on shorter screens */
+        max-width: none; /* Ensure it spans full width */
+        /* Inherits position, left, width, display, justify-content, z-index, transform from above */
     }
     
     .scroll-indicator {
@@ -3109,6 +3113,8 @@ p {
     /* Use same full-screen approach, just adjust button positions */
     .hero-buttons {
         bottom: 60px; /* Move up more on very short screens */
+        max-width: none; /* Ensure it spans full width */
+        /* Inherits position, left, width, display, justify-content, z-index, transform from above */
     }
     
     .scroll-indicator {
