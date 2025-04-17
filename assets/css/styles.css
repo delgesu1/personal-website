@@ -2831,77 +2831,292 @@ p {
 
 /* Add new height-based media queries for desktop with shorter heights */
 @media (min-width: 976px) and (max-height: 1100px) {
+    /* Full screen hero approach - fill entire viewport */
     .hero {
-        height: 85vh; /* Reduce from 100vh to 85vh */
-        min-height: 600px; /* Adjust minimum height */
-    }
-    
-    .hero-image-container {
-        max-width: 70%; /* Make the container a bit smaller */
-    }
-    
-    .hero-image-desktop {
-        max-height: 55vh; /* Reduce max height from 65vh */
+        height: 100vh; /* Full viewport height */
+        width: 100vw; /* Full viewport width */
+        max-width: 100vw; /* Ensure no horizontal scrolling */
+        min-height: 0; /* Remove min-height restriction */
+        display: block; /* Change from flex to block */
+        position: relative; /* Set as positioning context */
+        padding: 0; /* Remove padding */
+        margin: 0; /* Remove margins */
+        margin-left: calc(50% - 50vw); /* Stretch to full viewport width */
+        margin-right: calc(50% - 50vw); /* Stretch to full viewport width */
+        left: 0;
+        box-sizing: border-box; /* Include padding in width calculation */
+        overflow: hidden; /* Hide overflow */
     }
     
     .hero-content {
-        margin-bottom: 30px; /* Reduce bottom margin */
+        /* Position content absolutely in the hero section */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2; /* Above the image */
+        margin: 0; /* No margin */
+        padding: 0 20px; /* Add horizontal padding for content */
     }
     
+    .hero-image-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw; /* Full viewport width */
+        height: 100vh; /* Full viewport height */
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        z-index: 1; /* Below content */
+        overflow: hidden; /* Hide overflow */
+    }
+    
+    /* Hide desktop image and show mobile image for shorter heights */
+    .hero-image-desktop {
+        display: none; /* Hide desktop image */
+    }
+    
+    .hero-image-mobile {
+        display: block; /* Show mobile image */
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Cover the container */
+        object-position: center 33%; /* Center horizontally, 33% down from top */
+        max-height: none;
+        max-width: none;
+    }
+    
+    /* Make the header transparent and above the image */
+    .header {
+        z-index: 3; /* Above hero content */
+        background-color: transparent !important; /* Force transparency */
+        box-shadow: none !important; /* Remove shadow */
+    }
+    
+    /* Make all header text light colored */
+    .logo, 
+    .nav-link,
+    .cta-button {
+        color: var(--text-light) !important; /* Force light text color */
+    }
+    
+    /* Make the logo divider light colored */
+    .logo-divider {
+        background-color: var(--text-light) !important; /* Force light color */
+    }
+    
+    /* Make the CTA button border light colored */
+    .cta-button {
+        border-color: var(--text-light) !important; /* Force light border */
+    }
+    
+    /* Make the hover state for nav links visible */
+    .nav-link:hover {
+        color: rgba(255, 255, 255, 0.8) !important; /* Slightly dimmed white on hover */
+    }
+    
+    /* Adjust the hero buttons to be positioned at the bottom */
+    .hero-buttons {
+        position: absolute;
+        bottom: 100px; /* Position above scroll indicator */
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        z-index: 3;
+    }
+    
+    /* Adjust scroll indicator to the absolute bottom */
     .scroll-indicator {
-        bottom: 15px; /* Move up a bit */
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+        color: var(--text-light) !important; /* Force light text color */
+    }
+    
+    /* Make the scroll indicator line light colored */
+    .scroll-indicator::after {
+        background-color: var(--text-light) !important; /* Force light color */
+    }
+    
+    /* Make text and buttons visible against the image */
+    .cv-download-minimal {
+        color: var(--text-light);
+        opacity: 1;
+    }
+    
+    .cv-download-minimal::after {
+        background-color: var(--text-light);
+    }
+    
+    /* Make sure the section after hero isn't hidden */
+    #violinist {
+        margin-top: 100vh; /* Clear the hero section */
     }
 }
 
-@media (min-width: 976px) and (max-height: 900px) {
+/* Fill the gap between 756px-976px width when height is less than 1100px */
+@media (min-width: 756px) and (max-width: 975px) and (max-height: 1100px) {
+    /* Apply the same full-screen approach as above */
     .hero {
-        height: 80vh;
-        min-height: 550px;
-    }
-    
-    .hero-image-container {
-        max-width: 65%; 
-    }
-    
-    .hero-image-desktop {
-        max-height: 48vh; /* Further reduce max height */
+        height: 100vh;
+        width: 100vw;
+        max-width: 100vw;
+        min-height: 0;
+        display: block;
+        position: relative;
+        padding: 0;
+        margin: 0;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        left: 0;
+        box-sizing: border-box;
+        overflow: hidden;
     }
     
     .hero-content {
-        margin-bottom: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        margin: 0;
+        padding: 0 20px;
+    }
+    
+    .hero-image-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        z-index: 1;
+        overflow: hidden;
+    }
+    
+    .hero-image-desktop {
+        display: none; /* Hide desktop image in this width range */
+    }
+    
+    .hero-image-mobile {
+        display: block; /* Show mobile image in this width range */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 33%;
+        max-height: none;
+        max-width: none;
+    }
+    
+    /* Make the header transparent and above the image */
+    .header {
+        z-index: 3; /* Above hero content */
+        background-color: transparent !important; /* Force transparency */
+        box-shadow: none !important; /* Remove shadow */
+    }
+    
+    /* Make all header text light colored */
+    .logo, 
+    .nav-link,
+    .cta-button {
+        color: var(--text-light) !important; /* Force light text color */
+    }
+    
+    /* Make the logo divider light colored */
+    .logo-divider {
+        background-color: var(--text-light) !important; /* Force light color */
+    }
+    
+    /* Make the CTA button border light colored */
+    .cta-button {
+        border-color: var(--text-light) !important; /* Force light border */
+    }
+    
+    /* Make the hover state for nav links visible */
+    .nav-link:hover {
+        color: rgba(255, 255, 255, 0.8) !important; /* Slightly dimmed white on hover */
+    }
+    
+    .hero-buttons {
+        position: absolute;
+        bottom: 100px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        z-index: 3;
     }
     
     .scroll-indicator {
-        bottom: 10px;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+        color: var(--text-light) !important; /* Force light text color */
+    }
+    
+    /* Make the scroll indicator line light colored */
+    .scroll-indicator::after {
+        background-color: var(--text-light) !important; /* Force light color */
+    }
+    
+    .cv-download-minimal {
+        color: var(--text-light);
+        opacity: 1;
+    }
+    
+    .cv-download-minimal::after {
+        background-color: var(--text-light);
+    }
+    
+    #violinist {
+        margin-top: 100vh;
+    }
+}
+
+/* Just use the same approach for all shorter heights */
+@media (min-width: 976px) and (max-height: 900px) {
+    /* Use same full-screen approach, just adjust button positions */
+    .hero-buttons {
+        bottom: 80px; /* Move up slightly on shorter screens */
+    }
+    
+    .scroll-indicator {
+        bottom: 20px;
     }
 }
 
 @media (min-width: 976px) and (max-height: 750px) {
-    .hero {
-        height: 75vh;
-        min-height: 500px;
-    }
-    
-    .hero-image-container {
-        max-width: 60%;
-    }
-    
-    .hero-image-desktop {
-        max-height: 42vh;
-    }
-    
+    /* Use same full-screen approach, just adjust button positions */
     .hero-buttons {
-        margin-top: 10px; /* Reduce space between image and buttons */
+        bottom: 60px; /* Move up more on very short screens */
     }
     
     .scroll-indicator {
-        bottom: 5px;
+        bottom: 10px;
         font-size: 9px; /* Smaller text */
-        padding-bottom: 20px;
+        padding-bottom: 15px;
     }
     
     .scroll-indicator::after {
-        height: 15px; /* Shorter scroll indicator line */
+        height: 12px; /* Shorter scroll indicator line */
     }
 }
 
