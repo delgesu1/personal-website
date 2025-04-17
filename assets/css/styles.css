@@ -2925,10 +2925,12 @@ p {
     .hero-buttons {
         position: absolute;
         bottom: 100px; /* Position above scroll indicator */
-        left: 50%; 
-        transform: translateX(-50%); 
-        display: flex; /* Keep flex for aligning buttons inside */
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
         z-index: 3;
+        transform: none; /* Ensure no transform is applied */
     }
     
     /* Adjust scroll indicator to the absolute bottom */
@@ -3055,10 +3057,12 @@ p {
     .hero-buttons {
         position: absolute;
         bottom: 100px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 0;
+        width: 100%;
         display: flex;
+        justify-content: center;
         z-index: 3;
+        transform: none !important; /* Ensure this transform overrides mobile styles */
     }
     
     .scroll-indicator {
