@@ -224,6 +224,8 @@ p {
     z-index: 1000;
     padding: 1.5rem 0;
     transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background-color: rgba(255, 255, 255, 0); /* Start transparent */
+    backdrop-filter: blur(0px); /* Start with no blur */
 }
 
 .header-container {
@@ -496,6 +498,7 @@ p {
     z-index: 1999;
     transition: background-color 0.5s ease;
     pointer-events: none;
+    visibility: hidden;
 }
 
 .mobile-menu.active {
@@ -506,6 +509,12 @@ p {
 .mobile-menu.active + .mobile-menu-overlay {
     background-color: rgba(0, 0, 0, 0.3);
     pointer-events: all;
+    visibility: visible;
+}
+
+/* Add body class for when menu is open to prevent scrolling */
+body.menu-open {
+    overflow: hidden;
 }
 
 .mobile-menu-close {
@@ -2317,6 +2326,7 @@ p {
     #violinist .block-even .album-card.is-inactive {
         transform: scale(0.92);
         opacity: 0.6;
+        pointer-events: none; /* Allow drags to pass through inactive cards */
     }
 
     /* Style for when dragging */
@@ -2392,10 +2402,10 @@ p {
 .subtle-link { /* Keep as is */ }
 /* --- Add back header scrolled styles --- */
 .header.scrolled {
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 1rem 0;
-    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white background */
+    backdrop-filter: blur(10px); /* Apply blur effect for glass-like appearance */
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    padding: 1rem 0; /* Slightly reduce padding when scrolled */
 }
 
 /* Ensure all text elements and icons are dark when scrolled */
@@ -2555,41 +2565,46 @@ p {
         z-index: 3; /* Above image and content background */
     }
 
-    /* New rule: Apply transparent background only when this class is added via JS */
-    .header.header-hero-overlap {
+    /* Default state when NOT scrolled (at the top) on mobile */
+    .header:not(.scrolled) {
         background-color: transparent !important;
-        box-shadow: none; /* Also remove shadow when transparent */
+        box-shadow: none !important;
     }
 
-    /* --- Text Color Changes --- */
-    .header .logo,
-    .header .nav-link, /* Although hidden, style for consistency if it appears */
-    .header .nav-submenu-link, /* Style for consistency */
-    .mobile-menu-toggle,
-    .cv-download-minimal,
-    .header .cta-button, /* Added Contact button */
-    .scroll-indicator {
+    .header:not(.scrolled) .logo,
+    .header:not(.scrolled) .mobile-menu-toggle,
+    .header:not(.scrolled) .cta-button {
         color: var(--text-light) !important;
+    }
+
+    .header:not(.scrolled) .mobile-menu-toggle .menu-icon,
+    .header:not(.scrolled) .mobile-menu-toggle .menu-icon::before,
+    .header:not(.scrolled) .mobile-menu-toggle .menu-icon::after {
+        background-color: var(--text-light) !important;
+    }
+
+    .header:not(.scrolled) .cta-button {
+        border-color: var(--text-light) !important;
+    }
+
+    /* Explicitly style the SCROLLED state for mobile to override the above */
+    .header.scrolled .logo,
+    .header.scrolled .mobile-menu-toggle,
+    .header.scrolled .cta-button {
+        color: var(--text-color) !important; /* Dark text */
+    }
+    .header.scrolled .mobile-menu-toggle .menu-icon,
+    .header.scrolled .mobile-menu-toggle .menu-icon::before,
+    .header.scrolled .mobile-menu-toggle .menu-icon::after {
+        background-color: var(--text-color) !important; /* Dark lines */
+    }
+    .header.scrolled .cta-button {
+        border-color: var(--text-color) !important; /* Dark border */
     }
 
     /* Ensure CV buttons are fully opaque */
     .cv-download-minimal {
         opacity: 1 !important;
-    }
-
-    /* --- Line/Icon Color Changes --- */
-    .header .logo-divider,
-    .mobile-menu-toggle .menu-icon,
-    .mobile-menu-toggle .menu-icon::before,
-    .mobile-menu-toggle .menu-icon::after,
-    .cv-download-minimal::after,
-    .scroll-indicator::after {
-        background-color: var(--text-light) !important;
-    }
-
-    /* Ensure Contact button border is also white in this state */
-    .header.header-hero-overlap .cta-button {
-        border-color: var(--text-light) !important;
     }
 
     /* Adjust specific download link position if needed */
@@ -2667,6 +2682,7 @@ p {
     #violinist .block-even .album-card.is-inactive {
         transform: scale(0.92);
         opacity: 0.6;
+        pointer-events: none; /* Allow drags to pass through inactive cards */
     }
 
     /* Style for when dragging */
@@ -2743,6 +2759,7 @@ p {
     #violinist .block-even .album-card.is-inactive {
         transform: scale(0.92);
         opacity: 0.6;
+        pointer-events: none; /* Allow drags to pass through inactive cards */
     }
 
     /* Style for when dragging */
@@ -2758,17 +2775,21 @@ p {
 
 /* Unmute Indicator Container */
 .unmute-container {
-    width: 100%;
+    width: 100vw; /* Force full viewport width */
+    max-width: 100vw; /* Ensure it doesn't exceed viewport */
+    margin-left: calc(50% - 50vw); /* Center trick for full width */
+    margin-right: calc(50% - 50vw); /* Center trick for full width */
+    box-sizing: border-box; /* Include padding/border in width */
     position: relative;
-    margin-top: -30px;
-    margin-bottom: 25px;
+    margin-top: -30px;    /* restore original pull-up */
+    margin-bottom: 25px; /* restore original bottom spacing */
     z-index: 5;
 }
 
 /* Unmute Indicator */
 .unmute-indicator {
     position: absolute;
-    left: 25%;
+    left: 150px; /* Set fixed distance from left edge */
     top: 0;
     display: flex;
     flex-direction: column;
@@ -2795,7 +2816,7 @@ p {
 /* Desktop position for unmute indicator */
 @media (min-width: 769px) {
     .unmute-indicator {
-        left: 12%;
+        /* Removed percentage-based left positioning */
     }
 }
 
@@ -2833,35 +2854,35 @@ p {
 @media (min-width: 976px) and (max-height: 1100px) {
     /* Full screen hero approach - fill entire viewport */
     .hero {
-        height: 100vh; /* Full viewport height */
-        width: 100vw; /* Full viewport width */
-        max-width: 100vw; /* Ensure no horizontal scrolling */
-        min-height: 0; /* Remove min-height restriction */
-        display: block; /* Change from flex to block */
-        position: relative; /* Set as positioning context */
-        padding: 0; /* Remove padding */
-        margin: 0; /* Remove margins */
-        margin-left: calc(50% - 50vw); /* Stretch to full viewport width */
-        margin-right: calc(50% - 50vw); /* Stretch to full viewport width */
+        height: 100vh;
+        width: 100vw;
+        max-width: 100vw; /* explicit override */
+        min-height: 0;
+        display: block; /* Overrides display: flex */
+        position: relative;
+        padding: 0; /* Overrides padding: 0 4rem */
+        margin: 0;
+        margin-left: calc(50% - 50vw); /* Full width trick */
+        margin-right: calc(50% - 50vw);
         left: 0;
-        box-sizing: border-box; /* Include padding in width calculation */
-        overflow: hidden; /* Hide overflow */
+        box-sizing: border-box;
+        overflow: hidden;
     }
     
     .hero-content {
-        /* Position content absolutely in the hero section */
-        position: absolute;
+        position: absolute; /* Takes it out of normal flow */
         top: 0;
         left: 0;
-        width: 100%;
+        width: 100%; /* Should be full width of .hero (100vw) */
+        max-width: none; /* Override base max-width */
         height: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 2; /* Above the image */
-        margin: 0; /* No margin */
-        padding: 0 20px; /* Add horizontal padding for content */
+        align-items: center; /* Centers flex items horizontally */
+        justify-content: center; /* Centers flex items vertically */
+        z-index: 2;
+        margin: 0;
+        padding: 0 20px; /* Inner padding */
     }
     
     .hero-image-container {
@@ -2892,32 +2913,38 @@ p {
         max-width: none;
     }
     
-    /* Make the header transparent and above the image */
+    /* Make the header transparent ONLY at the top of the page, not when scrolled */
     .header {
         z-index: 3; /* Above hero content */
+    }
+
+    /* When header is at the top (no scrolled class), make it transparent */
+    .header:not(.scrolled) {
         background-color: transparent !important; /* Force transparency */
         box-shadow: none !important; /* Remove shadow */
     }
     
-    /* Make all header text light colored */
-    .logo, 
-    .nav-link,
-    .cta-button {
+    /* When scrolled, use the standard scrolled appearance - no override needed here */
+    
+    /* Make all header text light colored ONLY at the top of the page */
+    .header:not(.scrolled) .logo, 
+    .header:not(.scrolled) .nav-link,
+    .header:not(.scrolled) .cta-button {
         color: var(--text-light) !important; /* Force light text color */
     }
     
-    /* Make the logo divider light colored */
-    .logo-divider {
+    /* Make the logo divider light colored ONLY at the top of the page */
+    .header:not(.scrolled) .logo-divider {
         background-color: var(--text-light) !important; /* Force light color */
     }
     
-    /* Make the CTA button border light colored */
-    .cta-button {
+    /* Make the CTA button border light colored ONLY at the top of the page */
+    .header:not(.scrolled) .cta-button {
         border-color: var(--text-light) !important; /* Force light border */
     }
     
-    /* Make the hover state for nav links visible */
-    .nav-link:hover {
+    /* Make the hover state for nav links visible ONLY at the top of the page */
+    .header:not(.scrolled) .nav-link:hover {
         color: rgba(255, 255, 255, 0.8) !important; /* Slightly dimmed white on hover */
     }
     
@@ -2927,7 +2954,6 @@ p {
         bottom: 100px; /* Position above scroll indicator */
         left: 0;
         width: 100%;
-        max-width: none; /* Ensure it spans full width */
         display: flex;
         justify-content: center;
         z-index: 3;
@@ -2961,7 +2987,12 @@ p {
     
     /* Make sure the section after hero isn't hidden */
     #violinist {
-        margin-top: 100vh; /* Clear the hero section */
+        margin-top: 0; /* Changed from 100vh to fix the gap issue */
+    }
+    
+    /* Add proper positioning for the stretched block containing the YouTube video */
+    .block-stretched {
+        margin-bottom: 2rem; /* Reduce margin to tighten the layout */
     }
 }
 
@@ -2989,6 +3020,7 @@ p {
         top: 0;
         left: 0;
         width: 100%;
+        max-width: none; /* Override base max-width */
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -3026,47 +3058,53 @@ p {
         max-width: none;
     }
     
-    /* Make the header transparent and above the image */
+    /* Make the header transparent ONLY at the top of the page, not when scrolled */
     .header {
         z-index: 3; /* Above hero content */
+    }
+
+    /* When header is at the top (no scrolled class), make it transparent */
+    .header:not(.scrolled) {
         background-color: transparent !important; /* Force transparency */
         box-shadow: none !important; /* Remove shadow */
     }
     
-    /* Make all header text light colored */
-    .logo, 
-    .nav-link,
-    .cta-button {
+    /* When scrolled, use the standard scrolled appearance - no override needed here */
+    
+    /* Make all header text light colored ONLY at the top of the page */
+    .header:not(.scrolled) .logo, 
+    .header:not(.scrolled) .nav-link,
+    .header:not(.scrolled) .cta-button {
         color: var(--text-light) !important; /* Force light text color */
     }
     
-    /* Make the logo divider light colored */
-    .logo-divider {
+    /* Make the logo divider light colored ONLY at the top of the page */
+    .header:not(.scrolled) .logo-divider {
         background-color: var(--text-light) !important; /* Force light color */
     }
     
-    /* Make the CTA button border light colored */
-    .cta-button {
+    /* Make the CTA button border light colored ONLY at the top of the page */
+    .header:not(.scrolled) .cta-button {
         border-color: var(--text-light) !important; /* Force light border */
     }
     
-    /* Make the hover state for nav links visible */
-    .nav-link:hover {
+    /* Make the hover state for nav links visible ONLY at the top of the page */
+    .header:not(.scrolled) .nav-link:hover {
         color: rgba(255, 255, 255, 0.8) !important; /* Slightly dimmed white on hover */
     }
     
     .hero-buttons {
         position: absolute;
-        bottom: 100px;
+        bottom: 100px; /* Position above scroll indicator */
         left: 0;
         width: 100%;
-        max-width: none; /* Ensure it spans full width */
         display: flex;
         justify-content: center;
         z-index: 3;
         transform: none; /* Ensure no transform is applied */
     }
     
+    /* Adjust scroll indicator to the absolute bottom */
     .scroll-indicator {
         position: absolute;
         bottom: 30px;
@@ -3091,7 +3129,12 @@ p {
     }
     
     #violinist {
-        margin-top: 100vh;
+        margin-top: 0; /* Changed from 100vh to fix the gap issue */
+    }
+    
+    /* Add proper positioning for the stretched block containing the YouTube video */
+    .block-stretched {
+        margin-bottom: 2rem; /* Reduce margin to tighten the layout */
     }
 }
 
@@ -3100,8 +3143,6 @@ p {
     /* Use same full-screen approach, just adjust button positions */
     .hero-buttons {
         bottom: 80px; /* Move up slightly on shorter screens */
-        max-width: none; /* Ensure it spans full width */
-        /* Inherits position, left, width, display, justify-content, z-index, transform from above */
     }
     
     .scroll-indicator {
@@ -3113,8 +3154,6 @@ p {
     /* Use same full-screen approach, just adjust button positions */
     .hero-buttons {
         bottom: 60px; /* Move up more on very short screens */
-        max-width: none; /* Ensure it spans full width */
-        /* Inherits position, left, width, display, justify-content, z-index, transform from above */
     }
     
     .scroll-indicator {
@@ -3126,6 +3165,29 @@ p {
     .scroll-indicator::after {
         height: 12px; /* Shorter scroll indicator line */
     }
+}
+
+/* Hover effect for standalone social cards (used when social-card is the outer element) */
+.social-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Specific style for YouTube logo in header */
+#youtube-card .social-profile img {
+    height: 34px; /* Approximate height of the subscribe button */
+    width: auto; /* Maintain aspect ratio */
+}
+
+/* Ensure Upcoming Events sits clear of the unmute indicator */
+#upcoming-events {
+    margin-top: 2rem;
+}
+
+/* Ensure the unmute indicator has enough space below before upcoming events */
+.unmute-container {
+    margin-bottom: 0; /* remove existing small margin */
+    padding-bottom: 3rem; /* add clear space after unmute */
 }
 
 

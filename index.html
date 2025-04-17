@@ -112,23 +112,6 @@
         </div>
     </section>
 
-    <!-- Stretched Block for Featured Video - MOVED HERE -->
-    <div class="block block-stretched">
-        <!-- Featured Performance - Autoplay Video Card (full width) -->
-        <div id="featured-video-wrapper" class="card" data-url="https://www.youtube.com/watch?v=c43thu5bBZY">
-            <div class="autoplay-video-card">
-                <iframe class="autoplay-video" id="featured-video" data-src="https://www.youtube.com/embed/c43thu5bBZY?autoplay=1&mute=1&loop=1&playlist=c43thu5bBZY&rel=0" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-    <!-- Unmute indicator - positioned outside the block -->
-    <div class="unmute-container">
-        <div class="unmute-indicator">
-            <span class="unmute-arrow">↑</span>
-            <span class="unmute-text">UNMUTE</span>
-        </div>
-    </div>
-
     <!-- Violinist Section -->
     <section id="violinist" class="section section-violinist">
         <div class="container">
@@ -139,28 +122,28 @@
             <!-- Events Block for Duos -->
             <div class="block block-events">
                 <!-- Aegis Piano Trio -->
-                <div class="card" data-url="https://www.kurganov.org"> 
+                <a href="https://www.youtube.com/watch?v=tKPMMBWIf4s" class="card"> 
                     <img data-src="assets/images/Card Photos/aegis-piano-trio.jpg" alt="Aegis Piano Trio" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Aegis Piano Trio</h3>
                         <p class="card-text">Performing with pianist Constantine Finehouse and cellist Daniel Lelchuk</p>
                     </div>
-                </div>
+                </a>
                 
                 <!-- Duo with Constantine Finehouse -->
-                <div class="card" data-url="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4gS0zHaWAULx1jJDQ1M9U1">
+                <a href="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4gS0zHaWAULx1jJDQ1M9U1" class="card">
                     <img data-src="assets/images/Card Photos/Kurganov-Finehouse-Duo.jpg" alt="Kurganov-Finehouse Duo" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Kurganov-Finehouse Duo</h3>
                         <p class="card-text">A longstanding musical partnership exploring the violin and piano repertoire with a focus on artistic nuance and historical context</p>
                     </div>
-                </div>
+                </a>
             </div>
             
             <!-- Even Block for Albums -->
             <div class="block block-even">
                 <!-- Album 1 - 2023 -->
-                <div class="album-card" data-url="https://haensslerprofil.de/shop/kammermusik-instrumental/the-brahms-age/">
+                <a href="https://haensslerprofil.de/shop/kammermusik-instrumental/the-brahms-age/" class="album-card">
                     <div class="album-image-container">
                         <img data-src="assets/images/Card Photos/The-Brahms-Age-2023-Album-Cover.jpg" alt="Brahms Violin Sonatas Album" class="album-image" loading="lazy" draggable="false">
                     </div>
@@ -169,10 +152,10 @@
                         <p class="album-year">2023 | Haenssler Classics</p>
                         <p class="album-text">Pairing a 1706 Guarneri violin (strung with sheep gut) with original 19th-century pianos</p>
                     </div>
-                </div>
+                </a>
                 
                 <!-- Album 2 - 2021 -->
-                <div class="album-card" data-url="https://www.orchidclassics.com/releases/orc100182-daniel-kurganov/">
+                <a href="https://www.orchidclassics.com/releases/orc100182-daniel-kurganov/" class="album-card">
                     <div class="album-image-container">
                         <img data-src="assets/images/Card Photos/Rhythm-Borrowed-Past-2021-Album-cover.jpg" alt="World Premieres Album" class="album-image" loading="lazy" draggable="false">
                     </div>
@@ -181,10 +164,10 @@
                         <p class="album-year">2021 | Orchid Classics</p>
                         <p class="album-text">World-premiere recordings of the works of Lera Auerbach and Richard Beaudoin as well as masterpieces by Cage and Messiaen</p>
                     </div>
-                </div>
+                </a>
                 
                 <!-- Album 3 - 2018 -->
-                <div class="album-card" data-url="https://ffm.to/violin">
+                <a href="https://ffm.to/violin" class="album-card">
                     <div class="album-image-container">
                         <img data-src="assets/images/Card Photos/Between-The-Notes-2018-Album-Cover.jpg" alt="Debut Album" class="album-image" loading="lazy" draggable="false">
                     </div>
@@ -193,11 +176,27 @@
                         <p class="album-year">2018 | Spice Classics</p>
                         <p class="album-text">Featuring works by Brahms, Prokofiev, Tchaikovsky, Wagner, Rachmaninoff and Schemmer</p>
                     </div>
-                </div>
+                </a>
             </div>
             <!-- Dot Navigation for Mobile Carousel -->
             <div class="carousel-dots"></div>
-            
+            <!-- Stretched Block for Featured Video -->
+            <div class="block block-stretched">
+                <!-- Featured Performance - Autoplay Video Card (full width) -->
+                <div id="featured-video-wrapper" class="card" data-url="https://www.youtube.com/watch?v=c43thu5bBZY">
+                    <div class="autoplay-video-card">
+                        <iframe class="autoplay-video" id="featured-video" data-src="https://www.youtube.com/embed/c43thu5bBZY?autoplay=1&mute=1&loop=1&playlist=c43thu5bBZY&rel=0" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- Unmute indicator -->
+            <div class="unmute-container">
+                <div class="unmute-indicator">
+                    <span class="unmute-arrow">↑</span>
+                    <span class="unmute-text">UNMUTE</span>
+                </div>
+            </div>
+
             <!-- One Card Block for Upcoming Concerts -->
             <div class="block block-one-card" id="upcoming-events">
                 <div class="card"> 
@@ -344,73 +343,64 @@
                 </div>
                 
                 <!-- Instagram -->
-                <div class="card" id="instagram-card" data-url="https://www.instagram.com/violinvention">
-                    <div class="social-card">
-                        <div class="social-card-header">
-                            <div class="social-profile">
-                                <div class="social-icon instagram">
-                                    <i class="fab fa-instagram" style="color: white;"></i>
-                                </div>
-                                <div class="social-info">
-                                    <div class="social-username">violinvention</div>
-                                </div>
+                <div class="social-card" id="instagram-card" onclick="window.open('https://www.instagram.com/violinvention','_blank');">
+                    <div class="social-card-header">
+                        <div class="social-profile">
+                            <div class="social-icon instagram">
+                                <i class="fab fa-instagram" style="color: white;"></i>
                             </div>
-                            <a href="https://www.instagram.com/violinvention" target="_blank" class="social-follow-btn instagram-btn">
-                                Follow
-                            </a>
+                            <div class="social-info">
+                                <div class="social-username">violinvention</div>
+                            </div>
                         </div>
-                        <div class="instagram-grid social-grid">
-                            <div class="social-post">
-                                <img data-src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 1" loading="lazy">
-                            </div>
-                            <div class="social-post">
-                                <img data-src="assets/images/Card Photos/Instagram Thumbnail 2.jpg" alt="Instagram Thumbnail 2" loading="lazy">
-                            </div>
-                            <div class="social-post">
-                                <img data-src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 3" loading="lazy">
-                            </div>
+                        <a href="https://www.instagram.com/violinvention" target="_blank" class="social-follow-btn instagram-btn">
+                            Follow
+                        </a>
+                    </div>
+                    <div class="instagram-grid social-grid">
+                        <div class="social-post">
+                            <img data-src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 1" loading="lazy">
+                        </div>
+                        <div class="social-post">
+                            <img data-src="assets/images/Card Photos/Instagram Thumbnail 2.jpg" alt="Instagram Thumbnail 2" loading="lazy">
+                        </div>
+                        <div class="social-post">
+                            <img data-src="assets/images/Card Photos/Instagram Thumbnail 1.jpg" alt="Instagram Thumbnail 3" loading="lazy">
                         </div>
                     </div>
                 </div>
                 
                 <!-- YouTube Channel -->
-                <div class="card" id="youtube-card" data-url="https://www.youtube.com/@DanielKurganov">
-                    <div class="social-card">
-                        <div class="social-card-header">
-                            <div class="social-profile">
-                                <div class="social-icon youtube">
-                                    <i class="fab fa-youtube" style="color: white;"></i>
-                                </div>
-                                <div class="social-info">
-                                    <div class="social-username">Daniel Kurganov, Violinist</div>
-                                </div>
-                            </div>
-                            <a href="https://www.youtube.com/c/@danielkurganov" target="_blank" class="social-follow-btn youtube-btn">
-                                Subscribe 81K
-                            </a>
+                <div class="social-card" id="youtube-card" onclick="window.open('https://www.youtube.com/@DanielKurganov','_blank');">
+                    <div class="social-card-header">
+                        <div class="social-profile">
+                            <img src="assets/images/YouTube_Logo_2017.svg.png" alt="YouTube Logo" />
                         </div>
-                        <div class="social-grid">
-                            <div class="social-post">
-                                <img data-src="https://img.youtube.com/vi/Csd9zkjmO4w/hqdefault.jpg" alt="9 Exercises to Transform your Violin Technique" loading="lazy">
-                            </div>
-                            <div class="social-post">
-                                <img data-src="https://img.youtube.com/vi/osRXzpYiASA/hqdefault.jpg" alt="Forgotten romantic gems - Lera Auerbach" loading="lazy">
-                            </div>
-                            <div class="social-post">
-                                <img data-src="https://img.youtube.com/vi/6yi08rFZYc4/hqdefault.jpg" alt="Bartók Sonata for Solo Violin" loading="lazy">
-                            </div>
+                        <a href="https://www.youtube.com/c/@danielkurganov" target="_blank" class="social-follow-btn youtube-btn">
+                            Subscribe 81K
+                        </a>
+                    </div>
+                    <div class="social-grid">
+                        <div class="social-post">
+                            <img data-src="https://img.youtube.com/vi/Csd9zkjmO4w/hqdefault.jpg" alt="9 Exercises to Transform your Violin Technique" loading="lazy">
+                        </div>
+                        <div class="social-post">
+                            <img data-src="https://img.youtube.com/vi/osRXzpYiASA/hqdefault.jpg" alt="Forgotten romantic gems - Lera Auerbach" loading="lazy">
+                        </div>
+                        <div class="social-post">
+                            <img data-src="https://img.youtube.com/vi/6yi08rFZYc4/hqdefault.jpg" alt="Bartók Sonata for Solo Violin" loading="lazy">
                         </div>
                     </div>
                 </div>
                 
                 <!-- Kurofune Project -->
-                <div class="card" id="kurofune-card" data-url="https://www.kurganov.org">
+                <a href="https://www.kurganov.org" class="card" id="kurofune-card">
                     <img data-src="assets/images/Card Photos/Kurofune-Ensemble.jpg" alt="Kurofune Project" class="card-image" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">Kurofune Project (2018)</h3>
                         <p class="card-text">A collaborative project blending traditional Japanese music with Western classical forms.</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -435,66 +425,64 @@
             <!-- Tetris Block for Educator Cards -->
             <div class="block block-tetris">
                 <!-- Masterclasses Card -->
-                <div class="card" data-url="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4EdoSU8Tjgso1lvH7ggVfl">
+                <a href="https://www.youtube.com/playlist?list=PLjDCDd6U-QQ4EdoSU8Tjgso1lvH7ggVfl" class="card">
                     <img src="assets/images/Kurganov-Masterclasses.png" alt="Daniel Kurganov Masterclasses" class="card-image" style="object-fit: cover; height: 100%;"> 
-                </div>
+                </a>
                 
                 <!-- Patreon Card -->
-                <div class="card" data-url="https://www.patreon.com/artiststechnique">
-                    <div class="social-card"> 
-                         <div class="social-card-header">
-                            <div class="social-profile">
-                                <div class="social-icon patreon">
-                                    <i class="fab fa-patreon" style="color: white;"></i>
-                                </div>
-                                <div class="social-info">
-                                    <div class="social-username">Artist's Technique</div>
-                                </div>
+                <div class="social-card" onclick="window.open('https://www.patreon.com/artiststechnique','_blank');">
+                    <div class="social-card-header">
+                        <div class="social-profile">
+                            <div class="social-icon patreon">
+                                <i class="fab fa-patreon" style="color: white;"></i>
                             </div>
-                            <a href="https://www.patreon.com/artiststechnique" target="_blank" class="social-follow-btn" style="background-color: #F96854; color: white; border: none;">
-                                Join
-                            </a>
+                            <div class="social-info">
+                                <div class="social-username">Artist's Technique</div>
+                            </div>
                         </div>
-                         <div class="card-content">
-                            <p class="card-text">Join my Patreon community for exclusive educational content, practice guides, personalized feedback and bi-weekly live Q&A sessions.</p>
-                         </div>
-                         <div class="patreon-thumbnails">
-                            <div class="patreon-thumbnail">
-                                <img src="assets/images/Card Photos/Patreon-Image-1.jpg" alt="Patreon Content 1">
-                            </div>
-                            <div class="patreon-thumbnail">
-                                <img src="assets/images/Card Photos/Patreon-Image-2.jpeg" alt="Patreon Content 2">
-                            </div>
-                            <div class="patreon-thumbnail">
-                                <img src="assets/images/Card Photos/Patreon-Image-3.jpeg" alt="Patreon Content 3">
-                            </div>
-                            <div class="patreon-thumbnail">
-                                <img src="assets/images/Card Photos/Patreon-Image-4.jpg" alt="Patreon Content 4">
-                            </div>
+                        <a href="https://www.patreon.com/artiststechnique" target="_blank" class="social-follow-btn" style="background-color: #F96854; color: white; border: none;">
+                            Join
+                        </a>
+                    </div>
+                     <div class="card-content">
+                        <p class="card-text">Join my Patreon community for exclusive educational content, practice guides, personalized feedback and bi-weekly live Q&A sessions.</p>
+                     </div>
+                     <div class="patreon-thumbnails">
+                        <div class="patreon-thumbnail">
+                            <img src="assets/images/Card Photos/Patreon-Image-1.jpg" alt="Patreon Content 1">
+                        </div>
+                        <div class="patreon-thumbnail">
+                            <img src="assets/images/Card Photos/Patreon-Image-2.jpeg" alt="Patreon Content 2">
+                        </div>
+                        <div class="patreon-thumbnail">
+                            <img src="assets/images/Card Photos/Patreon-Image-3.jpeg" alt="Patreon Content 3">
+                        </div>
+                        <div class="patreon-thumbnail">
+                            <img src="assets/images/Card Photos/Patreon-Image-4.jpg" alt="Patreon Content 4">
                         </div>
                     </div>
                 </div>
                 
                  <!-- 64 Practice Hacks Card -->
-                <div class="card" data-url="https://payhip.com/violin">
+                <a href="https://payhip.com/violin" class="card">
                     <img src="assets/images/Card Photos/64 practice hacks.jpg" alt="64 Practice Hacks" class="card-image practice-hacks">
                     <div class="card-content practice-hacks">
                         <h3 class="card-title">64 Practice Hacks</h3>
                         <p class="card-text">My e-book offering practical strategies to transform your practice sessions and accelerate your musical growth.</p>
                     </div>
-                </div>
+                </a>
                 
                 <!-- Boston Violin Intensive Card -->
-                <div class="card" data-url="intensive.html">
+                <a href="http://www.kurganov.org/intensive.html" class="card">
                     <img src="assets/images/Card Photos/Boston-Violin-Intensive.jpeg" alt="Boston Violin Intensive" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Boston Violin Intensive</h3>
                         <p class="card-text">An immersive program designed to accelerate technical and artistic growth through focused study and performance opportunities.</p>
                     </div>
-                </div>
+                </a>
                 
                 <!-- Strad Articles Card -->
-                <div class="card" data-url="https://www.thestrad.com/daniel-kurganov/6784.tag">
+                <a href="https://www.thestrad.com/daniel-kurganov/6784.tag" class="card">
                     <img src="assets/images/Card Photos/The-Strad.jpg" alt="The Strad Magazine" class="card-image" style="object-fit: contain; background-color: white;">
                     <div class="card-content" style="padding-top: 0;">
                         <p class="card-text">My contributions to The Strad Magazine explore various aspects of violin technique, historical performance practice, and contemporary approaches to classical music.</p>
@@ -516,25 +504,25 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
                 
                 <!-- Workshops Card -->
-                <div class="card" data-url="https://docs.google.com/document/d/113RhmatJquXJeyLpdMyVvjr6R2W6Jwi2tpeqVyqb374/edit?usp=sharing">
+                <a href="https://docs.google.com/document/d/113RhmatJquXJeyLpdMyVvjr6R2W6Jwi2tpeqVyqb374/edit?usp=sharing" class="card">
                     <img data-src="assets/images/Card Photos/Workshops-and-Masterclasses.jpg" alt="Workshops and Masterclasses" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Workshops & Masterclasses</h3>
                         <p class="card-text">Specialized workshops worldwide focusing on technical development, musical interpretation, and career guidance for musicians.</p>
                     </div>
-                </div>
+                </a>
 
                 <!-- Tonebase Card -->
-                <div class="card" data-url="https://www.tonebase.co/violin-courses/vln-daniel-kurganov-18-experiments-for-the-practice-room">
+                <a href="https://app.tonebase.co/violin/library?tbModal=artistProfileModal&tbModalSlug=DanielKurganov" class="card">
                     <img data-src="assets/images/Card Photos/tonebase.jpg" alt="Tonebase Course" class="card-image" style="object-fit: contain; background-color: white;">
                     <div class="card-content">
                         <h3 class="card-title">18 Experiments for Practicing</h3>
                         <p class="card-text">Inspiration and experimentation have been crucial to my musical growth. By learning from other musicians and recordings, I have tried to translate fresh ideas into practical solutions in the practice room, resolving challenges and discovering new expressive possibilities.</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -549,16 +537,16 @@
             <!-- Tetris Block for Innovation Cards -->
             <div class="block block-tetris">
                 <!-- Arco AI (Consolidated) -->
-                <div class="card" data-url="https://www.violinvention.com">
+                <a href="https://www.violinvention.com" class="card">
                     <img src="assets/images/Card Photos/arco library image.jpg" alt="Arco AI" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">ArcoAI</h3>
                         <p class="card-text">A forthcoming revolutionary AI Agent that understands centuries of pedagogical wisdom, your unique violin journey, helps teachers and students with scheduling, practice tracking, AI analysis, and provides an ever-growing customizable library of violin study materials.</p>
                     </div>
-                </div>
+                </a>
                 
                 <!-- Audio & Video Engineering -->
-                <div class="card" data-url="https://www.overtoneartists.com">
+                <div class="card" onclick="window.open('https://www.overtoneartists.com','_blank');">
                     <img src="assets/images/Card Photos/audio video engineer.jpg" alt="Audio & Video Production" class="card-image">
                     <div class="audio-engineering-content card-content">
                         <h3 class="card-title">Audio & Video Production</h3>
@@ -569,22 +557,22 @@
                 </div>
                 
                 <!-- AI Classical Music Experiments -->
-                <div class="card" data-url="https://www.thestrad.com/video/did-ai-just-kill-classical-music-a-video-from-violinist-daniel-kurganov/18010.article?adredir=1&adredir=1">
+                <a href="https://www.thestrad.com/video/did-ai-just-kill-classical-music-a-video-from-violinist-daniel-kurganov/18010.article?adredir=1&adredir=1" class="card">
                     <img src="assets/images/Card Photos/AI Classical Music Experiments.jpg" alt="AI Classical Music Experiments" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">AI Music Experiments</h3>
                         <p class="card-text">Exploring the creative possibilities of AI in classical music composition and performance.</p>
                     </div>
-                </div>
+                </a>
                 
                 <!-- Audience Perspective Emulation System -->
-                <div class="card" data-url="assets/documents/Audience Perspective Emulation System (APES).pdf">
+                <a href="http://www.kurganov.org/assets/documents/Audience%20Perspective%20Emulation%20System%20(APES).pdf" class="card">
                     <img src="assets/images/Card Photos/Audience Perspective Emulation System.jpeg" alt="Audience Perspective Emulation System" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Audience Perspective Emulation System</h3>
                         <p class="card-text">An innovative system to help musicians experience and explore their sound and collaborations from the audience's perspective—in real time.</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -628,13 +616,13 @@
             <!-- Events Block for Photography Card -->
             <div class="block block-events">
                 <!-- Photography -->
-                <div class="card" data-url="https://overtoneartists.wixsite.com/photo">
+                <a href="https://overtoneartists.wixsite.com/photo" class="card">
                     <img src="assets/images/Card Photos/photography.jpg" alt="Photography" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">Photography</h3>
                         <p class="card-text">My photographic work explores the intersection of music, architecture, and natural landscapes, seeking to capture moments of artistic inspiration and contemplation.</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
